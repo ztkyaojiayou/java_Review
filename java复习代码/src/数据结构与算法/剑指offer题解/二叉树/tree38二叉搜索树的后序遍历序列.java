@@ -21,7 +21,9 @@ package 数据结构与算法.剑指offer题解.二叉树;
  *       如果在6后面的值有一个小于5就不是后序遍历，但此数组没有，因此是一个符合要求的数组
  *
  * 方法： 对于每一棵子树，它的根结点总是对应该子树的后序序列的最后一个数
- *       只需要不断地确定出左子树区间和右子树区间，并且判断：左子树区间的所有结点值 < 根结点值 < 右子树区间所有结点值，这个条件是否满足即可
+ *       只需要不断地确定出左子树区间和右子树区间，并且判断：
+ *       左子树区间的所有结点值 < 根结点值 < 右子树区间所有结点值，
+ *       这个条件是否满足即可
  */
 
 public class tree38二叉搜索树的后序遍历序列 {
@@ -32,20 +34,20 @@ public class tree38二叉搜索树的后序遍历序列 {
         return verifySequenceOfBST(sequence, 0, sequence.length-1);
     }
 
-    private static boolean verifySequenceOfBST(int[] squence, int start, int end) {
+    private static boolean verifySequenceOfBST(int[] sequence, int start, int end) {
         //说明递归结束，且每一轮判断都符合要求
         if (start >= end){
             return true;
         }
-        int root = squence[end]; //end位置为根结点
+        int root = sequence[end]; //end位置为根结点
         int index = 0;
         //找到第一个比根结点大的数的位置/索引
-        while (squence[index]<root && index<end-1){//只需从第一个数到倒数第二个数中遍历（因为倒数第一个数就是根节点）
+        while (sequence[index]<root && index<end-1){//只需从第一个数到倒数第二个数中遍历（因为倒数第一个数就是根节点）
             index++;
         }
         int mid = index;//即第一个比根结点大的数的位置
         //从第一个大于root值的地方开始遍历，判断该元素之后的所有值是否都大于root值
-        while (squence[index]>root && index<end-1){
+        while (sequence[index]>root && index<end-1){
             //若中途有小于root的数，则会退出循环，则index不可能达到end-1（倒数第二个位置），则说明肯定不是后序遍历数组
             index++;
         }
@@ -55,6 +57,6 @@ public class tree38二叉搜索树的后序遍历序列 {
             return false;
         }
         //通过递归不断地判断左子树区间和右子树区间是否也满足上述条件即可
-        return verifySequenceOfBST(squence,start,mid-1) && verifySequenceOfBST(squence,mid,end-1);
+        return verifySequenceOfBST(sequence,start,mid-1) && verifySequenceOfBST(sequence,mid,end-1);
     }
 }

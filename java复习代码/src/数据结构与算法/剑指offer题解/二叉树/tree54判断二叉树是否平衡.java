@@ -38,7 +38,8 @@ public class tree54判断二叉树是否平衡 {
         return depth(root) != -1;//depth(root)不为-1，则为true，说明是平衡二叉树，反之则不是
     }
     public int depth(TreeNode54 root){
-        //1.空树也是一颗平衡二叉树
+        //1.递归结束的条件
+        // 空树也是一颗平衡二叉树
         if(root == null)
             return 0;
 
@@ -58,10 +59,17 @@ public class tree54判断二叉树是否平衡 {
             if (Math.abs(left - right) > 1)//abs：求绝对值
          // 若不用绝对值方法，则可以写成：
          // if(left - right <(-1) || left - right > 1)
-            return -1;
-        else//3.2否则，返回深度值
-            return Math.max(left,right)+1;
+            {
+                return -1;
+            }
+        else{
+            //3.2否则，返回深度值
+                return Math.max(left,right)+1;
+            }
+
     }
+
+
 
     //方法一：（思路很自然，但有重复判断，并不是最优解，不推荐，但在牛客系统上的运行结果似乎差别不大）
     private static boolean IsBalanced01(TreeNode54 root){

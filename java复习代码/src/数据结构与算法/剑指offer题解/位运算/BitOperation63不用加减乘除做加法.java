@@ -88,5 +88,4 @@ public class BitOperation63不用加减乘除做加法 {
         }while(carry != 0); // 进位不为0则继续执行加法处理进位
         return result;
     }
-
 }

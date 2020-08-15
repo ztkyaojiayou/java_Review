@@ -1,4 +1,6 @@
 package 数据结构与算法.剑指offer题解.双指针;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * 题目描述
@@ -7,9 +9,6 @@ package 数据结构与算法.剑指offer题解.双指针;
  * 输出描述:
  * 对应每个测试案例，输出两个数，小的先输出。
  */
-
-import java.lang.reflect.Array;
-import java.util.*;
 
 /**
  * 思路解析：这种题，很明显就可以找到两种方法，

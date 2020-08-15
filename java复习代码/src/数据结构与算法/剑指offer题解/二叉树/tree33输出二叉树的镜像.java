@@ -24,6 +24,7 @@ class TreeNode33 {
 
 public class tree33输出二叉树的镜像 {
     public void Mirror(TreeNode33 root) {
+        //递归结束的条件
         if (root == null)
             return;
 

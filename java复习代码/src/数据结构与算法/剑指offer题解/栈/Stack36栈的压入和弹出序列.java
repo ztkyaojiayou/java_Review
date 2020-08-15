@@ -3,7 +3,9 @@ package 数据结构与算法.剑指offer题解.栈;
 import java.util.Stack;
 
 /**
- * 题目：输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。
+ * 题目：输入两个整数序列，第一个序列表示栈的压入顺序，
+ * 请判断第二个序列是否为该栈的弹出顺序。
+ * 假设压入栈的所有数字均不相等。
  * 例如：序列1、2、3 、4、5 是某栈压栈序列，
  *      序列4、5、3、2、1 是该压栈序列对应的一个弹出序列，
  *       但4、3、5、1、2 就不可能是该压栈序列的弹出序列。
@@ -12,7 +14,7 @@ import java.util.Stack;
  * 【解】
  * （1）思路：借用一个辅助的栈temp，
  *
- * 借用一个辅助的栈temp，按照入栈的顺序重新入栈一次，首先压入1，但是在入栈的时候，要结合出栈的顺序来判断是否应该出栈，
+ * 借用一个辅助的栈temp_stack，按照入栈的顺序重新入栈一次，首先压入1，但是在入栈的时候，要结合出栈的顺序来判断是否应该出栈，
  * 然后判断栈顶元素是不是出栈顺序的第一个元素，这里是4，很显然1≠4，所以我们继续压栈，
  * 直到相等以后开始出栈，出栈一个元素，则将出栈顺序向后移动一位，直到不相等，这样循环直到压栈里面的元素都遍历完成，
  * 如果辅助栈为空，则说明弹出序列不是该栈的弹出顺序
@@ -36,18 +38,21 @@ import java.util.Stack;
 
 public class Stack36栈的压入和弹出序列 {
     public boolean IsPopOrder(int [] pushA,int [] popA) {
-        //借助一个辅助栈temp，重新按照入栈顺序再进一次栈
-        Stack<Integer> temp = new Stack<Integer>();
+        //借助一个辅助栈temp_stack，重新按照入栈顺序再进一次栈
+        Stack<Integer> temp_stack = new Stack<>();
         int j = 0;
         for(int i=0; i < pushA.length; i++){
-            temp.push(pushA[i]);
+            temp_stack.push(pushA[i]);
             //一直入栈，直到要入栈的元素和传入的出栈序列popA中的值相等时，就把这个元素从栈顶弹出
-            while(j < pushA.length && temp.peek() == popA[j]){
-                temp.pop();//弹出那个相同值
-                //每弹出一个相同值，就把j加1，用于判断popA中的下一个元素
-                j = j+1;
+            while(j < pushA.length && temp_stack.peek() == popA[j]){
+                temp_stack.pop();//弹出temp栈中的那个相同值
+                //每弹出一个相同值，就把j加1，用于判断popA中的下一个元素，不断循环
+                j++;
             }
         }
-        return temp.empty();//说明此时辅助栈temp中的元素已经全部出栈完毕，也就是说输入的popA序列是为该栈的一个弹出顺序
+        // 若辅助栈temp为空，则说明此时辅助栈temp中的元素已经全部出栈完毕，
+        // 也就说明输入的popA序列是为该栈的一个弹出顺序，返回true，否则就不是，返回false
+        boolean res = temp_stack.empty();
+        return res;
     }
 }

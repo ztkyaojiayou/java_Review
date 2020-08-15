@@ -4,7 +4,7 @@ package 多线程与并发.叶子猿代码.多线程基础.创建线程的方式
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-//创建线程的方式4:通过implements Callable创建有返回值的线程
+//创建线程的方式4:通过implements Callable创建有返回值的线程（重要）
 //（后面会详细讲，即FutureTask类会涉及到）
 //使用FutureTask类异步获取线程运行的结果
 public class Demo4 implements Callable<Integer> {//里面有个call方法

@@ -74,8 +74,6 @@ public class heap20滑动窗口的最大值 {
     /**
      * 方法三：双端队列法（似乎都在推荐这个方法，但我没有搞懂）
      * 滑动窗口的最大值总是保存在队列首部，队列里面的数据总是从大到小排列。
-     *
-     *
      */
     public ArrayList maxInWindows03(int[] num, int size) {
         ArrayList res = new ArrayList();

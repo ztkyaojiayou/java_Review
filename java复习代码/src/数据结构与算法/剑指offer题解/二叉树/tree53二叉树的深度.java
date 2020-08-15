@@ -14,18 +14,16 @@ class TreeNode53 {
 
     public TreeNode53(int val) {
         this.val = val;
-
     }
-
 }
 public class tree53二叉树的深度 {
     public static int TreeDepth(TreeNode54 root){
         if (root==null){
             return 0;
         }
-        int left = TreeDepth(root.left);
-        int right = TreeDepth(root.right);
-        return Math.max(left,right)+1;
+        int left = TreeDepth(root.left);//左子树的深度
+        int right = TreeDepth(root.right);//右子树的深度
+        return Math.max(left,right)+1;//树的深度=路径最长的子树深度 + 1
         //return left>right? left+1: right+1;//不需要这么写
     }
 }

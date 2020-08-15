@@ -3,7 +3,7 @@ package 数据结构与算法.剑指offer题解.回溯与递归;
 /**
  * 题目描述
  * 地上有一个m行和n列的方格。
- * 一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，
+ * 一个机器人从坐标(0,0)的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，
  * 但是不能进入行坐标和列坐标的数位之和大于k的格子。
  * 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。
  * 但是，它不能进入方格（35,38），因为3+5+3+8 = 19。
@@ -37,23 +37,23 @@ class 机器人的运动范围66 {
 
     //dps搜索的具体实现（关键）
     private int dps(int k, int rows, int cols,
-                    int row, int col, boolean[] visited) {
+                    int cur_row, int cur_col, boolean[] visited) {
 
-        int i=row*cols+col;//2.0把坐标转化为一个数，便于处理
+        int i=cur_row*cols+cur_col;//2.0把坐标转化为一个数，便于处理
         //（因为每个位置是惟一的，则通过该换算（相当于把矩阵拉直后该位置的位置）之后也必然是惟一的）
 
         //2.1递归结束的条件：即若该位置越界或者被访问过或者该位置的坐标和大于了目标和，就返回0
-        if(row<0||row>=rows||col<0||col>=cols||visited[i]||!checkSum(k,row,col)) {
+        if(cur_row<0||cur_row>=rows||cur_col<0||cur_col>=cols||visited[i]||!checkSum(k,cur_row,cur_col)) {
             return 0;
         }
 
         //2.2每访问了一个位置就把该位置标记为“已被访问过”
         visited[i]=true;
         //2.3开始回溯/DFS搜索，把四个方向上的结果（相当于四种情况）都加上即可（式后的“+1”是指当前位置也算一个格子）
-        return  dps(k, rows, cols,row,col+1,visited)//向右走
-                + dps(k, rows, cols,row,col-1,visited)//向左走
-                + dps(k, rows, cols,row+1,col,visited)//向下走
-                + dps(k, rows, cols,row-1,col,visited) + 1;//向上走
+        return  dps(k, rows, cols,cur_row,cur_col+1,visited)//向右走
+                + dps(k, rows, cols,cur_row,cur_col-1,visited)//向左走
+                + dps(k, rows, cols,cur_row+1,cur_col,visited)//向下走
+                + dps(k, rows, cols,cur_row-1,cur_col,visited) + 1;//向上走
     }
 
     //判断该位置的下标的和是否满足要求的方法

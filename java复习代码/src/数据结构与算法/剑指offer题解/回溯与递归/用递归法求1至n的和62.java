@@ -23,8 +23,9 @@ class 用递归法求1至n的和62_1 {
     public int Sum_Solution(int n) {
         //递归终止的条件
         if (n == 1) return n;
+        int sum = n;//令和的初值为n，即从n往下加。
         //利用递归求和
-        return n + Sum_Solution(n-1);
+        return sum + Sum_Solution(n-1);
     }
 }
 
@@ -38,8 +39,9 @@ class 用递归法求1至n的和62_1 {
  */
 class solution62_2{
     public int Sum_Solution(int n) {
-        boolean flag = (n>1)&&((n+=Sum_Solution(n-1))>0);//即只有n大于1时才执行后面的递归函数（逻辑与的性质）
-        return n;//最后，返回结果即可
+        int sum = n;
+        boolean flag = (n>1)&&((sum+=Sum_Solution(n-1))>0);//即只有n大于1时才执行后面的递归函数（逻辑与的性质）
+        return sum;//最后，返回结果即可
     }
 }
 

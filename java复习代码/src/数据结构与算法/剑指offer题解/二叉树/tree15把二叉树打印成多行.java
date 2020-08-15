@@ -34,13 +34,14 @@ public class tree15把二叉树打印成多行 {
         while (!queue.isEmpty()) {
             ArrayList<Integer> list = new ArrayList<>();
             int cnt = queue.size();
-            while (cnt-- > 0) {
+            while (cnt > 0) {
                 TreeNode15 node = queue.poll();
                 if (node == null)
                     continue;
                 list.add(node.val);
                 queue.add(node.left);
                 queue.add(node.right);
+                cnt--;
             }
             //和tree14的代码基本相同，只是少了下面的反转操作
 //            if (reverse) {
@@ -51,7 +52,7 @@ public class tree15把二叉树打印成多行 {
 //            // 又因为第一行为奇数行，则顺序打印，打印完之后通过语句reverse = !reverse反转一次，则第二行就变成了逆序打印啦
 //            reverse = !reverse;//设置为true，使得下一行变成逆序打印
             if (list.size() != 0)
-                ret.add(list);
+                ret.add(list);//即将每一行当做一个小的list，在存入该ret（也是一个list）中
         }
         return ret;
     }

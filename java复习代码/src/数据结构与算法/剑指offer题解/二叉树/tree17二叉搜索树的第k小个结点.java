@@ -29,10 +29,9 @@ public class tree17二叉搜索树的第k小个结点 {
 //用于存储中序遍历后的结果
     ArrayList<TreeNode17> list = new ArrayList<>();
 
-    TreeNode17 KthNode(TreeNode17 pRoot, int k)
-    {
+    TreeNode17 KthNode(TreeNode17 root, int k) {
         //1.自定义一个中序遍历方法addNode，通过传入的根节点pRoot进行中序遍历，把结果存入list中
-        addNode(pRoot);
+        inOrder(root);
 
         //2.再查找第k小结点：
         //易知，此时的list已经是一个递增的有序序列啦，因此，对于第k小的数即为第k个数，非常简单
@@ -43,11 +42,11 @@ public class tree17二叉搜索树的第k小个结点 {
     }
 
     // 1.1中序遍历的具体实现（使用递归）
-    void addNode(TreeNode17 cur) {
+    void inOrder(TreeNode17 cur) {
         if(cur != null) {
-            addNode(cur.left);
-            list.add(cur);//把结点值存储到lis中
-            addNode(cur.right);
+            inOrder(cur.left);
+            list.add(cur);//把结点值存储到list中
+            inOrder(cur.right);
         }
     }
 }

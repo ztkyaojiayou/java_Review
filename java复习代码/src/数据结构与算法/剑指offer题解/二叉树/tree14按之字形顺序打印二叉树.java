@@ -40,30 +40,33 @@ public class tree14按之字形顺序打印二叉树 {
      // （也即在牛客系统的后台只会传入根节点）
     public  ArrayList<ArrayList<Integer>> Print(TreeNode15 pRoot) {//传入根节点
 
+
         /**
-         * 这里涉及到三个队列：
-         * ret：最终按照题意要返回的队列
-         * queue：用于存储所有结点
-         * list：由于顺序存储和反转存储
+         * 这里涉及到两个list和一个队列queue：
+         * 1）ret：最终按照题意要返回的结果集list，里面存储的是又是一个一个的list，
+         * 即以一个一个的list为单位存储，其代表的是每一行的元素
+         * 2）list：由于顺序存储和反转存储每一行的元素，然后再将该list存入结果集list中
+         * 3）queue：用于存储每一行的所有结点
          */
 
         //LinkedList的add（添加）、poll（删除） 方法提供先进先出的队列操作
-        ArrayList<ArrayList<Integer>> ret = new ArrayList<>();//最终要返回的
+        ArrayList<ArrayList<Integer>> ret = new ArrayList<>();//最终要返回的，其中包含多个list（每一个list就是每一行的元素）
         Queue<TreeNode15> queue = new LinkedList<>();//把所有结点先存入此队列中（先进先出）
         queue.add(pRoot);//往队列中添加二叉树的第一个结点/根节点，一层一层处理
         boolean reverse = false;//用于逆序操作
         while (!queue.isEmpty()) {
-            ArrayList<Integer> list = new ArrayList<>();
-            int cnt = queue.size();//获取队列的元素个数
-            while (cnt-- > 0) {
+            ArrayList<Integer> list = new ArrayList<>();//用于保存每一行的元素
+            int cnt = queue.size();//获取队列的元素个数（队列中保存了每一行的元素）
+            while (cnt > 0) {//退出循环时就表示这一层已经处理完了
                 TreeNode15 node = queue.poll();//删除并返回队列头部的第一个元素，这里强调返回，且是顺序返回/弹出
                 if (node == null)
                     continue;//continue时，跳出本次循环，继续执行下次循环;Break时，跳出循环（结束循环），执行循环体下面的语句。
                 list.add(node.val);//把从queue中顺序返回/弹出的元素依次存入到另一个队列list中
-                //再通过循环，处理其左右结点（即开始处理下一层结点），
+                //再通过循环，处理其左右结点（即每处理一个节点，就同时把该节点的左右节点（属于下一层的结点）加入到队列中））
                 //先添加该节点的左节点，再添加其右节点，此时为顺序，等会使用reverse方法反转即可
                 queue.add(node.left);
                 queue.add(node.right);
+                cnt--;//每处理完一个元素就减一，直到在这一层全处理完毕。
             }
             if (reverse) {//第一行为顺序打印，因此这段代码要先写到真正要反转的前面
                 //反转list，用于逆序打印

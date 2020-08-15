@@ -2,6 +2,7 @@ package 数据结构与算法.剑指offer题解.堆;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 /**
  * 题目： 输入n个整数，找出其中最小的k个数。
@@ -28,7 +29,30 @@ import java.util.Arrays;
  */
 public class heap44最小的k个数 {
 
-    //方法一：采用快排
+    //方法一：堆排序（推荐，常用于解决topK问题）
+    public ArrayList<Integer> GetLeastNumbers_Solution(int[] nums, int k) {
+        if (k > nums.length || k <= 0){
+            return new ArrayList<>();
+        }
+        PriorityQueue<Integer> maxheap = new PriorityQueue<>((o1, o2) -> o2 - o1);  //降序，实现小顶堆
+        for (int i= 0;i < nums.length; i++){
+            maxheap.add(nums[i]);//直接往里面加即可，优先队列会自动排序（降序排列，队首元素为最大元素）
+            if (maxheap.size() > k){
+                maxheap.poll();//弹出堆顶元素，即最大的元素，即保持该队列中的元素始终为k个，且为最小的k个，符合题意
+            }
+        }
+        //最后，使用构造函数的方式创建一个list用于返回，且就把该优先队列作为构造函数的参数传入，妙哉~
+        return new ArrayList<>(maxheap);
+    }
+
+    /**
+     * 以下方法参考一下即可，不推荐
+     * @param arr
+     * @param k
+     * @return
+     */
+
+    // 方法2：采用快排
     public int[] getLeastNumbers1(int[] arr, int k) {
         if (arr == null || arr.length == 0 || k == 0) {
             return new int[0];
@@ -76,7 +100,7 @@ public class heap44最小的k个数 {
         arr[a] = temp;
     }
 
-    //方法二： 也是排序，不过使用的是冒泡排序，大同小异
+    //方法三： 也是排序，不过使用的是冒泡排序，大同小异
     public ArrayList<Integer> GetLeastNumbers_Solution02(int [] input, int k) {
         ArrayList<Integer> list=new ArrayList<Integer>();
         if(input==null||input.length==0||k>input.length)
@@ -96,20 +120,6 @@ public class heap44最小的k个数 {
         for(int i=0;i<k;i++)
             list.add(input[i]);
         return list;
-    }
-
-    //方法三：直接调用实现了排序算法的API，但不推荐
-    public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
-
-        ArrayList<Integer> res = new ArrayList<>();
-        if (input == null || k <= 0 || k > input.length) {
-            return res;
-        }
-        Arrays.sort(input);//，属于直接调用API，不推荐，应该自己手写排序算法
-        for (int i = 0; i < k; i++) {
-            res.add(input[i]);
-        }
-        return res;
     }
 
 }

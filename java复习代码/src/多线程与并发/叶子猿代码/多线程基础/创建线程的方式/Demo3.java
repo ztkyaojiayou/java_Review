@@ -1,7 +1,7 @@
 package 多线程与并发.叶子猿代码.多线程基础.创建线程的方式;
 
 
-//创建线程的方式3:通过匿名内部类
+//创建线程的方式3:通过匿名内部类（其实本质上还是继承了Thread类，只是写法更骚一点）
 public class Demo3 {
 
     public static void main(String[] args) {

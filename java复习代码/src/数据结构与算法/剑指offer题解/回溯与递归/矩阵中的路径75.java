@@ -32,9 +32,11 @@ import java.util.Arrays;
  *  由于路径不能重复进入矩阵的格子，还需要定义和字符矩阵大小一样的布尔值矩阵，用来标识路径是否已经进入每个格子。
  *
  *  当矩阵中坐标为（row,col）的格子和路径字符串中下标为 pathLength 的字符一样时，
- *  从 4 个相邻的格子 (row,col-1),(row-1,col),(row,col+1) 以及 (row+1,col) 中去定位路径字符串中下标为 pathLength+1 的字符。
+ *  从 4 个相邻的格子 (row,col-1),(row-1,col),(row,col+1)
+ *  以及 (row+1,col) 中去定位路径字符串中下标为 pathLength+1 的字符。
  *
- *  如果 4 个相邻的格子都没有匹配字符串中下标为 pathLength+1 的字符，表明当前路径字符串中下标为pathLength的字符在矩阵中的定位不正确，
+ *  如果 4 个相邻的格子都没有匹配字符串中下标为 pathLength+1 的字符，
+ *  表明当前路径字符串中下标为pathLength的字符在矩阵中的定位不正确，
  *  我们需要回到前一个字符 (pathLength-1)，然后重新定位。
  *
  *  一直重复这个过程，直到路径字符串上所有字符都在矩阵中找到合适的位置
@@ -85,16 +87,20 @@ public class 矩阵中的路径75 {
      * @param cols       矩阵列数
      * @param str        要搜索的字符串
      * @param visited    访问标记数组
-     * @param row        当前处理的行号
-     * @param col        当前处理的列号
+     * @param cur_row        当前处理的行号
+     * @param cur_col        当前处理的列号
      * @param pathLength 已经处理的str中字符个数
      * @return 是否找到 true是，false否
      */
     private static boolean hasPathCore(char[] matrix, int rows, int cols, char[] str, boolean[] visited,
-                                       int row, int col, int[] pathLength) {
+                                       int cur_row, int cur_col, int[] pathLength) {
 
-        //0.定义一个路径是否存在的标志，默认false
+        //0.1定义一个路径是否存在的标志，默认false
         boolean hasPath = false;
+
+        //0.2把坐标转化为一个数，便于处理
+        //（因为每个位置是惟一的，则通过该换算（相当于把矩阵拉直后该位置的位置）之后也必然是惟一的）
+        int i=cur_row*cols+cur_col;
 
         //1.回溯/递归结束的条件，即若str中的字符全部存在，就返回true
         if (pathLength[0] == str.length) {
@@ -102,27 +108,29 @@ public class 矩阵中的路径75 {
         }
 
         //2.从当前位置开始回溯，有前提：1）位置要合法（即不能越界），2）当前字符和目标字符相等，3）该位置没有被访问过
-        if (row >= 0 && row < rows
-                && col >= 0 && col < cols//1）位置要合法（即不能越界）
-                && matrix[row * cols + col] == str[pathLength[0]]//2）当前字符和目标字符相等
-                && !visited[row * cols + col]) {//3）该位置没有被访问过
+        if (cur_row >= 0 && cur_row < rows
+                && cur_col >= 0 && cur_col < cols//1）位置要合法（即不能越界）
+                && matrix[i] == str[pathLength[0]]//2）当前字符和目标字符相等
+                && !visited[i]) {//3）该位置没有被访问过
 
             //2.1将当前位置标志为已访问过，同时使“已经处理的str中字符个数pathLength”加1
-            visited[row * cols + col] = true;//把坐标转化成了一个数，便于处理（因为每个位置是惟一的，
+            visited[i] = true;//把坐标转化成了一个数，便于处理（因为每个位置是惟一的，
             // 则通过该换算（相当于把矩阵拉直后该位置的位置）之后也必然是惟一的）
-            pathLength[0]++;
+
+            pathLength[0]++;//2.同时使“已经处理的str中字符个数pathLength”加1
 
             //2.2做选择，按左上右下进行回溯，只要有一个位置
-            hasPath = hasPathCore(matrix, rows, cols, str, visited, row, col - 1, pathLength)//向左
-                    || hasPathCore(matrix, rows, cols, str, visited, row - 1, col, pathLength)//向上
-                    || hasPathCore(matrix, rows, cols, str, visited, row, col + 1, pathLength)//向右
-                    || hasPathCore(matrix, rows, cols, str, visited, row + 1, col, pathLength);//向下
+            hasPath = hasPathCore(matrix, rows, cols, str, visited, cur_row, cur_col - 1, pathLength)//向左
+                    || hasPathCore(matrix, rows, cols, str, visited, cur_row - 1, cur_col, pathLength)//向上
+                    || hasPathCore(matrix, rows, cols, str, visited, cur_row, cur_col + 1, pathLength)//向右
+                    || hasPathCore(matrix, rows, cols, str, visited, cur_row + 1, cur_col, pathLength);//向下
 
-            //2.3如果四个方向都没有找到，就撤销该位置，
+
+            //2.3如果四个方向都没有找到，就撤销该位置，即回溯
             //即把已经处理的str中字符个数减1，同时把该位置又重置为false，以便下次还可以访问
             if (!hasPath) {
                 pathLength[0]--;
-                visited[row * cols + col] = false;
+                visited[i] = false;
             }
 
         }
