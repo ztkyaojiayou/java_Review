@@ -1,5 +1,7 @@
 package 数据结构与算法.剑指offer题解.二叉树;
 
+import java.util.LinkedList;
+
 /**
  * 题目：请实现一个函数来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。
  *
@@ -64,5 +66,54 @@ public class tree13判断二叉树是否对称 {
         //同理，root1的右子节点是和root2的左子节点比较，
         //当每一个结点比较之后都相等的话，则肯定对称了
         return isSymmetrical(root1.left, root2.right) && isSymmetrical(root1.right, root2.left);
+    }
+}
+
+/**
+ * 方法2：使用队列进行迭代实现（面试常问，要掌握）
+ * （1）回想下递归的实现：
+ * 当两个子树的根节点相等时，就比较:
+ * 左子树的left 和 右子树的right，这个比较是用递归实现的。
+ *
+ * （2）现在我们改用队列来实现，思路如下：
+ * 首先从队列中拿出两个节点(left和right)比较
+ * 将left的left节点和right的right节点放入队列，再比较
+ * 将left的right节点和right的left节点放入队列，再比较
+ * 时间复杂度是O(n)，空间复杂度是O(n)
+ */
+class Solution101 {
+    public boolean isSymmetric(TreeNode13 root) {
+        if(root==null || (root.left==null && root.right==null)) {
+            return true;
+        }
+        //用队列保存节点（list本来就是一个特殊的队列，不要大惊小怪）
+        LinkedList<TreeNode13> queue = new LinkedList<TreeNode13>();
+        //将根节点的左右孩子放到队列中
+        queue.add(root.left);
+        queue.add(root.right);
+        while(queue.size()>0) {
+            //从队列中取出两个节点，再比较这两个节点
+            TreeNode13 left = queue.removeFirst();
+            TreeNode13 right = queue.removeFirst();
+            //如果两个节点都为空就继续循环，两者有一个为空就返回false
+            if(left==null && right==null) {
+                continue;
+            }
+            if(left==null || right==null) {
+                return false;
+            }
+            if(left.val!=right.val) {
+                return false;
+            }
+            //将左节点的左孩子， 右节点的右孩子放入队列,
+            //它们两个在队列中是相邻的，因为队列是先进先出的，再拿出来比较
+            queue.add(left.left);
+            queue.add(right.right);
+            //再将左节点的右孩子，右节点的左孩子放入队列，同理。
+            queue.add(left.right);
+            queue.add(right.left);
+        }
+
+        return true;
     }
 }

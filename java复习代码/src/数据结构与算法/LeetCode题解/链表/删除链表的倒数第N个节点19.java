@@ -87,6 +87,7 @@ class Solution19_2 {
         }
         // 4.2于是用慢指针删除倒数第 n 个节点即可。
         slow.next = slow.next.next;
+        //5.最后，返回头结点即可，这也是预节点pre的作用
         return pre.next;
     }
 }

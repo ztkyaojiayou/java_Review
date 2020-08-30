@@ -1,6 +1,7 @@
 package 数据结构与算法.LeetCode题解.双指针;
 
 import java.util.Arrays;
+import java.util.concurrent.ConcurrentHashMap;
 /**
  *31. 下一个排列
  * 实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
@@ -43,7 +44,7 @@ import java.util.Arrays;
  * 如果一直没有元素满足nums[i] < nums[i + 1]，说明不存在下一个更大的排列，则将数字重新排列成最小的排列，直接库函数排序。
  *
  * 上述过程的交换是原地操作，库函数的排序为快排也是原地的。
- * 使用双指针完成数组翻转的话，时间复杂度是线性的。空间复杂度为O(1)O(1)的。
+ * 使用双指针完成数组翻转的话，时间复杂度是线性的。空间复杂度为O(1)的。
  */
 public class 下一个排列31 {
     /**
@@ -58,7 +59,7 @@ public class 下一个排列31 {
      * 但是此时，i的右边还是递减的数字，不是下一个最大的排列。例如上面的例子123654，交换后为124653，
      * 因此还需要将i右边变为升序（124356）（非常关键）。
      */
-    public void nextPermutation(int[] nums) {
+    public static void nextPermutation(int[] nums) {
         //1.从后往前遍历,且指针i在前，而指针j在后
         //（即指针i的起始位置为倒数第二个位置，而指针j则在倒数第一个位置）
         for(int i = nums.length-2; i>=0; i--){//i从倒数第二个位置开始
@@ -78,9 +79,14 @@ public class 下一个排列31 {
     }
 
     //掉换nums[i]和nums[j]的位置
-    void swap(int[] a, int i, int j){
+    private static void swap(int[] a, int i, int j){
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
+    }
+//测试
+    public static void main(String[] args) {
+        int[] arr = {1,5,8,4,7,6,5,3,1};
+        下一个排列31.nextPermutation(arr);
     }
 }

@@ -71,13 +71,12 @@ public class Linkedlist08从尾到头打印链表 {
     public ArrayList printListFromTailToHead(ListNode08 listNode) {
         if(listNode!=null){
             //即只要没有到达最后一个结点，就一直递归下去
-            //直到listNode=null，退出if语句，开始倒序执行list.add(listNode.val)（这是递归的过程和特点，先递归到最后的判断条件/已知条件，再利用已知条件一步一步逆序执行）
+            //直到listNode=null，退出if语句，开始倒序执行list.add(listNode.val)
+            //（这是递归的过程和特点，先递归到最后的判断条件/已知条件，再利用已知条件一步一步逆序执行）
             //这样就实现了倒序序列
             printListFromTailToHead(listNode.next);
             list.add(listNode.val);//递归到最后才开始执行这条语句，务必理解
         }
         return list;
     }
-
-
 }

@@ -61,9 +61,10 @@ public class 沉最多水的容器11 {
         while (i < j) {//1.只有i<j时才继续移动，若相遇，则退出循环即可
             int area = (j - i) * Math.min(height[i], height[j]);//2.面积（长度由j-i决定，而高则由较矮者决定）
             result = Math.max(result, area);//3.每次遍历都更新一下面积的最大值，保证result即为所求
-            if (height[i] < height[j]) {//4.2若i的高度小于j的高度，则移动i（因为是要移动矮者的指针），否则就移动指针j
+            if (height[i] < height[j]) {//4.2若i的高度小于j的高度，则此时矩形的面积的高度就由i的高度决定，而不是由j的高度决定，
+                // 于是应当移动左边的柱子，使得高度增加，因此要移动i（即要移动矮者的指针），否则就移动指针j
                 i++;
-            } else {//4.2
+            } else {//4.2否则就移动指针j
                 j--;
             }
         }

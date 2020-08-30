@@ -39,6 +39,7 @@ class Main_2 {
     }
 }
 
+
 //输入矩阵
 class Main_7{
     public static void main(String[] args) throws IOException {
@@ -92,6 +93,7 @@ class Main_7{
     }
 }
 
+
 //输入一个数组
 class Main_4 {
     public static void main(String[] args) {
@@ -102,12 +104,13 @@ class Main_4 {
             for (int i = 0; i < str.length; i++) {
                 arr[i] = Integer.parseInt(str[i]);
             }
-            for(int a:arr){
-                System.out.println(a);
-            }
+            //for(int a:arr){
+            //    System.out.println(a);
+            //}
         }
     }
 }
+
 
 //输入一个字符串（使用标准输入流）
 //nextLine就是输入字符串，务必记住
@@ -126,6 +129,7 @@ class Main_5{
             System.out.println(res.toString());
     }
 }
+
 //若为多行字符串输入，即多个案例时：
 //功能：倒置字符串
 class Main_53{

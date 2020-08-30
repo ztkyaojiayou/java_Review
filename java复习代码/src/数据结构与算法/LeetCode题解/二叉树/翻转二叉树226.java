@@ -16,8 +16,8 @@ import java.util.Stack;
  *   2     7
  *  / \   / \
  * 1   3 6   9
- * 输出：
  *
+ * 输出：
  *      4
  *    /   \
  *   7     2
@@ -61,7 +61,7 @@ public class 翻转二叉树226 {
             return root;
         }
     }
-//写法2：（每太懂）
+//写法2：（没太懂）
 class solution {
     public TreeNode226 invertTree(TreeNode226 root) {
         //递归的终止条件
@@ -97,7 +97,7 @@ class solution {
  * 判断其右子树是否为空，不为空就放入队列中
  */
 
-class Solution226 {
+class solution_使用队列226 {
     public TreeNode226 invertTree(TreeNode226 root) {
         //0.特判
         if(root==null) {
@@ -109,10 +109,10 @@ class Solution226 {
         //1.1先把根节点放入队列进行处理
         queue.add(root);
         while(!queue.isEmpty()) {
-            //2.再每次都从队列中拿一个节点，并交换这个节点的左右子树
+            //2.再每次都从队列中拿（用完不放回去）一个节点，并交换这个节点的左右子树
             //2.1先取（易知，第一次取的就是根节点）
             TreeNode226 cur = queue.poll();
-            //2.2再互换当前节点的左右子节点，使用一个辅助节点变量temp即可
+            //2.2再互换当前节点的左右子节点(其实是子树），使用一个辅助节点变量temp即可
             TreeNode226 temp = cur.left;
             cur.left = cur.right;
             cur.right = temp;

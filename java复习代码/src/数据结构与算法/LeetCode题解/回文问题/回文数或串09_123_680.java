@@ -44,6 +44,7 @@ package 数据结构与算法.LeetCode题解.回文问题;
  * 最后不要忘记将 help/100。
  */
 class 回文数09 {
+    //方法：把传入的值分解
         public boolean isPalindrome(int x) {
             if(x < 0)
                 return false;

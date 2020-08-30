@@ -36,10 +36,10 @@ public class Linkedlist31合并两个排序的链表 {
      * @return
      */
     public ListNode31 Merge01(ListNode31 list1, ListNode31 list2) {//注意：这里的list1和list2分别指两个链表的头结点
-        //1.先定义一个结点pre，插到新链表头结点的前面，其val值任意设置即可，这里设置为-1.
+        //1.先定义一个结点pre，插到新链表头结点的前面，其val值任意设置即可，这里设置为0.
         //但是由于这个结点毕竟不是原链表里的值，因此最终返回的链表应该从其下一个结点开始（即为pre.next，见line71）
         //（为什么不直接就用头结点呢？因为头结点本身也要比较）
-        ListNode31 pre = new ListNode31(-1);//
+        ListNode31 pre = new ListNode31(0);//
         //2.再定义一个辅助的临时结点cur，表示当前节点，起初就令其为pre
         // 这个结点是要移动的，但它移动不等于pre结点移动，只是起初令他们二者相等而已，
         ListNode31 cur = pre;
@@ -68,6 +68,7 @@ public class Linkedlist31合并两个排序的链表 {
             cur.next = list2;
         return pre.next;//因为pre结点是我们自己添加的，并不是原链表中的值，因此要从其下一个结点开始
     }
+
 
     /**
      * 方法二：递归法，思路简单，代码也很好理解

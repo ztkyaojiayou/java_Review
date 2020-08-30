@@ -18,10 +18,12 @@ class 两数之和01 {
         //1.使用hashMap做映射
         HashMap<Integer, Integer> map = new HashMap<>();
         for(int i=0;i<nums.length;i++){//2.开始遍历数组,
-            if(map.containsKey(target-nums[i])){//2.1若在map中找到了当前值对应的另一个加数，就通过一个数组返回这两个值所对应的下标即可
+            //2.1若在map中找到了当前值对应的另一个加数，就通过一个数组返回这两个值所对应的下标即可
+            if(map.containsKey(target-nums[i])){
                 return new int[]{map.get(target-nums[i]),i};
             }
-            map.put(nums[i],i);//2.2若没有找到，就把该值当做map中的key，而把其对应的下标就当做value放入map中
+            //2.2若没有找到，就把该值当做map中的key，而把其对应的下标就当做value放入map中
+            map.put(nums[i],i);
         }throw new IllegalArgumentException("没有找到");
     }
 }
@@ -68,7 +70,7 @@ class 两数之和01 {
  *
  * 复杂度分析：
  * 时间复杂度 O(N^2)：其中固定指针k循环复杂度 O(N)，双指针 i，j 复杂度 O(N)，N为数组长度。
- * 空间复杂度 O(1)O(1)：指针使用常数大小的额外空间。
+ * 空间复杂度 O(1)：指针使用常数大小的额外空间。
  */
 class 三数之和15 {
         public static List<List<Integer>> threeSum(int[] nums) {

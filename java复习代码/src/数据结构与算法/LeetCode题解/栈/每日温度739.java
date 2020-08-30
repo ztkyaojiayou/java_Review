@@ -1,5 +1,7 @@
 package 数据结构与算法.LeetCode题解.栈;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -35,26 +37,20 @@ import java.util.Stack;
  * 因为要计算隔了几天后温度比当前天温度高，存放数组下标更合适。
  */
 public class 每日温度739 {
-        public int[] dailyTemperatures(int[] T) {
-            // 0.结果集
-            int[] res = new int[T.length];
-            // 1.定义一个单调栈（即后面进入的元素值应当要小于栈顶元素的值），里面存放当天温度对应的下标
-            Stack<Integer> stack = new Stack();
-            // 2.再对数组从后往前遍历，则最后一天的温度先进栈（当然，这里我们是把其对应的下标进栈，目的是方便统计结果，但意义是一样的）
-            for(int i = T.length-1; i >= 0; i--){
-                // 2.1若当前元素/温度比栈顶元素大 则让栈顶元素出栈，不断比较，直至重新调整栈直至满足要求
-                // (注意：此时当前元素不进栈，而是还要让栈中的元素出栈，当前元素只有小于栈顶元素时才入栈）
-                while(!stack.isEmpty() && T[i] >= T[stack.peek()]){
-                    stack.pop();//不断弹出/删除栈顶元素并与当前元素进行比较
+        public int[] dailyTemperatures(int[] num) {
+            int length = num.length;
+            int[] ans = new int[length];
+            Deque<Integer> stack = new LinkedList<Integer>();
+            for (int i = 0; i < length; i++) {
+                ////若栈不为空，且当前温度大于栈顶元素对应的温度，则此时就可以计算出栈顶元素对应的温度的情况
+                while (!stack.isEmpty() && num[i] > num[stack.peek()]) {
+                    int prevIndex = stack.pop();//取出栈顶元素对应的下标，同时出栈该元素，因为该元素已经被处理了呀！
+                    ans[prevIndex] = i - prevIndex;//求出再过多少天就可以看到比自己高的温度了
                 }
-                // 2.2.1若栈为空 即比较到了最后一天，就说明后面没有比当前天温度高的，于是返回0即可
-                // 2.2而若不为空，则表示栈中还有比当前温度高的日子，且易知此时的栈顶元素所对应的日期即为第一个比当前温度大的日子，
-                // 2.2.1于是只需把其对应的下标减去当前温度所对应的下标即可，即为经过几天后温度比当前天温度高，同时将当前元素进栈。
-                res[i] = stack.isEmpty()? 0 :stack.peek()-i;
-                // 2.2.2同时，将当前元素进栈
+                //而若栈为空，且当前温度小于栈顶元素对应的温度，则把当前温度对应的下标存入栈中
                 stack.push(i);
             }
-            //3.最后，返回结果即可
-            return res;
+            //返回结果即可
+            return ans;
         }
     }

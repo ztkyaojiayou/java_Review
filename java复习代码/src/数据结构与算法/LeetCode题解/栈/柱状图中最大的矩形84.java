@@ -54,7 +54,7 @@ public class 柱状图中最大的矩形84 {
             for (int i = 0; i < new_heights.length; i++) {
                 //4.1若当前柱子的高度小于栈顶元素的高度，此时就可以就计算出栈顶元素所对应的柱子所能勾勒出的最大面积了，
                 //且此时当前柱子对应的下标i就充当了栈顶元素所对应的柱子的右边第一个比它小的位置啦，即上面分析中的right_i（关键）
-                while (!stack.isEmpty() && new_heights[stack.peek()] > new_heights[i]) {
+                while (!stack.isEmpty() && new_heights[i] < new_heights[stack.peek()]) {
                     //4.1.1先弹出栈顶的元素（下标），用于求栈顶元素所对应的柱子的高度，即new_heights[cur]。
                     //（也因此易知，每次弹出的元素都是可以求出该元素对应的柱子所能延伸的最大面积的元素）
                     //此时注意：此时栈顶元素就变成了要求的柱子的左边第一个比它小的位置啦，即上面分析中的left_i（关键）

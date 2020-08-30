@@ -43,8 +43,10 @@ public class Linkedlist29链表中倒数第K个结点 {
             P1 = P1.next;
             k--;
         }
-        if (k > 0)
+        //若链表元素还没有k个时，则倒数第k个元素必为空
+        if (k > 0){
             return null;
+        }
         //2.再定义一个指向头结点head的指针p2，让其和已经跑了k个结点的p1指针一起跑
         ListNode29 P2 = head;
         //当P1 != null时，继续跑，当它移动到链表结尾时（即p1=null，跳出循环）

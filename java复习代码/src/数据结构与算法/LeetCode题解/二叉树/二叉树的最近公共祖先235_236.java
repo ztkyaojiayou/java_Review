@@ -32,12 +32,12 @@ class TreeNode236 {
 /**
  * 思路解析：使用递归，最近公共祖先就是在他们的公共祖先节点中找一个最近的节点。
  * 首先把概念理清楚：
- * 祖先的定义： 若节点 pp 在节点 root 的左（右）子树中，或 p = root，则称 root 是 p 的祖先。
+ * 祖先的定义： 若节点 p 在节点 root 的左（右）子树中，或 p = root，则称 root 是 p 的祖先。
  *  最近公共祖先的定义： 设节点 root 为节点 p,q 的某公共祖先，
  *  若其左子节点 root.left 和右子节点 root.right 都不是 p,q 的公共祖先，则称 root 是 “最近的公共祖先” 。
  *
  * 根据以上定义，若 root 是 p,q 的 最近公共祖先 ，则只可能为以下情况之一：
- * p 和 qq 在 root 的子树中，且分列 root 的 异侧（即分别在左、右子树中）；
+ * p 和 q 在 root 的子树中，且分列 root 的 异侧（即分别在左、右子树中）；
  * p = root ，且 q 在 root 的左或右子树中；
  * q = root ，且 p 在 root 的左或右子树中；
  考虑通过递归对二叉树进行后序遍历，当遇到节点 p 或 q 时返回。
@@ -71,12 +71,12 @@ class TreeNode236 {
  *
  * TreeNode left = lowestCommonAncestor(root.left,p,q);
  * TreeNode right = lowestCommonAncestor(root.right,p,q);
- * 如果left或right为null，说明p和q并不存在其左或右子树中。所以我们可以分为以下几种情况：
+ * 如果left或right为null，说明p和q并不存在其左或右子树中。所以我们可以分为以下4种情况：
  *
- * left == null 并且 right == null 说明，p与q根本不存在公共祖先。那直接返回null。
- * left == null 并且 right ！= null 。说明其公共祖先就是 right
- * right == null 并且 left ！= null 。说明其公共祖先就是 left
- * right ！= null 并且 left ！=null 。说明right == left = root。return root。
+ * left == null 并且 right == null 说明，p与q根本不存在公共祖先。那直接返回null；
+ * left == null 并且 right ！= null 。说明其公共祖先就是 right；
+ * right == null 并且 left ！= null 。说明其公共祖先就是 left；
+ * right ！= null 并且 left ！=null 。说明right == left = root，return root。
  * 根据上述逻辑即可解决问题。
  */
 class 二叉树的最近公共祖先236 {
@@ -85,7 +85,7 @@ class 二叉树的最近公共祖先236 {
             if(root == null || root.val == p.val || root.val == q.val){
                 return root;
             }
-            //2.通过递归求出其左子树和右子树的最近公共祖先left和right
+            //2.通过递归求出这两个节点的左子树和右子树的最近公共祖先left和right
             TreeNode236 left = lowestCommonAncestor(root.left,p,q);
             TreeNode236 right = lowestCommonAncestor(root.right,p,q);
             //3.再对递归结果进行分类讨论：
@@ -131,7 +131,8 @@ class 二叉树的最近公共祖先236 {
  */
 
 /**
- * 解析：这道题和236题是相似的，只是上一题的二叉树是一颗普通的二叉树，而这里的二叉树是一颗搜索树，其性质更明显，因此更简单。
+ * 解析：这道题和236题是相似的，只是上一题的二叉树是一颗普通的二叉树，
+ * 而这里的二叉树是一颗搜索树，其性质更明显，因此更简单。
  * 先回忆一下二叉搜索树（BST)的基本性质：
  * （1）节点 N 左子树上的所有节点的值都小于等于节点 N 的值
  * （2）节点 N 右子树上的所有节点的值都大于等于节点 N 的值
@@ -139,11 +140,11 @@ class 二叉树的最近公共祖先236 {
  *
  * 思路：
  * 从根节点开始遍历树
- * 如果节点 pp 和节点 qq 都在右子树上，那么以右孩子为根节点继续 1 的操作
- * 如果节点 pp 和节点 qq 都在左子树上，那么以左孩子为根节点继续 1 的操作
- * 如果条件 2 和条件 3 都不成立，这就意味着我们已经找到节 pp 和节点 qq 的 最近公共祖先 了
+ * 如果节点 p 和节点 q 都在右子树上，那么以右孩子为根节点继续 1 的操作
+ * 如果节点 p 和节点 q 都在左子树上，那么以左孩子为根节点继续 1 的操作
+ * 如果条件 2 和条件 3 都不成立，这就意味着我们已经找到节 p 和节点 q 的 最近公共祖先 了
  */
-class Solution235 {
+class 二叉搜索树的最近公共祖先235 {
     public TreeNode236 lowestCommonAncestor(TreeNode236 root, TreeNode236 p, TreeNode236 q) {
         //1.递归结束的条件
         if(root == null || root.val == p.val || root.val == q.val){

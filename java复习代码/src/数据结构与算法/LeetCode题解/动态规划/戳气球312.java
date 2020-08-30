@@ -51,15 +51,17 @@ public class 戳气球312 {
                 return 0;
 
             // 因为原数组中可能有为0的位置，此情况必为0，可以不用考虑，只考虑大于0的情况即可，否则程序会超时
-            if (dp[left][right] > 0)
+            if (dp[left][right] > 0){
                 return dp[left][right];
+            }
+
 
             // 处理一般情况，使用状态方程
             // 即从新数组的第二个元素（也就是原数组的第一个元素）开始遍历，
             // 对于每一个元素，其最大金币数就是在“第 i 个气球处所能得到的金币数以及其左右两部分分别能得到的最大金币数dp(left, i) + dp(i, right)
             // ”中取最大值即可（当然，再要和之前的result值比较，以保证result值永远为最大值），这里的result即为dp[left][right]。
             int result = 0;
-            for (int i = left + 1; i < right; ++i){
+            for (int i = left + 1; i < right; i++){
                 //状态方程/递推关系式
                 // dpCount(dp, nums, left, i) :向位置i的左边递归，求出其左边所能得到的最大金币数
                 // dpCount(dp, nums, i, right)：向位置i的右边递归，求出其右边所能得到的最大金币数

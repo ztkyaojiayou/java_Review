@@ -1,5 +1,6 @@
 package 数据结构与算法.LeetCode题解.回溯_递归_记忆化搜索;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  *解析：使用递归算法
  * （1）思路：
- * “全排列”就是一个非常经典的“回溯”算法的应用。我们知道，N 个数字的全排列一共有 N!N! 这么多个。
+ * “全排列”就是一个非常经典的“回溯”算法的应用。我们知道，N 个数字的全排列一共有 N! 这么多个。
  * 大家可以尝试一下在纸上写 3 个数字、4 个数字、5 个数字的全排列，相信不难找到这样的方法。
  *
  * 以数组 [1, 2, 3] 的全排列为例。
@@ -65,39 +66,42 @@ import java.util.List;
  * 这种在遍历的过程中，从深层结点回到浅层结点的过程中所做的操作就叫“回溯”。
  */
 class 全排列46 {
+    //定义结果集list，里面包含的是一个一个的小list，每一个都代表一种排列
     List<List<Integer>> results = new LinkedList<>();
     List<List<Integer>> permute(int[] nums) {
-        // 记录「路径」
-        LinkedList<Integer> list = new LinkedList<>();
+        // 记录「路径」，即每一个小的list
+        LinkedList<Integer> path = new LinkedList<>();
         //开始调用递归方法
-        backtrack(nums, list);
+        backtrack(nums, path,0);
+        //最后，返回结果即可
         return results;
     }
 
     /**
-     * 具体的递归方法
+     * 具体的递归方法（注意，在递归中，没有"初始条件"一说，只有"递归结束的条件"一说）
      * @param nums  即提给的没有重复数字的数字序列
-     * @param list 用于记录每一种符合题意的结果/路径
+     * @param path 用于记录每一种符合题意的结果/路径
      */
-    void backtrack(int[] nums, LinkedList<Integer> list) {
+    void backtrack(int[] nums, LinkedList<Integer> path,int start) {
         // 1.开始递归的四部曲：
-        //（1）终止递归的条件，即当nums 中的元素全都在 track 中出现时
+        //（1）终止递归的条件，即当nums 中的元素全都在 path 中出现时,即已经是一个全排列时
         //其实也就是每一次递归结束的最后一步，即把结果存起来（重点）
-        if (list.size() == nums.length) {
-            results.add(new LinkedList(list));
+        if (path.size() == nums.length) {
+            results.add(new LinkedList(path));
             return;
         }
         // 2.开始递归
         for (int i = 0; i < nums.length; i++) {
             // 2.1排除不合法的选择,即当为重复元素时，就跳过该元素
-            if (list.contains(nums[i]))
+            if (path.contains(nums[i])){
                 continue;
+            }
             //（2）2.2做选择，即在nums 中选择一个list中不存在的元素（即不能有重复数字）并记录到list中
-            list.add(nums[i]);
+            path.add(nums[i]);
             //（3）进入下一层决策树/递归
-            backtrack(nums, list);
+            backtrack(nums, path,i+1);
             //（4）取消选择（即删除最后一个元素，往上回溯/递归）
-            list.removeLast();
+            path.removeLast();
         }
     }
 }
@@ -139,25 +143,28 @@ class 全排列46 {
  * 这就意味着，我们只需要对46题目对应的算法做出相应的去重改进即可
  * 具体有以下步骤：
  * 加入 if (!used[i] && (nums[i]!=preNum))
- * （这部分的意义可以解释为：如果当前的这个数即nums[i]，跟之前的数组中的数即preNum不相等，那才能说当前的nums[i]是一个有效的数字
+ * （这部分的意义可以解释为：如果当前的这个数（即nums[i]）跟之前的数组中的数即preNum不相等，
+ * 那才能说当前的nums[i]是一个有效的数字
  * 那么怎么才能保证preNum是一个不同的数呢？
- * （这里我们对数组初始进行了排序，Arrays.sort(nums);,这步保证了preNum一定是一个等于或者小于nums[i]的数，这也就是达到了去重的效果）
+ * （这里我们对数组初始进行了排序，Arrays.sort(nums);,
+ * 这步保证了preNum一定是一个等于或者小于nums[i]的数，
+ * 这也就是达到了去重的效果）
 
  */
 class 全排列47 {
-    //先定义一个结果集list，用于存储所有的结果集
+    //1.先定义一个结果集list，用于存储所有的结果集
     public List<List<Integer>> result = new LinkedList<>();
     public List<List<Integer>> permuteUnique(int[] nums) {
-        //特判
-        if(nums.length == 0){
-            return result;
-        }
-
-        //首先给数组排序
+        int len = nums.length;
+        //2.首先给数组排序
         Arrays.sort(nums);
-        //开始调用回溯/递归方法
-        findUnique(nums,new boolean[nums.length],new LinkedList<Integer>());
-        //返回结果集
+        //3.记录/存储每一个排列
+        ArrayList<Integer> path = new ArrayList<>();
+        //4.记录当前元素是否已经被访问过
+        boolean[] visited = new boolean[len];
+        //5.开始调用回溯/递归方法
+        backtrack(nums,path,visited);
+        //6.返回结果集
         return result;
     }
 
@@ -166,36 +173,36 @@ class 全排列47 {
      * @param nums 即题给的可包含重复数字的数字序列
      * @param visited 定义的一个boolean型的数组，长度和数组的长度系统，
      *                用于表示：若该数字已经被选过，则（要修改）为true，否则为false，且默认为false，即没有被选过
-     * @param list 用于存储每一次递归后产生的一个结果，如【1,1,2】
+     * @param path 用于存储每一次递归后产生的一个结果，如【1,1,2】
      */
     //整体思路和代码和入门版相同，主要是要去重，只需加上一个判断条件即可
-    public void findUnique(int[] nums, boolean[] visited,LinkedList<Integer> list){
-        //递归结束的条件
-        if(list.size() == nums.length){
-            result.add(new LinkedList(list));//每递归一次后就把该结果存入结果集中。
+    public void backtrack(int[] nums, ArrayList<Integer> path, boolean[] visited){
+        //5.1递归结束的条件
+        if(path.size() == nums.length){
+            result.add(new LinkedList(path));//每递归一次后就把该结果存入结果集中。
             return ;
         }
 
-        //选择列表,即从第一个数字开始遍历，很简单
+        //5.2选择列表,即从第一个数字开始遍历，很简单
         for(int i = 0; i<nums.length; i++){
-            // 开始排除不合法的选择（重点）
+            // 1）开始排除不合法的选择（重点）
             // 我们已经选择过的不需要再放进去了
             if(visited[i])//若该值为真，则表示已经选过了，则不再选它，跳过即可
                 continue;
-            //如果当前节点与他的前一个节点一样，并且他的前一个节点已经被遍历过了，那我们也就不需要了。
+            //如果当前节点等于他的前一个节点，并且他的前一个节点已经被遍历过了，那我们也就不需要了。
             if(i>0 && nums[i] == nums[i-1] && visited[i-1])
                 break;//也可以使用continue，但是不如break来的直接，break是直接跳出这一块，而continue则是一次一次地跳出。
-            //做出选择，即把当前数字存入list中
-            list.add(nums[i]);
+            //2）做出选择，即把当前数字存入list中
+            path.add(nums[i]);
             //同时把该值设为已经被使用过（重点）
             visited[i] = true;
-            //再开始下一轮递归/回溯
-            findUnique(nums,visited,list);
+            //3）再开始下一轮递归/回溯
+            backtrack(nums,path,visited);
             //最后，撤销选择，即把最后那个数字删除，同时设为false，即设为未被使用过的状态，因为在下一轮时，该值还是可以使用的。
             //我们的目的是使得同一层循环不能出现已经被使用过的数字，而对于其他层是不要求的，
             //即[1,1,2]和[1,2,1]是可以的（只是元素重复，但是是两种不同的结果，都符合题目要求），
             //但是[1,1,2]和[1,1,2]就是重复的（结果重复）。
-            list.removeLast();
+            path.remove(path.size()-1);
             visited[i] = false;
         }
     }

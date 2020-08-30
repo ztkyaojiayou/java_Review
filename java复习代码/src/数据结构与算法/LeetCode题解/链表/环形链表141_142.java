@@ -7,7 +7,7 @@ import java.util.Set;
 
 /**
  * 141. 环形链表（入门版）
- * 给定一个链表，判断链表中是否有环。
+ * 给定一个链表，判断链表中是否有环。（判断型）
  * 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。
  * 如果 pos 是 -1，则在该链表中没有环。
  *
@@ -37,9 +37,9 @@ import java.util.Set;
  *（2）遍历链表，每遍历一个节点，指针P1向下移动两个节点，指针P2向下移动一个节点。
  *（3）因为如果存在环，那么快慢指针一定会相遇，因此在链表遍历结束之前，
  *     1）若双指针指向了同一节点，则说明链表有环，返回true即可；
- *     2）否则，当某一个指针遍历完毕都没有相遇，则说明无环，返回false即可
+ *     2）否则，当某一个指针遍历完毕都没有相遇，则说明无环，返回false即可。
  */
-class 环形链表141 {
+class 环形链表_判断141 {
     public boolean hasCycle(ListNode head) {
         //0.特判
         if (head == null || head.next == null) {
@@ -51,7 +51,7 @@ class 环形链表141 {
         ListNode fast = head.next;
         //2.快慢指针开始遍历链表
         while (slow != fast) {
-            //2.1若其中一个指针完毕都没有相遇，则表示无环，返回false即可
+            //2.1若快指针遍历完毕了后都没有相遇，则表示无环，返回false即可
             if (fast == null || fast.next == null) {
                 return false;
             }
@@ -59,11 +59,12 @@ class 环形链表141 {
             slow = slow.next;
             fast = fast.next.next;
         }
-        //3.当相遇时表示有环，返回true即可
+        //3.当相遇时（跳出循环）表示有环，返回true即可
         return true;
     }
 }
-//写法2：
+
+//写法2：do...while
 class Solution141_1 {
     public boolean hasCycle(ListNode head) {
         //特判
@@ -76,7 +77,7 @@ class Solution141_1 {
         do {
             if (fast == null || fast.next == null) {
                 return false;
-            };
+            }
             //快指针每次走两步，慢指针每次走一步
             slow = slow.next;
             fast = fast.next.next;
@@ -119,7 +120,7 @@ class solution141_2{
 
 /**
  * 142. 环形链表 II(进阶版）
- * 给定一个链表，返回链表开始入环的第一个节点（也叫入口节点）。 如果链表无环，则返回 null。
+ * 给定一个链表，返回链表开始入环的第一个节点（也叫入口节点）。 如果链表无环，则返回 null。（要找到这个节点）
  * 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。
  * 如果 pos 是 -1，则在该链表中没有环。
  * 说明：不允许修改给定的链表。
@@ -151,7 +152,7 @@ class solution141_2{
  */
 
 
-class Solution142 {
+class 环形链表_找到该节点142 {
     public ListNode detectCycle(ListNode head) {
         //1.先定义快慢指针，且一开始都指向头结点
         ListNode fast = head, slow = head;

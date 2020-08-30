@@ -106,8 +106,7 @@ class 合并k个有序链表23 {
         //递归结束的条件，即当 l1 为空或 l2 为空时，此时返回另一个链表即可
         if (l1 == null) {
             return l2;
-        }
-        else if (l2 == null) {
+        } else if (l2 == null) {
             return l1;
         }
         //开始递归
