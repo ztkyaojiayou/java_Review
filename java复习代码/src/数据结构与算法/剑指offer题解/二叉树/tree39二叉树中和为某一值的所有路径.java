@@ -36,7 +36,7 @@ public class tree39二叉树中和为某一值的所有路径 {
         path.add(node.val);//把遍历过的结点值加入到path中
         currentSum += node.val;//累加已经遍历过的结点值
         if (currentSum == target && node.left == null && node.right == null) {
-            ret.add(new ArrayList<Integer>(path));
+            ret.add(new ArrayList<>(path));
         } else {//调用backtracking方法向其左右子节点进行回溯，变量是其子节点
             backtracking(node.left, currentSum,target, path);
             backtracking(node.right, currentSum,target, path);
@@ -47,7 +47,6 @@ public class tree39二叉树中和为某一值的所有路径 {
         // 应该删除掉这个叶子结点值而换成另外一个叶子节点重新计算
         path.remove(path.size() - 1);//删除ArrayList中的最后一个元素，因为要重新回溯到这个结点去查找它的另一个子结点
     }
-
 
 
 

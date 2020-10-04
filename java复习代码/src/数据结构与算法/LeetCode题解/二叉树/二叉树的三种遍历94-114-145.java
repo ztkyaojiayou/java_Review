@@ -2,6 +2,72 @@ package 数据结构与算法.LeetCode题解.二叉树;
 
 import javax.swing.tree.TreeNode;
 import java.util.*;
+/**
+ * 144. 二叉树的前序遍历
+ * 给定一个二叉树，返回它的 前序 遍历。
+ *  示例:
+ * 输入: [1,null,2,3]
+ *    1
+ *     \
+ *      2
+ *     /
+ *    3
+ * 输出: [1,2,3]
+ * 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
+ */
+class 前序遍历114{
+    public  List<Integer> preOrderRecur(TreeNode94 root) {
+        //结果集
+        List<Integer> res = new ArrayList<>();
+        //开始递归（带上结果集res）
+        dfs(res,root);
+        return res;
+    }
+
+    void dfs(List<Integer> res, TreeNode94 root) {
+        if (root == null) {
+            return;
+        }
+        res.add(root.val);//把根节点存入结果集中//System.out.print(root.val + " ");打印
+        dfs(res,root.left);
+        dfs(res,root.right);
+    }
+}
+
+/**
+ * 迭代法：同样是使用一个栈来模拟递归即可，
+ * 从根节点开始，每次迭代弹出当前栈顶元素，并将其孩子节点压入栈中，但是要先压右孩子再压左孩子，因为栈的特点是先进后出。
+ * 在这个算法中，输出到最终结果的顺序按照 Top->Bottom 和 Left->Right，符合前序遍历的顺序。
+ */
+class solution114{
+    public  List<Integer> preOrderIteration(TreeNode94 root) {
+        //0.结果集
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        //1.使用一个栈来模拟递归
+        Stack<TreeNode94> stack = new Stack<TreeNode94>();
+        //1.1先把根节点入栈
+        stack.add(root);
+        while (!stack.isEmpty()) {//只要栈不为空，就表明还有元素没有遍历完，若为空，则说明已经全部遍历结束，返回结果集即可
+            //1.2再弹出根节点并保存到结果集中
+            TreeNode94 node = stack.pop();
+            res.add(node.val);
+            //System.out.print(node.value + " ");//打印出来
+            //2.1接着先把其右节点入栈（先）
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            //2.2再把其左节点入栈（后）
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+        //3.最终，返回结果集（此时栈中已为空）
+        return res;
+    }
+}
 
 /**
  * 94. 二叉树的中序遍历
@@ -122,74 +188,7 @@ class solution941{
 
 
 
-/**
- * 144. 二叉树的前序遍历
- * 给定一个二叉树，返回它的 前序 遍历。
- *  示例:
- * 输入: [1,null,2,3]
- *    1
- *     \
- *      2
- *     /
- *    3
- * 输出: [1,2,3]
- * 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
- */
-class 前序遍历114{
-    public  List<Integer> preOrderRecur(TreeNode94 root) {
-        //结果集
-        List<Integer> res = new ArrayList<>();
-        //开始递归（带上结果集res）
-        dfs(res,root);
-        return res;
-    }
 
-    void dfs(List<Integer> res, TreeNode94 root) {
-        if (root == null) {
-            return;
-        }
-        res.add(root.val);//把根节点存入结果集中
-        //System.out.print(root.val + " ");打印
-        dfs(res,root.left);
-        dfs(res,root.right);
-    }
-}
-
-/**
- * 迭代法：同样是使用一个栈来模拟递归即可，
- * 类比上面中序遍历的代码
- * 从根节点开始，每次迭代弹出当前栈顶元素，并将其孩子节点压入栈中，但是要先压右孩子再压左孩子，因为栈的特点是先进后出。
- * 在这个算法中，输出到最终结果的顺序按照 Top->Bottom 和 Left->Right，符合前序遍历的顺序。
- */
-        class solution114{
-            public  List<Integer> preOrderIteration(TreeNode94 root) {
-                //0.结果集
-                List<Integer> res = new ArrayList<>();
-                if (root == null) {
-                    return res;
-                }
-                //1.使用一个栈来模拟递归
-                Stack<TreeNode94> stack = new Stack<TreeNode94>();
-                //1.1先把根节点入栈
-                stack.add(root);
-                while (!stack.isEmpty()) {//只要栈不为空，就表明还有元素没有遍历完，若为空，则说明已经全部遍历结束，返回结果集即可
-                    //1.2再弹出根节点并保存到结果集中
-                    TreeNode94 node = stack.pop();
-                    res.add(node.val);
-                    //System.out.print(node.value + " ");//打印出来
-                    //2.1接着先把其右节点入栈（先）
-                    if (node.right != null) {
-                        stack.push(node.right);
-                    }
-                    //2.2再把其左节点入栈（后）
-                    if (node.left != null) {
-                        stack.push(node.left);
-                    }
-                }
-                //3.最终，返回结果集（此时栈中已为空）
-                return res;
-            }
-        }
 /**
  * 145. 二叉树的后序遍历(其迭代法较难）
  * 给定一个二叉树，返回它的 后序 遍历。

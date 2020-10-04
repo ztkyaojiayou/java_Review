@@ -10,31 +10,26 @@ package 多线程与并发.毕向东代码.死锁;
 */
 class Ticket implements Runnable
 {
-    private  int num = 100;
+    private int num = 100;
     Object obj = new Object();
     boolean flag = true;
-    public void run()
-    {
-
-
+    public void run() {
         if(flag)
             while(true)
             {
                 //同步中嵌套同步，你不让我，我也不让你
                 synchronized(obj)//同步代码块
                 {
-                    show();//同步方法
+                    show();//同步方法（要持有锁）
                 }
-            }
-        else
+            }else
             while(true)
                 this.show();
     }
     //同理，同步中嵌套同步，你不让我，我也不让你
     public synchronized void show()//同步方法
     {
-
-        synchronized(obj)//同步代码块
+        synchronized(obj)//同步代码块（要持有锁）
         {
             if(num>0)
             {

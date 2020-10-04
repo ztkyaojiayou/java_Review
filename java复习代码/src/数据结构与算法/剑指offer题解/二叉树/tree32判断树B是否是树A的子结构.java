@@ -36,7 +36,7 @@ public class tree32判断树B是否是树A的子结构 {
     //（2）若不一样，则通过递归思想再判断A的左孩子和B的根节点是否一样，同理可判断A的右孩子和B的根节点是否一样。依次找下去
     //（3）如果上述情况都不满足则说明不包含
     public boolean HasSubtree(TreeNode32 rootA,TreeNode32 rootB) {
-        //（1）如果左右子树都为空，则说明不包含
+        //（1）如果左右子树有空的，则说明不包含
         if(rootA == null || rootB == null){
             return false;
         }

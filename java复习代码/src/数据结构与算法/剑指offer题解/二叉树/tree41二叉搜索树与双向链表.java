@@ -1,5 +1,7 @@
 package 数据结构与算法.剑指offer题解.二叉树;
 
+import 数据结构与算法.TreeNode;
+
 /**
  * （没懂）题目：输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。
  * 要求不能创建任何新的结点，只能调整树中结点指针的指向。
@@ -24,24 +26,26 @@ package 数据结构与算法.剑指offer题解.二叉树;
 }
 
 public class tree41二叉搜索树与双向链表 {
-    private TreeNode41 pre = null;//指向当前节点的前一个结点
-    private TreeNode41 head = null;//头结点
-
-    public TreeNode41 Convert(TreeNode41 root) {
+    TreeNode pre, head;//一个指向前一个节点，一个指向头结点
+    public  TreeNode treeToDoublyList( TreeNode root) {
+        if(root == null) return null;
         inOrder(root);
-        return head;//对于链表，返回头结点即可
+        //构造循环链表，首尾相连即可
+        head.left = pre;
+        pre.right = head;
+        return head;
     }
-
-    private void inOrder(TreeNode41 node) {
-        if (node == null)
-            return;
-        inOrder(node.left);//向左递归
-        node.left = pre;
-        if (pre != null)
-            pre.right = node;
-        pre = node;
-        if (head == null)
-            head = node;
-        inOrder(node.right);//向右递归
+    void inOrder(TreeNode cur) {//中序遍历
+        if(cur == null) return;
+        inOrder(cur.left);//向左递归
+        if(pre != null) {//说明此时不是头结点
+            pre.right = cur;//关键代码1
+        } else {//说明此时是头结点
+            head = cur;
+        }
+        cur.left = pre;//关键代码2
+        pre = cur;//保存当前节点，//关键代码3
+        inOrder(cur.right);//向右递归
     }
 }
+

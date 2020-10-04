@@ -3,6 +3,7 @@ package 数据结构与算法.剑指offer题解.堆;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * 题目： 输入n个整数，找出其中最小的k个数。
@@ -28,7 +29,6 @@ import java.util.PriorityQueue;
  *
  */
 public class heap44最小的k个数 {
-
     //方法一：堆排序（推荐，常用于解决topK问题）
     public ArrayList<Integer> GetLeastNumbers_Solution(int[] nums, int k) {
         if (k > nums.length || k <= 0){
@@ -44,82 +44,4 @@ public class heap44最小的k个数 {
         //最后，使用构造函数的方式创建一个list用于返回，且就把该优先队列作为构造函数的参数传入，妙哉~
         return new ArrayList<>(maxheap);
     }
-
-    /**
-     * 以下方法参考一下即可，不推荐
-     * @param arr
-     * @param k
-     * @return
-     */
-
-    // 方法2：采用快排
-    public int[] getLeastNumbers1(int[] arr, int k) {
-        if (arr == null || arr.length == 0 || k == 0) {
-            return new int[0];
-        }
-        int lo = 0, hi = arr.length - 1;
-        while (lo <= hi) {
-            int index = partition(arr, lo, hi);
-            if (index == k - 1) {
-                // find the kth smallest element.
-                break;
-            } else if (index < k - 1) {
-                lo = index + 1;
-            } else {
-                hi = index - 1;
-            }
-        }
-
-        // partition function will change the array,
-        // let k elements in the front is the smallest k elements.
-        int[] ret = new int[k];
-        for (int i = 0; i < k; i++) {
-            ret[i] = arr[i];
-        }
-        return ret;
-    }
-
-    // divide target range array to smaller hi value part and other part.
-    private int partition(int[] arr, int start, int end) {
-        int pivot = arr[end];
-        int smaller = start - 1;
-        while (start < end) {
-            if (arr[start] < pivot) {
-                swap(arr, start++, ++smaller);
-            } else {
-                start++;
-            }
-        }
-        swap(arr, end, ++smaller);
-        return smaller;
-    }
-
-    private void swap(int[] arr, int a, int b) {
-        int temp = arr[b];
-        arr[b] = arr[a];
-        arr[a] = temp;
-    }
-
-    //方法三： 也是排序，不过使用的是冒泡排序，大同小异
-    public ArrayList<Integer> GetLeastNumbers_Solution02(int [] input, int k) {
-        ArrayList<Integer> list=new ArrayList<Integer>();
-        if(input==null||input.length==0||k>input.length)
-            return list;
-        int len=input.length;
-        for(int i=0;i<len;i++){
-            for(int j=i+1;j<len;j++){
-                if(input[i]>input[j]){
-                    int temp=input[i];
-                    input[i]=input[j];
-                    input[j]=temp;
-                }
-            }
-            if(i>=k)
-                break;
-        }
-        for(int i=0;i<k;i++)
-            list.add(input[i]);
-        return list;
-    }
-
 }

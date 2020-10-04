@@ -52,6 +52,7 @@ public class 翻转二叉树226 {
             TreeNode226 tmp = root.right;//和交换两个数一样，也是选一个中间量temp即可，只是这个中间量为一个节点而已
             root.right = root.left;
             root.left = tmp;
+
             //递归交换当前节点的 左子树
             invertTree(root.left);
             //递归交换当前节点的 右子树
@@ -61,20 +62,6 @@ public class 翻转二叉树226 {
             return root;
         }
     }
-//写法2：（没太懂）
-class solution {
-    public TreeNode226 invertTree(TreeNode226 root) {
-        //递归的终止条件
-        if (root == null) {
-            return null;
-        }
-        TreeNode226 right = invertTree(root.right);
-        TreeNode226 left = invertTree(root.left);
-        root.left = right;
-        root.right = left;
-        return root;
-    }
-}
 
 /**
  * 方法2：使用迭代：

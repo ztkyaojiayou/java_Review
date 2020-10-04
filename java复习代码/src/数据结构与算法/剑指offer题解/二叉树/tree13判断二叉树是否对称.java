@@ -61,7 +61,7 @@ public class tree13判断二叉树是否对称 {
         if (root1.val != root2.val ) {//若这两个结点（的值）都不相等，则也肯定不对称
             return false;
         }
-        //否则，使用递归继续分别比较其左右结点（也即下一层的各个对称位置的值）即可
+        //否则，就说明当前节点相等，于是就继续使用递归继续分别比较其左右结点（也即下一层的各个对称位置的值）即可
         //但要注意:root1的左子节点是和root2的右子节点比较，
         //同理，root1的右子节点是和root2的左子节点比较，
         //当每一个结点比较之后都相等的话，则肯定对称了
@@ -113,7 +113,6 @@ class Solution101 {
             queue.add(left.right);
             queue.add(right.left);
         }
-
         return true;
     }
 }

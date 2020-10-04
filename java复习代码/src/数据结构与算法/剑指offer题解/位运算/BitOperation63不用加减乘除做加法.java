@@ -38,6 +38,9 @@ package 数据结构与算法.剑指offer题解.位运算;
  *关于二进制下的四则运算，参见https://blog.csdn.net/WangQYoho/article/details/79688177
  */
 
+/**
+ * 整体思路：两数之和 = 其不考虑进位时加法结果 + 进位
+ */
 //方法一：采用递归思想实现
     //写法1：把加数b同时看成进位
 public class BitOperation63不用加减乘除做加法 {
@@ -48,9 +51,9 @@ public class BitOperation63不用加减乘除做加法 {
     }
 
 //写法2：下面这个版本是上述版本的拆解版，更加通俗易懂
-    public int add01(int a,int b){
+    public int add01(int a,int b){//可以把a直接看成不算进位时的相加结果，而把b直接看成进位，进位为0时就说明相加结束（重要）
         int sum,carry;
-        sum=a^b;//不考虑进位，相加
+        sum=a^b;//不考虑进位，相加（亦或就是相加，有意思）
         carry=(a&b)<<1;//进位
         //1.当没有进位时（即carry==0）则说明运算已完成
         if(carry==0) {

@@ -52,12 +52,12 @@ class 字母异位词分组49 {
             //3.再去map的key中查找，看是否存在该字符串
             if (map.containsKey(sorted_str)){
                 //3.1若存在，则说明还有其对应的异位词list，
-                //1）于是先获取到该排序后的字符串所对应的所有异位词的list，并将当前字符串也添加到该list中
+                //1）于是先获取到该排序后的字符串在map中所对应的之前就添加进去了的所有异位词的list，并将当前字符串也添加到该list中
                 // (因为map中存在当前字符串通过排序后的字符串，说明该字符串也是其异位词，因此就要添加进该list）
                 //2）同时，把该排序后的字符串和其对应的所有异位词的list都存入map中
-                List<String> arr=map.get(sorted_str);
-                arr.add(str);
-                map.put(sorted_str,arr);
+                List<String> old_list=map.get(sorted_str);
+                old_list.add(str);
+                map.put(sorted_str,old_list);
             }
             else{//3.2而若map中不存在该排序后的字符串，则说明也无其异位词，
                 // 1)此时只需将当前字符串直接存入一个新的list中，
@@ -77,7 +77,7 @@ class 字母异位词分组49 {
 
 
 /**
- * 242. 有效的字母异位词
+ * 242. 判断两个字符串是否互为异位词
  * 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
  *
  * 示例 1:

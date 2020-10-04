@@ -1,8 +1,10 @@
 package 数据结构与算法.LeetCode题解.数组;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * 56. 合并区间
@@ -30,38 +32,33 @@ import java.util.Comparator;
  * 即：对结果集中最后一个区间的右端点更新（取两个区间的最大值）。
  */
 public class 合并重叠区间56 {
-        public int[][] merge(int[][] intervals) {
-            // 1.先按照区间起始位置排序（即对二维数组的每一行的第一个元素进行升序排序）
-            Arrays.sort(intervals, (v1, v2) -> v1[0] - v2[0]);
-            //自定义排序的传统写法如下：
-            // Arrays.sort(intervals, new Comparator<int[]>()
-            //{
-            //    @Override
-            //    public int compare(int[] o1, int[] o2) {
-            //        // TODO Auto-generated method stub
-            //        return o1[0]-o2[0];
-            //    }
-            //});
-
-            // 2.再遍历所给的二维数组
-            //二维结果数组（按一个一个的一维数组看，即多行两列
-            int[][] res = new int[intervals.length][2];
-            int index = -1;//下标
-            for (int[] interval: intervals) {//一行一行遍历，即每次都取出一行
-                // 2.1如果结果数组是空的，或者当前区间的起始位置 > 结果数组中最后区间的终止位置，
-                // 则不合并，直接将当前区间加入结果数组。
-                if (index == -1 || interval[0] > res[index][1]) {
-                    index ++;
-                    res[index] = interval;
-                } else {
-                    // 2.2反之将当前区间合并至结果数组的最后区间，
-                    // 只需对结果集中最后一个区间的右端点取两个区间的最大值进行更新即可
-                    res[index][1] = Math.max(res[index][1], interval[1]);
+            public int[][] merge(int[][] nums) {
+                List<int[]> res = new ArrayList<>();
+                if (nums == null || nums.length == 0) return res.toArray(new int[0][]);
+                // 1.先按照区间起始位置排序（即对二维数组的每一行的第一个元素进行升序排序）
+                Arrays.sort(nums, (v1, v2) -> v1[0] - v2[0]);
+                //自定义排序的传统写法如下：
+                // Arrays.sort(intervals, new Comparator<int[]>()
+                //{
+                //    @Override
+                //    public int compare(int[] o1, int[] o2) {
+                //        // TODO Auto-generated method stub
+                //        return o1[0]-o2[0];
+                //    }
+                //});
+                int i = 0;
+                while (i < nums.length) {//表示按照二维数组的每一行遍历
+                    int left = nums[i][0];//一小行(即一个小区间）的左端点
+                    int right = nums[i][1];//一小行的右端点
+                    while (i < nums.length - 1 && nums[i + 1][0] <= right) {//若下一个小区间的左端点小于当前区间的右端点时，说明有交集，于是把右端点更新为该两个区间右端点的最大值
+                        i++;
+                        right = Math.max(right, nums[i][1]);
+                    }//否则，区间不变
+                    res.add(new int[]{left, right});
+                    i++;
                 }
+                return res.toArray(new int[0][]);
             }
-            // 3.最后，返回结果数组即可
-            return Arrays.copyOf(res, index + 1);
-        }
 }
 
 /**

@@ -78,9 +78,10 @@ public class 有效的括号的判断20 {
                 char preChar = stack.peek();
                 if ((preChar == '{' && theChar == '}') || (preChar == '(' && theChar == ')') || (preChar == '[' && theChar == ']')){
                     stack.pop();//2.2.1匹配成功就弹出该右括号
-                }
-                else//2.2.2否则，即不匹配，返回false（即有可能出现右括号')'和左括号 '{'的比对，虽然是一左一右，但这并不是匹配）
+                } else//2.2.2否则，即不匹配，返回false（即有可能出现右括号')'和左括号 '{'的比对，虽然是一左一右，但这并不是匹配）
+                {
                     return false;
+                }
             }
         }
         //3.当全部比对完毕之后，若栈为空，说明刚好匹配成功，返回true。

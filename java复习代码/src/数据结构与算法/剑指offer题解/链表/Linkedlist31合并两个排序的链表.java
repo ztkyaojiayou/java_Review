@@ -39,20 +39,20 @@ public class Linkedlist31合并两个排序的链表 {
         //1.先定义一个结点pre，插到新链表头结点的前面，其val值任意设置即可，这里设置为0.
         //但是由于这个结点毕竟不是原链表里的值，因此最终返回的链表应该从其下一个结点开始（即为pre.next，见line71）
         //（为什么不直接就用头结点呢？因为头结点本身也要比较）
-        ListNode31 pre = new ListNode31(0);//
+        ListNode31 dummy = new ListNode31(0);//
         //2.再定义一个辅助的临时结点cur，表示当前节点，起初就令其为pre
         // 这个结点是要移动的，但它移动不等于pre结点移动，只是起初令他们二者相等而已，
-        ListNode31 cur = pre;
+        ListNode31 cur = dummy;
         //3.当这两个链表都没有遍历完时，比较结点list1的值和list2的值，确定cur的指向，同时移动cur
         while(list1 != null && list2 !=null){
             //3.1若list1的值<list2的值,则令当前结点cur（此时cur还在头结点head处）指向/连接到list1结点（以构成递增序列）。
             // 并且同时移动 list1 指针，比较其下一个结点的值与list2的大小。
             //同时移动 cur 指针（line60），用于连接下一个值
             if(list1.val<=list2.val){
-                cur.next = list1;
+                cur.next = list1;//连接
                 list1 = list1.next;
             }else{//3.2否则，令当前结点cur（此时cur还在头结点pre处）指向/连接到list1结点（以构成递增序列）
-                cur.next = list2;
+                cur.next = list2;//连接
                 list2 = list2.next;
             }
             //3.3连接完一个值后，要移动 cur 指针，用于连接下一个较小值
@@ -66,23 +66,26 @@ public class Linkedlist31合并两个排序的链表 {
         //4.2同理，若链表list2已经遍历完，但list2还没有遍历完，则直接把剩下的结点连接到cur结点上即可
         if(list2!=null)
             cur.next = list2;
-        return pre.next;//因为pre结点是我们自己添加的，并不是原链表中的值，因此要从其下一个结点开始
+        return dummy.next;//因为pre结点是我们自己添加的，并不是原链表中的值，因此要从其下一个结点开始
     }
 
 
     /**
      * 方法二：递归法，思路简单，代码也很好理解
      */
-
     public ListNode31 Merge2(ListNode31 list1, ListNode31 list2) {
-        if (list1 == null)
+        if (list1 == null){
             return list2;
-        if (list2 == null)
+        }
+
+        if (list2 == null){
             return list1;
-        if (list1.val <= list2.val) {//此时，list1即为头结点，list1.next即表示要通过递归去连接下一个较小值的结点了
+        }
+
+        if (list1.val <= list2.val){//此时，list1即为头结点，list1.next即表示要通过递归去连接下一个较小值的结点了
             list1.next = Merge2(list1.next, list2);
             return list1;
-        } else {//此时，list2是头结点
+        }else{//此时，list2是头结点
             list2.next = Merge2(list1, list2.next);
             return list2;
         }

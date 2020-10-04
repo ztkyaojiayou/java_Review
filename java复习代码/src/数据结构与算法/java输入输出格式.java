@@ -3,6 +3,9 @@ package 数据结构与算法;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 // 本题为考试单行输入输出规范示例，无需提交，不计分。
@@ -32,10 +35,10 @@ class Main_2 {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 x = in.nextInt();
-                ans += x;
+                //ans += x;
             }
         }
-        System.out.println(ans);
+        //System.out.println(ans);
     }
 }
 
@@ -110,6 +113,58 @@ class Main_4 {
         }
     }
 }
+
+//直接输入数字（有空格时），然后变成数组的方法（切记）
+class Main_8{
+    public static void main(String[] args) {
+        //直接输入数字，然后变成数组的方法（切记）
+        Scanner sc = new Scanner(System.in);
+        List<Integer> list = new ArrayList<>();
+        String[] str = sc.nextLine().split(" ");
+        for (int i = 0; i < str.length; i++) {
+            list.add(Integer.valueOf(str[i]));
+        }
+        int[] nums = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            nums[i] = list.get(i);
+        }
+        Arrays.sort(nums);//默认为升序
+        System.out.println(nums[nums.length/2]);
+    }
+}
+
+//直接输入多组字符串（无空格时），把它存入list中再通过遍历来处理每一个字符串即可（常用）
+class test02 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            String str = sc.nextLine();
+            list.add(str);
+        }
+        for (int i = 0; i < list.size(); i++) {
+            String str1 = list.get(i);
+            //然后就可以处理该字符串了
+        }
+    }
+}
+
+//直接输入多组字符，把它存入list中再通过遍历来处理每一个字符串即可（常用）
+class Main_54 {
+    public static void main(String[] args) {
+        String str;
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
+        while (sc.hasNextLine()){//只要下一行还有，就一直输入
+            str = sc.nextLine();
+            list.add(str);
+        }
+        for (int i = 0;i<list.size();i++){
+            //再处理
+            System.out.println(list.get(i));
+        }
+        }
+    }
 
 
 //输入一个字符串（使用标准输入流）

@@ -63,7 +63,7 @@ class Solution46_2 {
         int count=0;
         while(n>0){
             String str=String.valueOf(n);
-            char [] chars=str.toCharArray();
+            char[] chars=str.toCharArray();
             for(int i=0;i<chars.length;i++){
                 if(chars[i]=='1')
                     count++;
@@ -71,5 +71,22 @@ class Solution46_2 {
             n--;
         }
         return count;
+    }
+}
+
+class Solution461 {
+    public int countDigitOne(int n) {
+        int digit = 1, res = 0;
+        int high = n / 10, cur = n % 10, low = 0;
+        while(high != 0 || cur != 0) {
+            if(cur == 0) res += high * digit;
+            else if(cur == 1) res += high * digit + low + 1;
+            else res += (high + 1) * digit;
+            low += cur * digit;
+            cur = high % 10;
+            high /= 10;
+            digit *= 10;
+        }
+        return res;
     }
 }

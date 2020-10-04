@@ -24,7 +24,6 @@ public class 丑数48 {
             int[] result = new int[index];
             result[0] = 1;
             for(int i=1; i < index; i++){//每循环一次就找到了一个丑数，且是从小到大的，易知result[index-1]即为所求。
-
                 //从小到大，找这个数的2倍，3倍，5倍的数的最小值，
                 // 若该最小值为其中某个数对应的倍数，则令其加1。
                 result[i] = Math.min(result[p2]*2, Math.min(result[p3]*3, result[p5]*5));
@@ -32,6 +31,7 @@ public class 丑数48 {
                 if(result[i] == result[p3]*3)p3++;
                 if(result[i] == result[p5]*5)p5++;
             }
+
             return result[index-1];
         }
-    }
+}

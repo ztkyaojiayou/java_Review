@@ -1,6 +1,8 @@
 package 数据结构与算法.剑指offer题解.数组;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * （懂了）题目：在一个长度为n的数组里的所有数字都在 0 到 n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。
@@ -55,40 +57,59 @@ import java.util.Arrays;
 
 public class array02找出数组中的任一重复数字 {
 //方法一：先排序，再比较相邻元素是否相等即可（简单）
-    public boolean duplicate01(int numbers[],int length,int [] duplication) {
-        if(numbers == null || length == 0){
-            return false;
+public int findRepeatNumber(int[] nums) {
+    Arrays.sort(nums);
+    for (int i = 1; i < nums.length; i++) {
+        if (nums[i] == nums[i - 1])
+            return nums[i];
+    }
+    return -1;
+}
+
+//方法2：使用set
+// 最简单的方式就是把数组中的元素一个个加入到集合set中，加入的时候如果有重复的，则直接返回
+    public int findRepeatNumber02(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            if (!set.add(num))
+                return num;
         }
-        Arrays.sort(numbers);
-        for(int i=0;i<length-1;i++){
-            if(numbers[i] == numbers[i+1]){
-                duplication[0] = numbers[i];
-                return true;
-            }
-        }
-        return false;
+        return -1;
     }
 
-    //方法二：“归位”法：（搞清楚原理之后也简单）
-    public boolean duplicate02(int[] nums, int length, int[] duplication) {
-        if (nums == null || length <= 0)
-            return false;
+
+    //方法三：使用一个临时数组，类似于map计数
+    public int findRepeatNumber03(int[] nums) {
+        int length = nums.length;
+        int[] temp = new int[length];
         for (int i = 0; i < length; i++) {
-            while (nums[i] != i) {
-                if (nums[i] == nums[nums[i]]) {
-                    duplication[0] = nums[i];
-                    return true;
-                }
-                swap(nums, i, nums[i]);//即交换nums[i] 和 nums[nums[i]]的值
-            }
+            temp[nums[i]]++;//即把该元素作为在map中对应的位置，让其加一，即对该元素计数。
+            if (temp[nums[i]] > 1)
+                return nums[i];
         }
-        return false;
+        return -1;
     }
-    //此方法方法二需要
-    private void swap(int[] nums, int i, int j) {//交换nums[i] 和 nums[j]的值;
-        int t = nums[i];
-        nums[i] = nums[j];
-        nums[j] = t;
+
+
+    //方法四：“归位”法：（搞清楚原理之后也简单）
+    public int findRepeatNumber04(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            //位置正确，先不用管
+            if (i == nums[i])
+                continue;
+            //出现了重复，直接返回
+            if (nums[i] == nums[nums[i]]) {
+                return nums[i];
+            }
+            //交换
+            int temp = nums[nums[i]];
+            nums[nums[i]] = nums[i];
+            nums[i] = temp;
+            //这里的i--是为了抵消掉上面的i++，
+            //交换之后需要原地再比较
+            i--;
+        }
+        return -1;
     }
 
 }

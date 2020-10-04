@@ -1,6 +1,6 @@
 package 数据结构与算法.剑指offer题解.链表;
 
-import 数据结构与算法.剑指offer题解.ListNode;
+import 数据结构与算法.ListNode;
 
 
 /**

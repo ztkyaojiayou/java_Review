@@ -26,12 +26,12 @@ package 数据结构与算法.LeetCode题解.数组;
 public class 除自身以外的数组元素的乘积238 {
         public int[] productExceptSelf(int[] nums) {
             int len = nums.length;
-            int[] result = new int[len];
+            int[] res = new int[len];
 
             //1.先求各个元素的左边乘积和，并把其先临时保存在result数组中，而不去开设一个新的数组，可以达到节省空间的作用
             int leftSum = 1;//1.0约定，第一个元素的左乘积和为1
             for(int i=0;i<len;i++){//遍历，求和
-                result[i] = leftSum;//1.1先求第一个位置的左乘积和，并放入result数组中
+                res[i] = leftSum;//1.1先求第一个位置的左乘积和，并放入result数组中
                 leftSum*=nums[i];//2.再把该“左数组和”变量累乘即可，这样的话，下一个位置的左乘积和刚好是使用的“累乘到上一个位置的和”
             }
             /**
@@ -39,12 +39,12 @@ public class 除自身以外的数组元素的乘积238 {
              */
             //2.再开始由后往前遍历，方法也一样，主要是要注意一点，此时存入result数组中的值即为最终结果
             int rightSum = 1;//2.0约定，最后一个元素的右乘积和也为1
-            for(int i=len - 1;i>=0;i--){
-                result[i]*=rightSum;//2.1即当前位置的最终乘积和为：原result[i](即该元素的左边乘积和）乘以 该元素的右边乘积和rightSum
-                rightSum*=nums[i];//2.2同时更新右边乘积和即可，用于下一个位置的计算
+            for(int j=len - 1;j>=0;j--){
+                res[j]*=rightSum;//2.1即当前位置的最终乘积和为：原result[i](即该元素的左边乘积和）乘以 该元素的右边乘积和rightSum
+                rightSum*=nums[j];//2.2同时更新右边乘积和即可，用于下一个位置的计算
             }
 
             //3.最终，返回该result数组即可
-            return result;
+            return res;
         }
     }

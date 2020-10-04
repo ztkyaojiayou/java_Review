@@ -39,20 +39,20 @@ import java.util.Stack;
 public class Stack36栈的压入和弹出序列 {
     public boolean IsPopOrder(int [] pushA,int [] popA) {
         //借助一个辅助栈temp_stack，重新按照入栈顺序再进一次栈
-        Stack<Integer> temp_stack = new Stack<>();
+        Stack<Integer> temp = new Stack<>();
         int j = 0;
         for(int i=0; i < pushA.length; i++){
-            temp_stack.push(pushA[i]);
+            temp.push(pushA[i]);
             //一直入栈，直到要入栈的元素和传入的出栈序列popA中的值相等时，就把这个元素从栈顶弹出
-            while(j < pushA.length && temp_stack.peek() == popA[j]){
-                temp_stack.pop();//弹出temp栈中的那个相同值
+            while(j < pushA.length && temp.peek() == popA[j]){
+                temp.pop();//弹出temp栈中的那个相同值
                 //每弹出一个相同值，就把j加1，用于判断popA中的下一个元素，不断循环
                 j++;
             }
         }
         // 若辅助栈temp为空，则说明此时辅助栈temp中的元素已经全部出栈完毕，
         // 也就说明输入的popA序列是为该栈的一个弹出顺序，返回true，否则就不是，返回false
-        boolean res = temp_stack.empty();
+        boolean res = temp.empty();
         return res;
     }
 }

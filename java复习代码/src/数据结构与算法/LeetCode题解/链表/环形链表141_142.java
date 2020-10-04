@@ -47,6 +47,7 @@ class 环形链表_判断141 {
         }
         //1.定义快慢指针，一个在前（指向头结点head），一个在后（即head.next）
         //因为如果起点一样，循环里面第一次判断i=j，直接返回了
+        //注意：其实这个位置可以随意，只是相遇的点不一样,但由于一开始也有一个判断，因此还是直接一前一后吧，好处理一些
         ListNode slow = head;
         ListNode fast = head.next;
         //2.快慢指针开始遍历链表
@@ -60,28 +61,6 @@ class 环形链表_判断141 {
             fast = fast.next.next;
         }
         //3.当相遇时（跳出循环）表示有环，返回true即可
-        return true;
-    }
-}
-
-//写法2：do...while
-class Solution141_1 {
-    public boolean hasCycle(ListNode head) {
-        //特判
-        if (head == null || head.next == null) {
-            return false;
-        }
-        //定义快慢指针，且都指向头结点
-        ListNode slow = head;
-        ListNode fast = head;
-        do {
-            if (fast == null || fast.next == null) {
-                return false;
-            }
-            //快指针每次走两步，慢指针每次走一步
-            slow = slow.next;
-            fast = fast.next.next;
-        } while (slow != fast);
         return true;
     }
 }
@@ -150,7 +129,6 @@ class solution141_2{
  *
  *参考链接：https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/
  */
-
 
 class 环形链表_找到该节点142 {
     public ListNode detectCycle(ListNode head) {

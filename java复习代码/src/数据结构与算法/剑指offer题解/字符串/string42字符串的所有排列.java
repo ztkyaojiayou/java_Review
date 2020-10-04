@@ -1,5 +1,9 @@
 package 数据结构与算法.剑指offer题解.字符串;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * （没懂）题目：输入一个字符串，打印出该字符串中字符的所有排列。
  * 例如 输入字符串 abc。
@@ -41,4 +45,4 @@ package 数据结构与算法.剑指offer题解.字符串;
  */
 
 public class string42字符串的所有排列 {
-}
+    }

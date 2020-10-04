@@ -22,17 +22,18 @@ import java.util.*;
  */
 public class heap20滑动窗口的最大值 {
     public ArrayList<Integer> maxInWindows01(int [] num, int size){
-            //0.创建一个list。用于存储结果集，最终返回
+            //0.创建一个list，用于存储结果集，最终返回
             ArrayList<Integer> resList = new ArrayList();
             //1.先处理特例/边界情况
             if(size ==0) return resList;//这种情况不能省
             if(num.length<size){//但这种情况可以省
             }
+
             //2.使用两个变量 i，j 开始遍历整个数组，和max比较，把最大值存入resList中
             for(int i=0;i<num.length-size+1;i++){//length-size+1为窗口个数，即：寻找/循环这么多次即可
                 int max =0;
-                for(int j=i;j<i+size;j++){
-                    if(max<num[j]){
+                for(int j=i;j<i+size;j++){//找到每一个窗口中的最大值
+                    if(num[j] > max){
                         max =num[j];
                     }
                 }

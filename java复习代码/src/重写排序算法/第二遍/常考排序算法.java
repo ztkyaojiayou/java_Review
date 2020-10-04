@@ -5,7 +5,7 @@ import java.util.Arrays;
 //07.26日
 public class 常考排序算法 {
     /**
-     * 1.冒泡排序
+     * 1.冒泡排序：适用于数据量量不大，对稳定性有要求，且数据基本有序的情况
      *  * 方法：（1）从首位开始，依次比较相邻元素的值，若发现逆序则交换（较大值放后面），
      *  *           直至最后，最大值就到了末尾（这称为一次冒泡），不再参与接下来的排序
      *  *      （2）再从剩下的数组中继续不断地进行相同操作（比较相邻元素并交换），直至排序结束。
@@ -16,7 +16,7 @@ public int[] bubbleSort(int[] arr){
     if (arr == null || arr.length == 0){
         return arr;
     }
-    for (int i = 0;i < arr.length;i ++){//表示要比较多少次，即（长度-1）次
+    for (int i = 0;i < arr.length;i++){//表示要比较多少次，即（长度-1）次
         for (int j = 0;j<arr.length-1-i;j++){//每比较完一次，那么就要少比较一次，
             // 因此这里要减去i，因为j就表示要比较的次数。
     if (arr[j+1] < arr[j]){//真正比较是用j来比较，若后一个数比前一个数还小，则交换
@@ -30,8 +30,64 @@ public int[] bubbleSort(int[] arr){
     return arr;
 }
 
+//优化版1：使用一个标志位来减少比较趟数
+public int[] bubbleSort02(int[] arr){
+    //特判
+    if (arr == null || arr.length == 0){
+        return arr;
+    }
+    boolean flag = false;//本趟排序是否发生交换的标识
+    for (int i = 0;i < arr.length;i++){//表示要比较多少次，即（长度-1）次
+        for (int j = 0;j<arr.length-1-i;j++){//每比较完一次，那么就要少比较一次，
+            // 因此这里要减去i，因为j就表示要比较的次数。
+            if (arr[j+1] < arr[j]){//真正比较是用j来比较，若后一个数比前一个数还小，则交换
+                int temp = arr[j+1];
+                arr[j+1] = arr[i];
+                arr[j] = temp;
+                flag = true;//若交换了，则将该标识设为true
+            }
+
+        }
+
+        if (flag == false){//若这一趟比较下下来都没有进行交换，就可以直接跳出该循环，减少了不必要的比较次数
+            break;
+        }
+    }
+    //最终返回比较完毕的数组
+    return arr;
+}
+
+//优化2：有序部分不用再比较
+public int[] bubbleSort03(int[] arr){
+    //特判
+    if (arr == null || arr.length == 0){
+        return arr;
+    }
+    int lastChangeIndex =0;//最后交换的位置
+    int sortBorder = arr.length-1;//无序数列的边界，每次比较只需要比较到这里即可
+    boolean flag = false;//本趟排序是否发生交换的标识
+    for (int i = 0;i < arr.length;i++){//表示要比较多少次，即（长度-1）次
+        for (int j = 0;j<sortBorder;j++){//每比较完一次，那么就要少比较一次，
+            // 因此这里要减去i，因为j就表示要比较的次数。
+            if (arr[j+1] < arr[j]){//真正比较是用j来比较，若后一个数比前一个数还小，则交换
+                int temp = arr[j+1];
+                arr[j+1] = arr[i];
+                arr[j] = temp;
+                flag = true;//若交换了，则将该标识设为true
+                lastChangeIndex = j;
+            }
+        }
+        sortBorder = lastChangeIndex;//更新最后一次交换的位置
+        if (flag == false){//若这一趟比较下下来都没有进行交换，就可以直接跳出该循环，减少了不必要的比较次数
+            break;
+        }
+    }
+    //最终返回比较完毕的数组
+    return arr;
+}
+
 /**
- *  2.选择排序
+ *  2.选择排序：适用于当数据量不大，且对稳定性没有要求的时候
  */
     /**
      *  * 方法：（1）在被排序数组中选出最小值，与原首位元素互换，
@@ -68,7 +124,7 @@ public int[] bubbleSort(int[] arr){
 
 /**
  *  3.快速排序（常考）
- *  基本思路：先任选一个元素作为划分值（但一般都选中间值），通过一次遍历和比较将待排序的数组分割成独立的两部分，
+ *  基本思路：先任选一个元素作为划分值（但一般都选第一个值），通过一次遍历和比较将待排序的数组分割成独立的两部分，
  *  其中一部分的所有数据都比另外一部分的所有数据小
  *  然后再按照此方法对这两部分的数据继续进行快排分割（即递归操作），最终变成有序序列。
  *  方法：（1）先任选一个划分值，再通过与最右边的值互换，使此划分值位于最右边
@@ -83,8 +139,8 @@ public int[] bubbleSort(int[] arr){
 public int[] QuickSort(int[] arr,int left,int right){
     if (left < right){
         int mid = partition(arr,left,right);
-        arr = QuickSort(arr,left,mid -1);
-        arr = QuickSort(arr,mid+1,right);
+        QuickSort(arr,left,mid -1);
+        QuickSort(arr,mid+1,right);
     }
     return arr;
 }
@@ -125,7 +181,7 @@ public int[] QuickSort(int[] arr,int left,int right){
     }
 
     /**
-     *  4.插入排序
+     *  4.插入排序：适用于数据量不大，对算法的稳定性有要求，且数据局部或者整体基本有序的情况
      *  方法：（1）先把待排序数组看成一个有序表和无序表，其中，有序表此时只包含一个元素（且通常就选第一个元素），剩下的元素构成无序表
      *        （2）每次把无序表中的第一个元素与有序表中的元素依次进行比较，把其放在合适的位置（易知，有序表已扩充），此元素不再参与接下来的排序
      *        （3）再从剩下的无序表中继续不断地进行相同操作（选第一个元素放到有序表的合适位置），直至排序结束，有序表即为排序结果
@@ -151,7 +207,7 @@ public int[] insertSort(int[] arr){
 }
 
     /**
-     *  5.归并排序
+     *  5.归并排序：适用于数据量较大时，要注意考虑内存空间的开销
      *   * 基本思路：先把待排数组拆分成若干个只包含一个元素的子数组，
      *  * 再对每相邻的两个子数组进行排序再合并，直到排序结束
      *  * 这里的排序方法很重要。

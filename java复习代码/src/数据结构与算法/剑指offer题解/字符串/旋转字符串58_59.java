@@ -32,7 +32,7 @@ class 左旋转字符串58_2 {
         //4.最后，再将通过上述两步翻转之后的字符数组整体再反转一次即为所求
         reverse(chars, 0, chars.length - 1);
         //5.再将其转回字符串并返回即可
-        return new String(chars);
+        return new String(chars);//这种转换务必记住
     }
 
     //用于反转字符数组中i到j的字符的方法
@@ -102,9 +102,9 @@ class 翻转单词顺序列59 {
         while (j <= n) {
             if (j == n || chars[j] == ' ') {//当该字符串没空格或遇到空格时，就说明这个一个单独的字符串，就反转
                 reverse(chars, i, j - 1);
-                i = j + 1;
+                i = j + 1;//用于指向新一个字符串
             }
-            j++;
+            j++;//j向前遍历，直到找到第一个空格，就相当于找到了第一个字符串
         }
         //3.再反转整个字符串
         reverse(chars, 0, n - 1);

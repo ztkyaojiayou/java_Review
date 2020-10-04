@@ -5,11 +5,10 @@ import java.util.Arrays;
 //一点资讯一面，快排：
 public class 快排test {
         public  int[] quickSort(int[] arr,int left,int right){
-
        if(left < right){
             int mid = Mid(arr,left,right);
-            arr = quickSort(arr,left,mid -1);
-            arr = quickSort(arr,mid + 1,right);
+            quickSort(arr,left,mid -1);
+            quickSort(arr,mid + 1,right);
           }
             return arr;
         }

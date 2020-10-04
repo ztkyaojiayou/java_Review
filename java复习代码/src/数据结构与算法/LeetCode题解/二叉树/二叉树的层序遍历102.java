@@ -56,9 +56,9 @@ public class 二叉树的层序遍历102 {
             return new ArrayList<List<Integer>>();
         }
         //结果集list
-        List<List<Integer>> results = new ArrayList<List<Integer>>();
+        List<List<Integer>> results = new ArrayList<>();
         //保存每一层节点的队列
-        LinkedList<TreeNode102> queue = new LinkedList<TreeNode102>();
+        LinkedList<TreeNode102> queue = new LinkedList<>();
         //将根节点放入队列中，然后不断遍历队列
         queue.add(root);
         while (queue.size() > 0) {
@@ -140,8 +140,8 @@ class Solution102 {
              * 移动当前在该位置处的元素（如果有），所有后续元素都向右移（在其索引中添加 1）。
              */
             //只有这一步有点区别，其他地方都完全相同
-            //即因为是逆序的，所以我们将新的list加到index为0的地方即可。
-            result.add(0, curLevel);//
+            //即因为是倒序的，所以我们将新的list加到index为0的地方即可。
+            result.add(0, curLevel);
         }
         return result;
     }

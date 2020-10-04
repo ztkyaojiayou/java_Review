@@ -1,6 +1,74 @@
 package 数据结构与算法.LeetCode题解.二叉树;
 
-import javax.swing.tree.TreeNode;
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+
+/**
+ * 235. 二叉搜索树的最近公共祖先（入门版）
+ * 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
+ *
+ * 例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]
+ * 示例 1:
+ * 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+ * 输出: 6
+ * 解释: 节点 2 和节点 8 的最近公共祖先是 6。
+ *
+ * 示例 2:
+ * 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
+ * 输出: 2
+ * 解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。
+ *
+ * 说明:
+ * 所有节点的值都是唯一的。
+ * p、q 为不同节点且均存在于给定的二叉搜索树中。
+ */
+
+/**
+ * 解析：这道题和236题是相似的，只是上一题的二叉树是一颗普通的二叉树，
+ * 而这里的二叉树是一颗搜索树，其性质更明显，因此更简单。
+ * 先回忆一下二叉搜索树（BST)的基本性质：
+ * （1）节点 N 左子树上的所有节点的值都小于等于节点 N 的值
+ * （2）节点 N 右子树上的所有节点的值都大于等于节点 N 的值
+ * （3）左子树和右子树也都是 二叉搜索树(BST)
+ *
+ * 思路：
+ * 从根节点开始遍历树
+ * 如果节点 p 和节点 q 都在右子树上，那么以右孩子为根节点继续 1 的操作
+ * 如果节点 p 和节点 q 都在左子树上，那么以左孩子为根节点继续 1 的操作
+ * 如果条件 2 和条件 3 都不成立，这就意味着我们已经找到节 p 和节点 q 的 最近公共祖先 了
+ */
+class 二叉搜索树的最近公共祖先235 {
+    public TreeNode236 lowestCommonAncestor(TreeNode236 root, TreeNode236 p, TreeNode236 q) {
+        //1.递归结束的条件
+        if(root == null || root.val == p.val || root.val == q.val){
+            return root;
+        }
+        //2.通过递归求出其左子树和右子树的最近公共祖先left和right
+        TreeNode236 left = lowestCommonAncestor(root.left,p,q);
+        TreeNode236 right = lowestCommonAncestor(root.right,p,q);
+        //3.开始对递归结果进行讨论,由于是二叉搜索树，因此其结果只有三种情况，即：
+        // 3.1要么根节点比p和q都大，此时说明p和q都分布在根节点的左边，则最近公共祖先肯定在左边
+        // 3.2要么比他们俩小，此时说明p和q都分布在根节点的右边，则最近公共祖先肯定在右边
+        // 3.3再要么比其中一个大，比另外一个小，此时说明p和q分布在根节点的两侧，则最近公共祖先肯定就是根节点自己嘛。
+        //3.1 当都分布在左侧时
+        if(root.val>p.val && root.val>q.val) return left;
+        //3.2 当都分布在右侧时
+        if(root.val<p.val && root.val<q.val) return right;
+        //3.3 当分布在两侧时
+        return root;
+    }
+}
+
+
 
 /**
  * 236. 二叉树的最近公共祖先(较难）
@@ -100,71 +168,7 @@ class 二叉树的最近公共祖先236 {
         }
     }
 
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 
-/**
- * 235. 二叉搜索树的最近公共祖先（入门版）
- * 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
- *
- * 例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]
- * 示例 1:
- * 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
- * 输出: 6
- * 解释: 节点 2 和节点 8 的最近公共祖先是 6。
- *
- * 示例 2:
- * 输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
- * 输出: 2
- * 解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。
- *
- * 说明:
- * 所有节点的值都是唯一的。
- * p、q 为不同节点且均存在于给定的二叉搜索树中。
- */
-
-/**
- * 解析：这道题和236题是相似的，只是上一题的二叉树是一颗普通的二叉树，
- * 而这里的二叉树是一颗搜索树，其性质更明显，因此更简单。
- * 先回忆一下二叉搜索树（BST)的基本性质：
- * （1）节点 N 左子树上的所有节点的值都小于等于节点 N 的值
- * （2）节点 N 右子树上的所有节点的值都大于等于节点 N 的值
- * （3）左子树和右子树也都是 二叉搜索树(BST)
- *
- * 思路：
- * 从根节点开始遍历树
- * 如果节点 p 和节点 q 都在右子树上，那么以右孩子为根节点继续 1 的操作
- * 如果节点 p 和节点 q 都在左子树上，那么以左孩子为根节点继续 1 的操作
- * 如果条件 2 和条件 3 都不成立，这就意味着我们已经找到节 p 和节点 q 的 最近公共祖先 了
- */
-class 二叉搜索树的最近公共祖先235 {
-    public TreeNode236 lowestCommonAncestor(TreeNode236 root, TreeNode236 p, TreeNode236 q) {
-        //1.递归结束的条件
-        if(root == null || root.val == p.val || root.val == q.val){
-            return root;
-        }
-        //2.通过递归求出其左子树和右子树的最近公共祖先left和right
-        TreeNode236 left = lowestCommonAncestor(root.left,p,q);
-        TreeNode236 right = lowestCommonAncestor(root.right,p,q);
-        //3.开始对递归结果进行讨论,由于是二叉搜索树，因此其结果只有三种情况，即：
-        // 3.1要么根节点比p和q都大，此时说明p和q都分布在根节点的左边，则最近公共祖先肯定在左边
-        // 3.2要么比他们俩小，此时说明p和q都分布在根节点的右边，则最近公共祖先肯定在右边
-        // 3.3再要么比其中一个大，比另外一个小，此时说明p和q分布在根节点的两侧，则最近公共祖先肯定就是根节点自己嘛。
-        //3.1 当都分布在左侧时
-        if(root.val>p.val && root.val>q.val) return left;
-        //3.2 当都分布在右侧时
-        if(root.val<p.val && root.val<q.val) return right;
-        //3.3 当分布在两侧时
-        return root;
-    }
-}
 
 
 

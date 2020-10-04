@@ -1,59 +1,56 @@
 package 数据结构与算法.剑指offer题解.字符串;
 
 /**
- * （懂了）题目：将一个字符串中的空格替换成 "%20"。
+ * 题目：将一个字符串中的空格替换成 "%20"。
  *      例如：Input:
  *           "A B"
  *
  *           Output:
  *           "A%20B"
+ *
  * 首先注意：空格不是空字符串，切记！！！
- * 思路：先计算替换之后的字符串的长度，再在原数组后面追加空格至此长度（因为一个空格要替换成三个字符（%20），因此当遍历到一个空格时，需要在尾部填充两个任意字符），最后对原字符串进行遍历，遇到空字符串就在新字符串后逆序依次填充%20，
- *      若不为空格，则直接用此字符串进行填充即可。
- *      （具体做法：令 P1 指向字符串原来的末尾位置，P2 指向字符串现在的末尾位置。P1 和 P2 从后向前遍历，当 P1 遍历到一个空格时，就需要令 P2 指向的位置依次填充 02%（注意是逆序的），否则就填充上 P1 指向字符的值。
- *  *      从后向前遍是为了在改变 P2 所指向的内容时，不会影响到 P1 遍历原来字符串的内容）
+ * 这里让求的是把字符串中的空格替换成%20，其中一种实现方式就是申请一个临时数组，然后再遍历这个字符串的每个字符，
+ * 如果不是空格就把遍历的字符添加到临时数组中，如果是空格就添加3个字符'%'，'2'，'0'分别到临时数组中，最后再把临时数组转化为字符串即可。
  */
 public class string04替换空格 {
-
-    public String replaceSpace(StringBuffer str) {
-        //1.先使用一个变量 P1 指向原字符串的末尾位置（此时还是原字符串）
-        int P1 = str.length() - 1;
-        for (int i = 0; i <= P1; i++)
-            //方法charAt(int index)的作用是：取索引index位置的字符
-            if (str.charAt(i) == ' ')//若索引i处的字符为空格（空格不是空字符串，也是一个字符，切记！！！）
-                ////则先在字符串的末尾添加两个空格，使得其和替换之后的字符串具有相同的长度，这是本方法的核心
-                // 因为%20是三个字符，空格是一个字符，则添加两个字符即可（再次提醒：空格不是空字符串，也是一个字符串，只是值为null）
-                str.append("  ");//两个空格哦（在尾部添加完空格后，就已经变成了一个新字符串了）
-
-        //2.再使用一个变量 P2 指向字符串现在的末尾位置,此时字符串相比之前，在末尾已经追加了空格
-        int P2 = str.length() - 1;
-        while (P1 >= 0 && P2 > P1) {
-            char c = str.charAt(P1);//获取P1处的字符（之后，P1再减1（line54），也可以直接写成char c = str.charAt(P1--);）
-            if (c == ' ') {//若为空格，则在此处逆向填充%20，即填充顺序依次为：0，2，%，因为P2在最后面
-                /**
-                 * setCharAt()这是StringBuffer类里面的一个方法；主要是用来替换的，
-                 * 方法里面有两个参数 setCharAt(int index,Char ch),
-                 * 第一个参数是取代的位置 索引从0开始
-                 * 第二个参数是你要替换为的字符串；
-                 */
-                str.setCharAt(P2, '0');
-                P2--;
-                str.setCharAt(P2, '2');
-                P2--;
-                str.setCharAt(P2, '%');
-                P2--;
-                //上述三行可以直接写为：
-//                str.setCharAt(P2--, '0');
-//                str.setCharAt(P2--, '2');
-//                str.setCharAt(P2--, '%');
-            } else {//若不为空，则直接用此字符填充
-                str.setCharAt(P2, c);
-                P2--;
-                //这一行同样可以简写为：
-                // str.setCharAt(P2--, c);//P2--：先获取P2处的字符，P2才减一
+    /**
+     * 方法1：使用一个临时数组
+     * @param s
+     * @return
+     */
+        public String replaceSpace01(String s) {
+            int length = s.length();
+            char[] array = new char[length * 3];
+            int index = 0;//用于记录新字符串的长度
+            for (int i = 0; i < length; i++) {
+                char c = s.charAt(i);
+                if (c == ' ') {
+                    array[index++] = '%';
+                    array[index++] = '2';
+                    array[index++] = '0';
+                } else {
+                    array[index++] = c;
+                }
             }
-            P1--;
+            String newStr = new String(array, 0, index);
+            return newStr;
         }
-        return str.toString();
+
+
+    /**
+     * 方法2：直接使用StringBuilder中的append方法（不推荐）
+     * 和上面差不多，就是把字符串中的每个字符一个个添加到StringBuilder中，如果遇到空格就把他换成%20
+     */
+        public String replaceSpace02(String s) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == ' ')
+                    stringBuilder.append("%20");
+                else
+                    stringBuilder.append(s.charAt(i));
+            }
+            return stringBuilder.toString();
+        }
     }
-}
+
+

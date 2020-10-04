@@ -191,30 +191,6 @@ class Solution125_1 {
 }
 
 /**
- * 写法2：也是使用双指针，不过使用了一个库函数isLetterOrDigit来判断指定字符是否为字母或数字
- * 设置左、右双指针，向中间判断；
- * 跳过非数字字母的字符；
- * 将字母全部转化为小写体，之后判断。
- */
-class Solution125_2 {
-    public boolean isPalindrome(String s) {
-        //1.定义双指针，一左一右
-        int i = 0, j = s.length() - 1;
-        while(i < j){//2.开始遍历并判断
-            //boolean isLetterOrDigit(char ch)：用于判断指定字符是否为字母或数字，若是（是字母或字符都行），则返回true。
-            //2.1若该处字符不为数字或字母，则直接跳过
-            while(i < j && !Character.isLetterOrDigit(s.charAt(i))) i++;
-            while(i < j && !Character.isLetterOrDigit(s.charAt(j))) j--;
-            //2.2将字母全部转化为小写体，之后再判断其是否相等，只要有一个不相等，就立马返回false。
-            if(Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) return false;
-            i++; j--;
-        }
-        //3.否则，若当全部比对完毕之后都没有返回false时，则说明其对应的字符全部相等，因此即为回文字符串，返回true即可
-        return true;
-    }
-}
-
-/**
  * 680. 验证回文字符串 Ⅱ(进阶版）
  * 给定一个非空字符串 s，最多删除一个字符。
  * 判断是否能成为回文字符串。

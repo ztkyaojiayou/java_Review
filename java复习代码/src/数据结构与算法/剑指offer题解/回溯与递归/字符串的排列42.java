@@ -53,8 +53,7 @@ class 字符串的排列42 {
         return res;
 
     }
-    public void helper( ArrayList<String> res,int index,char []s)
-    {
+    public void helper( ArrayList<String> res,int index,char[] s) {
         if(index==s.length-1)
             res.add(new String(s));
 
@@ -70,8 +69,7 @@ class 字符串的排列42 {
         }
     }
 
-    public void swap(char[]t,int i,int j)
-    {
+    public void swap(char[]t,int i,int j) {
         char c=t[i];
         t[i]=t[j];
         t[j]=c;

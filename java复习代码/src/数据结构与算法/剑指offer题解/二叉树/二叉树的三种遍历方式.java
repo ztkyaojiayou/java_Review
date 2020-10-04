@@ -1,6 +1,9 @@
 package 数据结构与算法.剑指offer题解.二叉树;
 
-import java.util.Stack;
+import 数据结构与算法.TreeNode;
+
+import java.util.*;
+
 class TreeNode22 {
     //创建二叉树所需要的结点（牛客网上则不需要自己写，系统默认已输入）
     int val = 0;
@@ -33,21 +36,28 @@ public class 二叉树的三种遍历方式 {
     }
 
     //方法2：非递归版：用栈实现（常考，掌握）
-    private void preOrder02(TreeNode22 root) {
-        if(root == null) return;
-        Stack<TreeNode22> s = new Stack<>();
-        TreeNode22 node = root;
-        while (node != null || s.size() > 0) {
-            if (node != null) {//只要当前节点不为空，就打印当前节点和其左节点，同时把该节点及其左节点入栈
-                System.out.print(node.val + "  ");//（根）
-                s.push(node);//入栈
-                node = node.left;//当前节点的左节点(左）
-            } else {//若当前节点为空，即已经遍历到了最下方的叶子节点，此时易知栈中的元素从上到下依次为最左边的从下到上的根节点，
-                // 要将其一个一个弹出，再看其右节点，若不为空，则又会跳转到上面的if语句，把其右节点打印出来，依次往复即可。
-                node = s.pop();//出栈，每出栈一个元素，就把当前节点设为它的右节点，目的是把他们也打印出来。
-                node = node.right;//（右）
+    // 非递归前序遍历(这个版本非常之好，类比层序遍历，思路清晰）
+    public List<Integer> preOrderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if(root == null) {
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while(!stack.isEmpty()) {
+            TreeNode current = stack.pop();
+            res.add(current.val);
+
+            if(current.right != null) {
+                stack.push(current.right);
+            }
+
+            if(current.left != null) {
+                stack.push(current.left);
             }
         }
+        return res;
     }
 
     //2.中序遍历（左根右）
@@ -67,16 +77,16 @@ public class 二叉树的三种遍历方式 {
     //方法2：非递归版，使用栈实现
     private void inOrder02(TreeNode22 root) {
         if(root == null) return;
-        Stack<TreeNode22> s = new Stack<>();
-        TreeNode22 node = root;
-        while (node != null || s.size() > 0) {
-            if (node != null) {
-                s.push(node);
-                node = node.left;//（左）
+        Stack<TreeNode22> stack = new Stack<>();
+        TreeNode22 cur = root;
+        while (cur != null || stack.size() > 0) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;//（左）
             } else {
-                node = s.pop();
-                System.out.print(node.val + "  ");//（根）
-                node = node.right;//（右）
+                cur = stack.pop();
+                System.out.print(cur.val + "  ");//（根）
+                cur = cur.right;//（右）
             }
         }
     }
@@ -94,31 +104,29 @@ public class 二叉树的三种遍历方式 {
         System.out.print(root.val + "  ");        //输出 8  9  4  10  5  2  6  7  3  1
     }
 
-    //方法2：非递归版，使用栈实现（了解）
-    private void afterIterateBinTree(TreeNode22 root) {
-        Stack<TreeNode22> stack1 = new Stack<>();
-        Stack<Integer> stack2 = new Stack<>();
-        int i = 1;
-        while(root != null || !stack1.empty()) {
-            while (root != null) {
-                stack1.push(root);
-                stack2.push(0);
-                root = root.left;
-            }
 
-            while(!stack1.empty() && stack2.peek() == i)
-            {
-                stack2.pop();
-                System.out.print(stack1.pop().val + "  ");
-            }
-
-            if(!stack1.empty())
-            {
-                stack2.pop();
-                stack2.push(1);
-                root = stack1.peek();
-                root = root.right;
+    /**
+     * 方法2：非递归版，使用栈实现
+     * 后序遍历的输出顺序是左、右、根，当我们采用先序遍历的方法，
+     * 但是先遍历右子树，实现的效果是根、右、左，刚好和后序遍历的结果想法，
+     * 所以我们通过add(0, node)的方式将顺序反序，达到我们想要的效果。
+     * @param root
+     * @return
+     */
+    public List<Integer> postOrderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode node = root;
+        while(node != null || !stack.isEmpty()) {
+            if(node != null) {
+                stack.push(node);
+                list.add(0, node.val);
+                node = node.right;
+            }else {
+                node = stack.pop();
+                node = node.left;
             }
         }
+        return list;
     }
 }

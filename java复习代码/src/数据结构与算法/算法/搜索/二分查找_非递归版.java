@@ -13,14 +13,13 @@ public class 二分查找_非递归版 {
      * @return 返回对应下标，-1表示没有找到
      */
     public static int binarySearch(int[] arr, int target) {
-
         int left = 0;
         int right = arr.length - 1;
         while(left <= right) { //说明继续查找
             int mid = (left + right) / 2;
             if(arr[mid] == target) {
                 return mid;
-            } else if ( arr[mid] > target) {
+            } else if (arr[mid] > target) {
                 right = mid - 1;//即目标数target在数组左边，需要向左边查找
             } else {
                 left = mid + 1; //即目标数target在数组右边，需要向右边查找

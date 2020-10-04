@@ -190,7 +190,7 @@ class 进阶版122 {
      * 这里的「处于冷冻期」指的是在第 i 天结束之后的状态。
      * 也就是说：如果第 i天结束之后处于冷冻期,那么第 i+1 天无法买入股票。
      *
-     * 对这三种状态进行分析：
+     * 对这三种状态进行分析:
      *
      * 1）对于 f[i][0]，有两种情况，
      * 1.1我们目前持有的这一支股票可以是在第i−1 天就已经持有的，对应的状态为 f[i−1][0]；
@@ -225,7 +225,6 @@ class 进阶版122 {
             if (nums.length == 0) {
                 return 0;
             }
-
             int len = nums.length;
             // dp[i][0]: 第i天手上持有股票的最大收益
             // dp[i][1]: 第i天手上不持有股票，并且处于冷冻期中的累计最大收益
@@ -286,6 +285,7 @@ class 进阶版122 {
  * 第一次卖出后的状态： maxProfit1: 第一次交易最大利润
  * 第二次买入后的状态： maxProfitAfterBuy: 第二次买入后的最大剩余利润
  * 第二次卖出后的状态： maxProfit2: 当天最终能获得最大最大利润
+ * (注意，上述四个步骤是连贯的）
  *
  * 然后遍历每一天，在每一天我们都作 4个假设，并更新上面4个状态；
  * 1.假设今天第一次买入：更新 最低价格
@@ -302,11 +302,10 @@ class 进阶版122 {
  */
 class 高阶版123 {
         public int maxProfit(int[] prices) {
-
-            int minPrice1 = Integer.MAX_VALUE;//初始化为最大值
-            int maxProfit1 = 0;
-            int maxProfitAfterBuy = Integer.MIN_VALUE;//初始化为最小值
-            int maxProfit2 = 0;
+            int minPrice1 = Integer.MAX_VALUE;//最低价格，初始化为最大值
+            int maxProfit1 = 0;//第一次交易最大利润
+            int maxProfitAfterBuy = Integer.MIN_VALUE;//第二次买入后的最大剩余利润,初始化为最小值
+            int maxProfit2 = 0;//(第二次后）当天最终能获得最大最大利润
             for (int price : prices) {//遍历每一天的股票价格，更新上述四个状态值
                 // 1.第一次最小购买价格（使用当前价格和之前的最小值比较，
                 //取最小值即可，即保证该值永远是最小的）
@@ -328,6 +327,7 @@ class 高阶版123 {
             return maxProfit2;
         }
     }
+
 
 /**
  * （高阶版188）买卖股票的最佳时机 IV：可以完成 k 笔交易（了解即可）

@@ -3,7 +3,6 @@ package 数据结构与算法.LeetCode题解.链表;
 import 数据结构与算法.LeetCode题解.ListNode;
 
 /**
- *
  给出两个 非空 的链表用来表示两个非负的整数。
  其中，它们各自的位数是按照 逆序 的方式存储的（不是指排序的逆序），并且它们的每个节点只能存储 一位 数字。
  如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
@@ -21,7 +20,7 @@ import 数据结构与算法.LeetCode题解.ListNode;
 //而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。
 public class 用链表表示的两数相加02 {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        //定义一个预节点,
+        //定义一个预节点
         ListNode dummy = new ListNode(0);
         ListNode head = dummy;
         int carry = 0;
@@ -42,6 +41,5 @@ public class 用链表表示的两数相加02 {
         }
         //最后，返回该链表的头结点即可
         return dummy.next;
-
     }
 }

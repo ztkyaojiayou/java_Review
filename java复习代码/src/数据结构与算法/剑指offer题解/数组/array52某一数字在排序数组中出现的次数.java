@@ -37,53 +37,47 @@ public class array52某一数字在排序数组中出现的次数 {
     /**
      * 方法2：二分查找
      * 写法1
-     * @param array
+     * @param arr
      * @param k
      * @return
      */
-    public int GetNumberOfK02(int [] array , int k) {
+    public int GetNumberOfK02(int [] arr , int k) {
         //使用二分查找即可,先找到搜索值k的第一个索引index
         //可是这样直接用API（Arrays）里面的二分查找真的好吗？
-        int index = binarySearch(array, k);//在目标数组array中返回搜索值k的索引
-        if(index<0)return 0;
+        //int index = binarySearch(array, k);//在目标数组array中返回搜索值k的索引
+        int index = binaryMethod(arr, k);//二分查找还是自己实现吧哈哈哈哈
+        if(index<0){
+            return 0;
+        }
         int cnt = 1;
         //先向index之后统计值为k的个数
-        for(int i=index+1; i < array.length && array[i]==k;i++)
-            cnt++;
-        //再index之前统计值为k的个数
-        for(int i=index-1; i >= 0 && array[i]==k;i--)
-            cnt++;
+        for(int i=index+1; i < arr.length;i++){
+            if (arr[i]==k){
+                cnt++;
+            }
+        }
+
+        //再向index之前统计值为k的个数
+        for(int i=index-1; i >= 0 ;i--){
+            if (arr[i]==k){
+                cnt++;
+            }
+        }
         return cnt;
     }
 
-    /**
-     * 写法2
-     * @param nums
-     * @param K
-     * @return
-     */
-    //这个方法也是使用的相同方法，即二分查找，但是这里是假设传入的目标排好序的数组是连续的，谁说的？？？
-    public int GetNumberOfK03(int[] nums, int K) {
-        int first = binarySearch(nums, K);
-        int last = binarySearch(nums, K + 1);//要是没有k+1呢？？？
-        return (first == nums.length || nums[first] != K) ? 0 : last - first;
-    }
-
     //二分查找的具体实现，获取k第一次出现的下标
-    private int binarySearch(int[] nums, int K) {
+    public int binaryMethod(int[] nums, int K){
         int left = 0, right = nums.length;
         while (left < right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] >= K){//则说明k在左边
                 right = mid;
-            }
-            else{//说明k在右边
+            } else{//说明k在右边
                 left = mid + 1;
             }
         }
 
         return left;//返回最左边的索引，即为k第一次出现的下标，若为right，则为最后一次出现的下标
     }
-
-
 }

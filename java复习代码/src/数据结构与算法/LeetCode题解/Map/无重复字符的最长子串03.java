@@ -25,7 +25,7 @@ import java.util.Map;
  *
  * 注意：区分子串和子序列
  * 给定 "pwwkew" ，
- * 子串是pww，wwk等很多个子串，它是连在一起的。
+ * 子串是类似于pww，wwk等的串，它是连在一起的。
  * 子序列是 pwk，pke等很多个子序列 ，但是子序列中的字符在字符串中不一定是连在一起的。
  */
 
@@ -40,7 +40,7 @@ import java.util.Map;
  * 参考链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-cshi-xian-/
  */
     //写法1(推荐）
-class 无重复字符的最长子串03_1 {
+class 无重复字符的最长子串的长度03_1 {
     public int lengthOfLongestSubstring(String s) {
         //表示最长子串的长度
                 int res = 0;

@@ -1,6 +1,8 @@
 package 数据结构与算法.LeetCode题解.数组;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -25,12 +27,14 @@ import java.util.List;
  * 我们可以利用数组内容本身跟数字下标的关联找出缺失的数字。
  * 扫描两遍数组，第一次将所有数字做标记，第二次根据标记信息找出缺失的数字。下面来看详细分析。
  * 假设有数组[1,2,3,4,5,6]
- * 数组上方的是数组的下标，通过这张图可以发现，数组中的每个值都有一个对应的数组下标，比如值为4的对应下标3。即arr[i]对应i-1
+ * 数组上方的是数组的下标，通过这张图可以发现，数组中的每个值都有一个对应的数组下标，
+ * 比如值为4的对应下标3。即arr[i]对应i-1
  * 如果数组是乱序的呢？
  * 乱序的数组并不影响，比如值为3的对应的是下标2，值为6的对应的是下标5。
  *
  * 我们可以利用下标这个隐藏条件，再假设有下面数组，数组缺少5
- * 因为每个arr[i]都对应下标i-1，我们将arr[i]对应的下标中的数组值置为负，比如值是3的对应下标2，我们将arr[2]中的值设置为arr[2]*-1。
+ * 因为每个arr[i]都对应下标i-1，我们将arr[i]对应的下标中的数组值置为负，
+ * 比如值是3的对应下标2，我们将arr[2]中的值设置为arr[2]*-1。
  * 对[1,2,3,4,6,6]这个数组我们做如下操作：
  * 1=>arr[0]，将arr[0]设置成-1
  * 2=>arr[1]，将arr[1]设置成-2
@@ -58,6 +62,26 @@ public class 找到数组中消失的所有数字448 {
             }
         }
         //3.最后，返回结果集即可
+        return result;
+    }
+}
+
+class Solution111 {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+
+        HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+//先全部标记为true
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], true);
+        }
+
+        List<Integer> result = new LinkedList<Integer>();
+
+        for (int i = 1; i <= nums.length; i++) {
+            if (!map.containsKey(i)) {//再去找下标在map中是否存在，若不存在，则说明该i即为所求。同样利用的是下标和元素值相差1的思路
+                result.add(i);
+            }
+        }
         return result;
     }
 }

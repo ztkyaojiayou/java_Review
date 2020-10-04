@@ -7,7 +7,7 @@ package 数据结构与算法.剑指offer题解.位运算;
  */
 
 public class BitOperation026一个数的二进制中1的个数 {
-    //方法一（推荐）：易知，n 每和 (n-1) 相与一次，1就减一，因此可以每与一次，就加1，直到为0
+    //方法一（推荐）：易知，n 每和 (n-1) 相与(&)一次，1就减一，因此可以每与一次，就加1，直到为0
     public int NumberOf1(int n) {
         int cnt = 0;
         while (n != 0) {

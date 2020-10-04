@@ -53,7 +53,7 @@ package 数据结构与算法.剑指offer题解.贪心;
  */
 class solution14_3 {
     public int cutRope(int target) {
-        //0.特判，易知当target等于1，2，3的时候，结果是固定的。
+        //0.特判，易知当target等于1，2，3的时候，结果是固定的。因为至少要分两段
         if (target < 2)
             return 0;
         if (target == 2)

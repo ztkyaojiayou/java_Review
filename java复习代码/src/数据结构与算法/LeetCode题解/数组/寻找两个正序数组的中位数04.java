@@ -1,5 +1,8 @@
 package 数据结构与算法.LeetCode题解.数组;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 /**
  * 给定两个大小为 m 和 n 的正序（从小到大，但可能有重复数字）数组 nums1 和 nums2。
  * 请你找出这两个正序数组（合并之后）的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
@@ -37,6 +40,27 @@ if(y == nums2.length || (x < nums1.length && nums1[x] < nums2[y])){
         }else {//数组长为奇数时
             return merged[merged.length/2];
         }
+    }
+}
+
+//方法2：使用堆
+class MedianFinder {
+    Queue<Integer> A, B;
+    public MedianFinder() {
+        A = new PriorityQueue<>(); // 小顶堆，保存较大的一半
+        B = new PriorityQueue<>((x, y) -> (y - x)); // 大顶堆，保存较小的一半
+    }
+    public void addNum(int num) {
+        if(A.size() != B.size()) {//奇数时
+            A.add(num);
+            B.add(A.poll());
+        } else {//偶数时
+            B.add(num);
+            A.add(B.poll());
+        }
+    }
+    public double findMedian() {
+        return A.size() != B.size() ? A.peek() : (A.peek() + B.peek()) / 2.0;
     }
 }
 

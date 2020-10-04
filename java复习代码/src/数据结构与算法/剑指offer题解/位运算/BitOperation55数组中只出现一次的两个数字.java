@@ -40,8 +40,9 @@ public class BitOperation55数组中只出现一次的两个数字 {
     /**
      * 方法一：利用ArrayList
      * 关于remove方法：
-     * public E remove(int index)
+     * 1)public E remove(int index)：删除的是该下标所对应的元素，而不是这个元素本身，务必记住！！！
      * 移除此列表中指定位置上的元素。向左移动所有后续元素（将其索引减 1），这一点很重要。
+     * 2)public E remove(Object o)：这个方法就是直接删除的这个元素本身,因此可以把该元素通过new Integer(i）来变成对象再删除即可！！！
      * @param array
      * @param num1
      * @param num2

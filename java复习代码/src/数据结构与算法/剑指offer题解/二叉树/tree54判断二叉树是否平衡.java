@@ -70,18 +70,19 @@ public class tree54判断二叉树是否平衡 {
     }
 
 
-
     //方法一：（思路很自然，但有重复判断，并不是最优解，不推荐，但在牛客系统上的运行结果似乎差别不大）
     private static boolean IsBalanced01(TreeNode54 root){
         if (root == null){
             return true;
         }
+        //先判断根节点两侧是否平衡
         int left = TreeDepth(root.left);
         int right = TreeDepth(root.right);
         int diff = left - right;
         if (diff>1 || diff<-1){
             return false;
         }
+        //还要判断每一个节点的左右是否平衡，这很关键
         return IsBalanced01(root.left) && IsBalanced01(root.right);
     }
 
