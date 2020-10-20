@@ -19,15 +19,14 @@ public class demo29_接雨水 {
         Stack<Integer> stack = new Stack<>();
         for (int i = 0;i<len;i++){
             while (!stack.isEmpty() && height[i] > height[stack.peek()]){
-                int h = height[stack.peek()];
-                stack.pop();
+                int cur_high = height[stack.pop()];
                 if (stack.empty()){
                     break;
                 }
-                int dis = i-stack.peek()-1;//宽
+                int kuan = i-stack.peek()-1;//宽
                 int min_height = Math.min(height[stack.peek()],height[i]);//矮柱子
-                int real_high = min_height-h;//“能接到水的”高（即有效高度）
-                sum =sum + dis * real_high;//宽*高即为当前柱子可以接的雨水，再累加到sum上即可
+                int real_high = min_height-cur_high;//“能接到水的”高（即有效高度）
+                sum =sum + kuan * real_high;//宽*高即为当前柱子可以接的雨水，再累加到sum上即可
 
             }
             stack.push(i);

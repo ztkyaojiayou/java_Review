@@ -2,7 +2,7 @@ package 数据结构与算法.第二遍.动态规划;
 
 public class 零钱兑换 {
     public int coinChange(int[] nums,int amount){
-        ////dp[i] 表示凑成总金额为i所需的最少的硬币个数
+        //dp[i] 表示凑成总金额为i所需的最少的硬币个数
         int[] dp = new int[nums.length + 1];
         //确定初始值
         dp[0]=0;

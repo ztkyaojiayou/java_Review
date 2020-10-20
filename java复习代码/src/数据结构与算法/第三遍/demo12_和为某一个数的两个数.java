@@ -8,19 +8,19 @@ public class demo12_和为某一个数的两个数 {
         //先排序
         Arrays.sort(arr);
         //双指针
-        int i = 0;
-        int j = arr.length-1;
+        int left = 0;
+        int right = arr.length-1;
         ArrayList<Integer> list = new ArrayList<>();
-        while (i<j){
-            int cur_sum = arr[i] + arr[j];
+        while (left<right){
+            int cur_sum = arr[left] + arr[right];
             if (cur_sum == sum){
-                list.add(arr[i]);
-                list.add(arr[j]);
+                list.add(arr[left]);
+                list.add(arr[right]);
                 return list;
             }else if (cur_sum < sum){
-                i++;
+                left++;
             }else {
-                j++;
+                right++;
             }
         }
         return new ArrayList<>();

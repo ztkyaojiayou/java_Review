@@ -25,8 +25,9 @@ class A2 implements Runnable {
             }
         }
     }
-
 }
+
+
 class B2 implements Runnable {
 
     private Demo02 demo;

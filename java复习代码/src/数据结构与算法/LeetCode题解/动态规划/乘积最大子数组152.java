@@ -55,7 +55,11 @@ package 数据结构与算法.LeetCode题解.动态规划;
  * 题目问连续子数组的乘积最大值，这些值需要遍历 dp[i][1] 获得。
  */
 public class 乘积最大子数组152 {
-
+    /**
+     * （1)写法1：该版本思路清晰，但较为臃肿，理解之后可参考下面的写法2
+     * @param nums
+     * @return
+     */
         public int maxProduct(int[] nums) {
             //0.特判
             int len = nums.length;
@@ -70,7 +74,7 @@ public class 乘积最大子数组152 {
 
             //2.确定初始情况
             dp[0][0] = nums[0];//即以 下标0 结尾的连续子数组的最小值，即第一个元素的值
-            dp[0][1] = nums[0];//即以 下标0 结尾的连续子数组的最大值，即第一个元素的值
+            dp[0][1] = nums[0];//即以 下标0 结尾的连续子数组的最大值，也为第一个元素的值
 
             //3.再考虑一般情况，使用状态方程，先把这个二维数组填满
             for (int i = 1; i < len; i++) {//下标从1开始即可
@@ -99,3 +103,21 @@ public class 乘积最大子数组152 {
             return result;
         }
     }
+
+/**
+ * (2)该版本更简洁，推荐
+ */
+class Solution021 {
+    public int maxProduct(int[] nums) {
+        int [][] dp=new int[nums.length][2];
+        dp[0][0]=nums[0];//最小值
+        dp[0][1]=nums[0];//最大值
+        int res=dp[0][0];
+        for(int i=1;i<nums.length;i++){
+            dp[i][0]= Math.min(Math.min(nums[i],nums[i]*dp[i-1][0]),nums[i]*dp[i-1][1]);//最小值分两种情况
+            dp[i][1]=Math.max(Math.max(nums[i],nums[i]*dp[i-1][0]),nums[i]*dp[i-1][1]);//最大值也分两种情况
+            res=Math.max(dp[i][1],res);//随时更新最终的最大值
+        }
+        return res;
+    }
+}

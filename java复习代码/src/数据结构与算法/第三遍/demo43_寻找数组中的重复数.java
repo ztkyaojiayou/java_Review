@@ -8,31 +8,29 @@ public class demo43_寻找数组中的重复数 {
     //方法1：使用set,简单解法，掌握
     public int findDuplicate01(int[] nums) {
         HashSet<Integer> set = new HashSet<>();
-        for (int i = 0;i<nums.length;i++){
-            if (set.contains(nums[i])){
+        for (int i = 0; i < nums.length; i++) {
+            if (set.contains(nums[i])) {
                 return nums[i];
             }
             set.add(nums[i]);
         }
-return -1;
+        return -1;
 
     }
-
-
 
     //方法2：双指针，高阶，尽量理解吧
     public int findDuplicate02(int[] nums) {
         int fast = nums[0];
         int slow = nums[nums[0]];
-while (slow != fast){
-    slow = nums[slow];
-    fast = nums[nums[fast]];
-}
-slow = 0;
-while (slow != fast){
-    slow = nums[slow];
-    fast = nums[fast];
-}
-return slow;
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+        slow = 0;
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
     }
 }

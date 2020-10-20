@@ -36,6 +36,17 @@ class 机器人的运动范围66 {
     }
 
     //dps搜索的具体实现（关键）
+
+    /**
+     *
+     * @param k 目标数
+     * @param rows 总行数
+     * @param cols 总列数
+     * @param cur_row 当前位置所在的行
+     * @param cur_col 当前位置所在的列
+     * @param visited 当前位置是否被访问的访问标记数组
+     * @return
+     */
     private int dps(int k, int rows, int cols,
                     int cur_row, int cur_col, boolean[] visited) {
 
@@ -57,7 +68,7 @@ class 机器人的运动范围66 {
     }
 
     //判断该位置的下标的和是否满足要求的方法
-    private boolean checkSum(int threshold, int row, int col) {
+    private boolean checkSum(int target, int row, int col) {
         int sum=0;//0.坐标的各位上的数字和
         //1.求行的各位数字之和
         while(row!=0){//注意：%是取余，/是取商
@@ -69,13 +80,13 @@ class 机器人的运动范围66 {
             //如对于一个三位数357，当先取余后，得到个位上7，接着再取商，
             //得到的是35，也即百位和十位上的数，以此类推，每次都是从低位开始累加的）
         }
-        //2.同理，再求列的各位数字之和
+        //2.同理，再求(累加）列的各位数字之和
         while(col!=0){
             sum+=col%10;
             col=col/10;
         }
         //3.1若坐标和大于目标值，则返回false
-        if(sum>threshold){
+        if(sum>target){
             return false;
         }
         //3.2否则，说明符合要求，返回true

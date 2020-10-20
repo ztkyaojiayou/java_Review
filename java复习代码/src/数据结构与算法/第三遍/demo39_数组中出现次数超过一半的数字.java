@@ -11,6 +11,7 @@ public class demo39_数组中出现次数超过一半的数字 {
                 map.put(nums[i],map.get(nums[i])+1);
             }
             map.put(nums[i],1);
+            //开始查找
             if (map.get(nums[i]) > len/2){
                 return nums[i];
             }

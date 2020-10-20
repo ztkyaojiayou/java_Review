@@ -1,6 +1,6 @@
 package 数据结构与算法.LeetCode题解.动态规划;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * 128. 最长连续子序列
@@ -41,6 +41,12 @@ import java.util.Arrays;
  * 空间复杂度：O(1)（或者 O(n)）
  * 以上算法的具体实现中，由于我们将数组就低排序，所以额外的空间复杂度是常数级别的。
  * 如果不允许修改输入数组，我们需要额外的线性长度的空间来保存中间结果和排好序的数组。
+ *
+ * 参考链接：https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/java-pai-xu-ji-he-ha-xi-biao-bing-cha-ji-by-lzhlyl/
+ */
+
+/**
+ * 方法1：排序（推荐）
  */
 public class 最长连续子序列128 {
     public int longestConsecutive(int[] nums) {
@@ -50,20 +56,20 @@ public class 最长连续子序列128 {
         }
         //1.先对数组排序（升序）并定义所需变量，即最终结果值max和当前的最长序列的长度curMax
         Arrays.sort(nums);
-        int n = nums.length;//数组长度
-        int max = 1, curMax = 1;//最终结果值max，当前的最长序列的长度curMax
+        int len = nums.length;//数组长度
+        int maxLen = 1, curMax = 1;//最终结果值maxLen，当前的最长序列的长度curMax
         //2.开始遍历数组
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i < len; i++) {
             if (nums[i] != nums[i - 1]) {//2.1若前后两个数不相等，则说明有可能能构成连续递增序列，于是继续判断；
                 //而若相等，那么说明当前的序列既不会增长也不会中断，我们只需要继续考虑下一个数字，
                 //则不会进入该if语句块，而是直接i++进入下一轮。
                 //1）即为能构成连续递增序列的条件，于是curMax加1
                 if (nums[i - 1] + 1 == nums[i]) {
                     curMax++;
-                } else {//2）否则，即表示前后两数相等，此时说明加入该元素会破坏当前的连续序列，
-                    // 因此要记录当前连续递增的序列的长度max,
+                } else {//2）否则，即表示前后两数不相等且不连续，此时说明加入该元素会破坏当前的连续序列，
+                    // 因此要记录当前连续递增的序列的长度maxLen,
                     // 同时要将当前序列长度curMax重置为 1，重新查找下一个连续递增序列
-                    max = Math.max(max, curMax);
+                    maxLen = Math.max(maxLen, curMax);
                     curMax = 1;
                 }
             }
@@ -71,7 +77,61 @@ public class 最长连续子序列128 {
         // 3.最后，返回上述的最大值max即可，
         // 但是易知，上面的代码处理在边界case 如[-1,0],是不会走else语句块的，也即不会比较max与cur的值，
         // 因此需要在最后一道防线拦截一次 Math.max(max,cur);
-        return Math.max(max, curMax);
-        //return max;//此时不能这样写，因为该语句会漏掉上面说的形如[-1,0]的边界情况
+        return Math.max(maxLen, curMax);
+        //return maxLen;//此时不能这样写，因为该语句会漏掉上面说的形如[-1,0]的边界情况
     }
 }
+
+/**
+ * 方法2：使用set+贪心（推荐）
+ */
+class Solution02 {
+
+    public int longestConsecutive(int[] nums) {
+        int ans = 0;
+        Set<Integer> set = new HashSet<>();
+        for(int num : nums){
+            set.add(num);
+        }
+        for(int num : set){
+            // 如果set中存在num之前的一个数，说明当前num不是连续序列的开始
+            if(set.contains(num-1))
+                continue;
+            int cur = num;
+            // 此时num为一个连续序列的开始，现在才统计其所在连续序列长度
+            // 在整个for循环中，此while循环总共走了n次，因为数组中的数只属于一个连续序列
+            // 而我们每次只从连续序列的开始往后走
+            while(set.contains(cur))
+                cur++;
+            ans = Math.max(cur-num, ans);
+        }
+        return ans;
+    }
+
+    /**
+     * 方法3：使用hashMap，参考本包中的demo14（无重复字符的最长子串的长度）
+     * @param nums
+     * @return
+     */
+    public int longestConsecutive02(int[] nums) {
+        if (nums.length == 0) return 0;
+
+        Map<Integer, Integer> map = new HashMap<>(); // 记录区间 [v, r]
+        for (int v : nums) {
+            map.put(v, v);
+        }
+
+        int max = 1;
+        for (int v : nums) {
+            int r = v;
+            while (map.containsKey(r + 1))
+                r = map.get(r + 1); // 利用前面已知的右边界，快速找到当前需要的右边界
+            map.put(v, r);
+            max = Math.max(max, r - v + 1);
+        }
+        return max;
+    }
+}
+
+
+

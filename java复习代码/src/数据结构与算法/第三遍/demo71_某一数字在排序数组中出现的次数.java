@@ -1,7 +1,7 @@
 package 数据结构与算法.第三遍;
 
 public class demo71_某一数字在排序数组中出现的次数 {
-    //1.暴力
+    //1.暴力（主要是因为数组中的元素可能无限多）
     public int GetNumberOfK01(int [] arr , int k) {
         int count = 0;
         int len = arr.length;
@@ -18,17 +18,11 @@ public class demo71_某一数字在排序数组中出现的次数 {
         int index = binarySearch(arr, k);
         //此时已经找到了k第一次出现的位置，因此只需往右寻找最后出现的位置即可
         int count = 1;
-        for (int i = index+1;i<arr.length;i++){
+        for (int i = index+1;i<arr.length;i++){//此时，就不用考虑元素还有很多了
             if (arr[i] == k){
                 count++;
             }
         }
-        //这一步似乎没必要了，因为左边肯定没有该元素了呀~
-        //for (int i = index-1;i>0;i--){
-        //    if (arr[i] == k){
-        //        count++;
-        //    }
-        //}
         return count;
     }
 

@@ -9,22 +9,24 @@ package 数据结构与算法.第三遍;
  * 返回值： 返回已修改的 nums数组。
  */
 public class demo37_调整数组顺序使奇数位于偶数前面 {
-        public int[] exchange(int[] nums) {
-int i = 0;
-int j = nums.length-1;
-while (i<j){
-    //若左边已经是奇数，右边已经是偶数了，则不动它，直接跳过
-    while (i<j && nums[i] % 2 == 1){
-        i++;
-    }
-    while (i<j && nums[j] % 2 == 0){
-        j--;
-    }
-    //而若左边是偶数，右边是奇数时，则交换二者
-    int temp = nums[j];
-    nums[j] = nums[i];
-    nums[i] = temp;
-}
-return nums;
+    public int[] exchange(int[] nums) {
+        //使用双指针即可，很简单
+        int i = 0;
+        int j = nums.length - 1;
+        //开始循环
+        while (i < j) {
+            //1.若左边已经是奇数，右边已经是偶数了，则不动它，直接跳过
+            while (i < j && nums[i] % 2 == 1) {
+                i++;
+            }
+            while (i < j && nums[j] % 2 == 0) {
+                j--;
+            }
+            //2.而若左边是偶数，右边是奇数时，则交换二者
+            int temp = nums[j];
+            nums[j] = nums[i];
+            nums[i] = temp;
         }
+        return nums;
     }
+}

@@ -46,8 +46,8 @@ public class 生成有效括号的所有组合22 {
         /**
          * 递归函数
          * @param curStr 当前递归得到的结果（每一次递归都会记录上一次的结果（即加一个左括号或右括号））
-         * @param left   左括号已经用了几个括号
-         * @param right  右括号已经用了几个括号
+         * @param left   左括号已经用了几个
+         * @param right  右括号已经用了几个
          * @param n      左括号、右括号一共可以用几个（即题给的n）
          * @param result    结果集
          */

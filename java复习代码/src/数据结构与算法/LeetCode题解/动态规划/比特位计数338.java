@@ -16,7 +16,7 @@ package 数据结构与算法.LeetCode题解.动态规划;
  * 进阶:
  * 给出时间复杂度为O(n*sizeof(integer))的解答非常容易。但你可以在线性时间O(n)内用一趟扫描做到吗？
  * 要求算法的空间复杂度为O(n)。
- * 你能进一步完善解法吗？要求在C++或任何其他语言中不使用任何内置函数（如 C++ 中的 __builtin_popcount）来执行此操作。
+ * 你能进一步完善解法吗？要求在C++或任何其他语言中不使用任何内置函数（如 C++ 中的 builtin_popcount）来执行此操作。
  */
 
 /**
@@ -29,14 +29,15 @@ package 数据结构与算法.LeetCode题解.动态规划;
 public class 比特位计数338 {
         public int[] countBits(int num) {
             //0.特判
-            if(num==0)
+            if(num==0){
                 return new int[]{0};
+            }
             //1.创建一个数组，其中，dp[i] 表示i的二进制数中的 1 的数目
-            int [] dp=new int [num+1];//因为0 ≤ i ≤ num，所以有num+1个数
+            int [] dp = new int[num+1];//因为0 ≤ i ≤ num，所以有num+1个数
             //2.再确定初始情况
             dp[0]=0;
             //3.考虑一般情况，使用状态方程，把数组填满
-            for(int i=1;i<=num;i++){
+            for(int i=1;i<num + 1;i++){
                 //3.1当i为偶数时
                 if(i % 2 == 0) {
                     dp[i]=dp[i/2];

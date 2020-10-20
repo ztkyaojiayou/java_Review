@@ -5,7 +5,7 @@ public class demo02_旋转单词 {
         char[] str_arr = str.toCharArray();
         int len = str_arr.length;
         int i = 0;
-        //旋转单个字符串
+        //先旋转单个字符串
         for (int j = 0; j<len;j++){
             if (str_arr[j] == ' ' || j == len ){//当到一个字符串的尽头时，就旋转。
                 reverse(str_arr,i,j-1);
@@ -18,19 +18,14 @@ public class demo02_旋转单词 {
         return res_str;
     }
 
-
 //反转每个单词
     private void reverse(char[] chars, int i, int j) {
         while (i<j){
-            swap(chars,i,j);
+            char temp = chars[i];
+            chars[i] = chars[j];
+            chars[j] = temp;
             i++;
             j--;
         }
-    }
-    //一一交换
-    private void swap(char[] chars, int i, int j) {
-        char temp = chars[i];
-        chars[i] = chars[j];
-        chars[j] = temp;
     }
 }

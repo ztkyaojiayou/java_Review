@@ -43,7 +43,7 @@ import java.util.*;
  * (2) 形如 aba 或 aa 等特殊测试用例的情况，vector在进行push_back时是不考虑重复情况的，需要自行控制；
  * (3) 输出的排列可能不是按字典顺序排列的，可能导致无法完全通过测试用例，考虑输出前排序，或者递归之后取消复位操作。
  */
-class 字符串的排列42 {
+class 字符串的全排列42 {
     public ArrayList<String> Permutation(String str) {
         ArrayList<String> res=new ArrayList<String>();
         if(str.length()==0||str==null)return res;

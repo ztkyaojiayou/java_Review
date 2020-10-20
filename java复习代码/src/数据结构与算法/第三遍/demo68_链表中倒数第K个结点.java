@@ -6,7 +6,7 @@ import 数据结构与算法.LeetCode题解.ListNode;
 public class demo68_链表中倒数第K个结点 {
     public ListNode FindKthToTail(ListNode head, int k) {
 ListNode p1 = head;
-while (p1 != null && k > 0){
+while (p1 != null && k > 0) {
     p1 = p1.next;
     k--;
 }

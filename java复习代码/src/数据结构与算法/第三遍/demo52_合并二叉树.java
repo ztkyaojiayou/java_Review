@@ -12,8 +12,9 @@ public class demo52_合并二叉树 {
         if (t2 == null){
             return t1;
         }
-        //若均不为空，则二者对应的值相加
+        //若均不为空，则二者对应的值相加，即为合并
         t1.val += t2.val;
+
         //再同样地，通过递归来连接左右节点（左和左合并，右和右合并）
         t1.left = mergeTrees(t1.left, t2.left);
         t1.right = mergeTrees(t1.right, t2.right);

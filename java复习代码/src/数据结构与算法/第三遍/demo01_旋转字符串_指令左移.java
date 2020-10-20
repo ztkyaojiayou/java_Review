@@ -15,16 +15,14 @@ public class demo01_旋转字符串_指令左移 {
 //旋转一段
     private void reverse(char[] arr, int i, int j) {
         while (i<j){
-            swap(arr,i,j);
+            //一前一后交换
+            char temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            //处理下一个
             i++;
             j--;
         }
-    }
-//一前一后交换
-    private void swap(char[] arr, int i, int j) {
-        char temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
     }
 
 }

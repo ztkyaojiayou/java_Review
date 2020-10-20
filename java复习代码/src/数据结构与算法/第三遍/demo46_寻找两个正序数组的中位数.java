@@ -8,6 +8,7 @@ public class demo46_寻找两个正序数组的中位数{
         int[] merged = new int[len];
         int i = 0;
         int j = 0;
+        //1.先合并成有序（升序）数组（属于暴力）
         for (int index = 0;index<len;index++){
             if (i>len1){
                 merged[index] = nums2[j];
@@ -25,7 +26,7 @@ public class demo46_寻找两个正序数组的中位数{
                 i++;
             }
         }
-        //此时已经变成了一个有序的合并数组了,于是只需直接找中位数即可，分奇偶
+        //2.此时已经变成了一个有序的合并数组了,于是只需直接找中位数即可（分奇偶）
         int mid = len / 2;
         if (len % 2 == 0){
             return (double)(merged[mid] + merged[mid-1])/2;

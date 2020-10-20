@@ -28,7 +28,7 @@ public class demo13_三数之和为零的三个数 {
                     while (left < right && nums[right] == nums[right-1]){
                         right--;
                     }
-                    //找到了第一组，还要继续探索是否有下一组，此时易知要一起移动
+                    //找到了第一组，还要继续探索是否有下一组，此时易知要一起移动，因为此时已经去重了！
                     left++;
                     right--;
                 }else if (cur_sum < 0){//若没有只找到，就只需看情况移动一边即可

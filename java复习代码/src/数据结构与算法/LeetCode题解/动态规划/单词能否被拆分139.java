@@ -40,13 +40,14 @@ import java.util.List;
  */
 public class 单词能否被拆分139 {
         public boolean wordBreak(String str, List<String> wordDict) {
-           //1.把字典表存入HashSet中
+           //1.把字典表存入HashSet中,用于判断是否存在
             HashSet<String> set = new HashSet<>(wordDict); //public HashSet(Collection<? extends E> c)构造一个包含指定 collection 中的元素的新 set。
-            //2.再创建一个数组，长度设置为s.length() + 1，dp[i]就表示字符串s中的前i个字符能否拆分成字典表wordDict中的字符
+            //2.再创建一个数组，长度设置为s.length() + 1，
+            //dp[i]就表示字符串s中的前i个字符能否拆分成字典表wordDict中的字符
             int len = str.length();
             boolean[] dp = new boolean[len + 1];
             //3.确定初始值/边界情况
-            dp[0] = true;//字典表wordDict中默认含有空字符串
+            dp[0] = true;// 字典表wordDict中默认含有空字符串
             //4.考虑一般情况，使用状态方程
             for(int i = 1; i<=len; i++){//下标i用于考虑所有从当前字符串开始的可能的子字符串
                 for(int j = 0; j<i; j++){//通过下标j把每一个子字符串又拆分成两个子字符串（即前j个字符构成的字符串s1和由j至i所构成的字符串s2），

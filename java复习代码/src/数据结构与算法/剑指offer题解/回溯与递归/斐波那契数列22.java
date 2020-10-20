@@ -60,7 +60,7 @@ class solution22_3{
 //当需要计算 f(6) 时，f(6) = f(5) + f(4)，sum 存储的 f(5)，
 //f(4) 存储在 pre2 中，由 f(5)-f(3) 得到.
 class Solution22_4 {
-    public int Fibonacci(int n) {
+    public  int Fibonacci(int n) {
         //0.特判
         if(n == 0){
             return 0;
@@ -78,4 +78,5 @@ class Solution22_4 {
         //3.最终返回结果即可
         return sum_pre1;
     }
+
 }

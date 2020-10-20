@@ -9,14 +9,13 @@ public class demo18_输出二叉树的镜像 {//即反转二叉树，与demo54�
         if (root == null){
             return;
         }
-        swap(root);
-        Mirror(root.left);
-        Mirror(root.right);
-    }
-//交换当前节点左右子节点
-    private void swap(TreeNode root) {
+        //先交换当前节点左右子节点
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
+        //再使用递归处理其左右节点
+        Mirror(root.left);
+        Mirror(root.right);
     }
+
 }
