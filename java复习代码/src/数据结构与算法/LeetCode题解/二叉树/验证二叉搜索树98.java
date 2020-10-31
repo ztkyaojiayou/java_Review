@@ -68,8 +68,8 @@ class 验证二叉搜索树01 {
 // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
             if (temp.val <= inorder)
                 return false;
-            inorder = temp.val;
-            root = temp.right;
+            inorder = temp.val;//保存当前节点
+            root = temp.right;//遍历右子节点
         }
         return true;
     }

@@ -27,10 +27,10 @@ import java.util.PriorityQueue;
 
 public class tree18获取数据流中的中位数 {
     /* 大顶堆，存储左半边元素 */
-    //自定义了一个比较器：降序（则输出也是降序，第一个元素为最大），实现大顶堆的特点
+    //自定义了一个比较器：降序（则输出也是降序，第一个元素/堆顶元素为最大），实现大顶堆的特点
     private PriorityQueue<Integer> left = new PriorityQueue<>((o1, o2) -> o2 - o1);
     /* 小顶堆，存储右半边元素，并且右半边元素都大于左半边 */
-    private PriorityQueue<Integer> right = new PriorityQueue<>();//默认排序：升序（则输出也是升序，第一个元素为最小）
+    private PriorityQueue<Integer> right = new PriorityQueue<>();//默认排序：升序（则输出也是升序，第一个元素/堆顶元素为最小）
     /* 当前数据流读入的元素个数 */
     private int N = 0;
 
@@ -40,12 +40,12 @@ public class tree18获取数据流中的中位数 {
             /* N 为偶数的情况下插入到右半边。
              * 因为右半边元素都要大于左半边，但是新插入的元素不一定比左半边元素来的大，
              * 因此需要先将元素插入左半边，然后利用左半边为大顶堆的特点，取出堆顶元素即为最大元素，此时插入右半边 */
-            left.add(val);
-            right.add(left.poll()); //（没太懂）
+            left.add(val);//目的是把算上该元素后的大数找出来，再把其放入right堆中
+            right.add(left.poll()); //
         } else {//当为奇数时，则插入到左半边
             //left.poll():从left边返回队首元素，且队首元素出队列，即从left边取出了那个最大的元素放入right边
             // 即此时中位数在right边了，而left边则比right少了一个元素
-            right.add(val);
+            right.add(val);//同理
             left.add(right.poll());
         }
         N++;

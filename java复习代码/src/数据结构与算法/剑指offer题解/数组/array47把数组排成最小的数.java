@@ -23,9 +23,9 @@ package 数据结构与算法.剑指offer题解.数组;
  *      所以，我们可以把数值的比较大小 直接转化为字符串的compare
  *      但这里我们先不考虑，好像牛客网也让过
  *
- *思路：可以看成是一个排序问题，先将各个元素从小到大进行排序，排序之后再把他们串联起来就可以了
+ *思路（其实是个暴力方法Hhhh）：可以看成是一个排序问题，先将各个元素从小到大进行排序，排序之后再把他们串联起来就可以了
  * 在这里自定义一个比较大小的函数，比较两个字符串s1, s2大小的时候，先将它们拼接起来，比较s1+s2,和s2+s1哪个大，
- * 如果s1+s2大，那说明s2应该放前面，所以按这个规则，s2就应该排在s1前面
+ * 如果s1+s2大，那说明s2应该放前面,即把较小值放在前面，所以按这个规则，s2就应该排在s1前面
  */
 public class array47把数组排成最小的数 {
     public String PrintMinNumber(int [] nums) {
@@ -50,7 +50,7 @@ public class array47把数组排成最小的数 {
                 int append1 = Integer.valueOf(nums[i]+""+nums[j]);
                 int append2 = Integer.valueOf(nums[j]+""+nums[i]);
                 //2.3再对两个拼接后的数字进行比较，调换其对应的值的位置（而不是此拼接数，这只是一个辅助值），用到一个临时变量temp进行交换（老生常谈了）
-                if(append1 > append2){
+                if(append1 > append2) {
                     int temp = nums[j];
                     nums[j] = nums[i];
                     nums[i] = temp;
@@ -59,8 +59,9 @@ public class array47把数组排成最小的数 {
         }
         //3.此时原数组中的数已经是按照拼接后为最小数的顺序排列好了的，因此只需要把其一个一个拼接成一个字符串即可
         String str = new String("");
-        for(int i=0; i < nums.length; i++)
+        for(int i=0; i < nums.length; i++){
             str = str + nums[i];//string中的+号是拼接字符串，而不是数学运算
+        }
         return str;
     }
 }

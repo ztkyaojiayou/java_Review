@@ -14,6 +14,7 @@ public class demo15_最小的k个数 {
                 priQueue.poll();
             }
         }
+        //返回结果，把队列直接转化为list
         return new ArrayList<>(priQueue);
     }
 }

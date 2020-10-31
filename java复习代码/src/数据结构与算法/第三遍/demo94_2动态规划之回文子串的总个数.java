@@ -3,7 +3,7 @@ package 数据结构与算法.第三遍;
 public class demo94_2动态规划之回文子串的总个数 {
     public int countSubstrings(String str) {
         int res_len = str.length();
-        //dp[i][j] 表示从i到j所构成的字符串是否为回文子串的状态，
+        //dp[i][j] 表示从i到j所构成的字符串是否为回文子串的状态
         boolean[][] dp = new boolean[res_len][res_len];
         //初始化
         for (int i = 0;i<res_len;i++){

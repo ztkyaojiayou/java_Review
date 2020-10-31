@@ -11,7 +11,7 @@ public class demo95_动态规划之最长有效括号的长度 {
      */
     public int longestValidParentheses(String str) {
         int maxLen = 0;
-//dp[i]表示字符串前i个字符的最长有效括号
+//dp[i]表示字符串前i个字符（不包括i）的最长有效括号
         int[] dp = new int[str.length()];
         //初始化
         dp[0] = 0;
@@ -42,7 +42,7 @@ public class demo95_动态规划之最长有效括号的长度 {
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '(') {
                 stack.push(i);
-            } else {
+            } else {//先弹出，再计算
                 stack.pop();
                 if (stack.isEmpty()) {//别忘了
                     stack.push(i);

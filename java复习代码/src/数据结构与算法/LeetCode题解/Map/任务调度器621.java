@@ -66,7 +66,6 @@ import java.util.Arrays;
  * 参考链接：https://leetcode-cn.com/problems/task-scheduler/solution/tong-zi-by-popopop/
  */
 public class 任务调度器621 {
-
     public int leastInterval02(char[] tasks, int n) {
         if (tasks.length <= 1 || n < 1) return tasks.length;
         //1.统计各个任务出现的次数最多的任务有几种(老生常谈啦）
@@ -83,7 +82,6 @@ public class 任务调度器621 {
         int retCount = (maxCount - 1) * (n + 1) + 1;
         //4.再依次考虑下一个最大的任务，如果下一个任务B的个数和最大任务数一致，
         //这会导致最后一个桶子中，我们需要多执行一次B任务，因此使retCount++即可，以此类推，直到把所有的任务都考虑完毕。
-        //
         int i = 24;
         while (i >= 0 && map[i] == maxCount) {
             retCount++;
@@ -95,8 +93,7 @@ public class 任务调度器621 {
         //不难发现无论再继续插入多少任务，我们都可以类似处理，而且新插入元素肯定满足冷却要求
         //继续思考一下，这种情况下其实每个任务之间都不存在空余时间，冷却时间已经被完全填满了。
         //也就是说，我们执行任务所需的时间，就是任务的数量tasks.length
-        //因此最后我们只需要取这二者的最大值即可
+        //因此最后我们只需要取这二者的最大值即可。
         return Math.max(retCount, tasks.length);
     }
-
 }

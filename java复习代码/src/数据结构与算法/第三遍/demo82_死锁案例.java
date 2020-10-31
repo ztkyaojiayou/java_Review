@@ -1,7 +1,7 @@
 package 数据结构与算法.第三遍;
 
 //先定义两个锁对象
-class MyLock{
+class MyLock {
     public static final Object lockA = new Object();
     public static final Object lockB = new Object();
 }
@@ -10,31 +10,32 @@ class MyLock{
 class deadLock implements Runnable {
     //加一个标志位
     private boolean flag;
+
     deadLock(boolean flag) {
         this.flag = flag;
     }
 
     @Override
     public void run() {
-if (flag){
-    while (true){
-        synchronized (MyLock.lockA){
-            System.out.println("持有了A锁");
-            synchronized (MyLock.lockB){
-                System.out.println("还想试图获取B锁");
+        if (flag) {
+            while (true) {
+                synchronized (MyLock.lockA) {
+                    System.out.println("持有了A锁");
+                    synchronized (MyLock.lockB) {
+                        System.out.println("还想试图获取B锁");
+                    }
+                }
+            }
+        } else {
+            while (true) {
+                synchronized (MyLock.lockB) {
+                    System.out.println("持有了B锁");
+                    synchronized (MyLock.lockA) {
+                        System.out.println("还想试图获取A锁");
+                    }
+                }
             }
         }
-    }
-}else {
-    while (true){
-        synchronized (MyLock.lockB){
-            System.out.println("持有了B锁");
-            synchronized (MyLock.lockA){
-                System.out.println("还想试图获取A锁");
-            }
-        }
-    }
-}
     }
 }
 
@@ -49,4 +50,4 @@ public class demo82_死锁案例 {
         t2.start();
     }
 }
-    //测试成功
+//测试成功

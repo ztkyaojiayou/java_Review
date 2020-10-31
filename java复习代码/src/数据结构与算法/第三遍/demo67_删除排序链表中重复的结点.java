@@ -31,6 +31,7 @@ public class demo67_删除排序链表中重复的结点 {
         }
         //哑结点
         ListNode dummy = new ListNode(0);
+        dummy.next = head;
         //定义两个指针
         ListNode p1 = dummy;
         ListNode p2 = head;

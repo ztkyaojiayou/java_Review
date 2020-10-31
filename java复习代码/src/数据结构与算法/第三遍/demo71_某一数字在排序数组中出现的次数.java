@@ -45,12 +45,13 @@ public class demo71_某一数字在排序数组中出现的次数 {
         int right = len-1;
         while (left < right){
             int mid = (left + right)/2;
-            if (num[mid] >= k){
+            if (num[mid] >= k) {
                 right = mid;
             } else {
                 left = mid+1;
             }
         }
+        //返回的是最左边那个下标（切记）
         return left;
     }
 }

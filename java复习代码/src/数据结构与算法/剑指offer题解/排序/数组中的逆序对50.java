@@ -29,7 +29,7 @@ class 数组中的逆序对50_1 {
     private long cnt = 0;
     private int[] tmp;  // 在这里声明辅助数组，而不是在 merge() 递归函数中声明
 
-    public int InversePairs(int[] nums) {
+    public int reversePairs(int[] nums) {
         tmp = new int[nums.length];
         //归并排序
         mergeSort(nums, 0, nums.length - 1);
@@ -40,8 +40,10 @@ class 数组中的逆序对50_1 {
         if (right - left < 1)
             return;
         int mid = left + (right - left) / 2;
+        //先排序
         mergeSort(nums, left, mid);
         mergeSort(nums, mid + 1, right);
+        //再合并，同时统计逆序数的对数
         merge(nums, left, mid, right);
     }
 
@@ -56,19 +58,19 @@ class 数组中的逆序对50_1 {
                 tmp[k] = nums[i++];
             else {
                 tmp[k] = nums[j++];
-                this.cnt += mid - i + 1;  // nums[i] > nums[j]，说明 nums[i...mid] 都大于 nums[j]
+                cnt += mid - i + 1;  // nums[i] > nums[j]，说明 nums[i...mid] 都大于 nums[j]
             }
             k++;
         }
-        for (k = left; k <= right; k++)
+        for (k = left; k <= right; k++){
             nums[k] = tmp[k];
+        }
     }
 }
 
 
 
 class Solution50_2 {
-
     public int reversePairs(int[] nums) {
         int len = nums.length;
 
@@ -76,13 +78,13 @@ class Solution50_2 {
             return 0;
         }
 
-        int[] copy = new int[len];
+        int[] new_nums = new int[len];
         for (int i = 0; i < len; i++) {
-            copy[i] = nums[i];
+            new_nums[i] = nums[i];
         }
 
         int[] temp = new int[len];
-        return reversePairs(copy, 0, len - 1, temp);
+        return reversePairs(new_nums, 0, len - 1, temp);
     }
 
     /**

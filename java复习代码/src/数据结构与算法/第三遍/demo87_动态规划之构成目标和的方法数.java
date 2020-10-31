@@ -41,7 +41,7 @@ int len = nums.length;
         for (int j = 1;j<len+1;j++){
             dp[j][0] = 1;//即不放，这也是一种方法
         }
-        //0-1背包问题
+        //一般情况，其实就是0-1背包问题
         for (int i = 1;i< len+1;i++){
             for (int j = 0;j<target+1;j++){//nums[i]即为物品
                 if (j < nums[i-1]){//即易知，放不下，则维持原来的结果

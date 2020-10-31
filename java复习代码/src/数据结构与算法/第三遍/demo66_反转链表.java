@@ -8,7 +8,7 @@ public class demo66_反转链表 {
             return head;
         }
         ListNode cur_pre = null;
-        ListNode cur_next = null;
+        ListNode cur_next;
         while (head != null) {
             cur_next = head.next;
             head.next = cur_pre;
@@ -22,8 +22,9 @@ public class demo66_反转链表 {
 /**
  * 反转部分链表
  */
-class Solution02 {
+class 反转部分链表 {
     public ListNode reverseBetween(ListNode head, int m, int n) {
+        //设置一个哑结点
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode node = dummy;
@@ -32,15 +33,15 @@ class Solution02 {
             node = node.next;
         }
         //node.next就是需要反转的这段的起点。
-        ListNode tar_head = node.next;
+        ListNode new_head = node.next;
         ListNode cur_next = null;
         ListNode cur_pre = null;
         //反转m到n这一段
         for (int i = m; i <= n; i++) {
-            cur_next = tar_head.next;
-            tar_head.next = cur_pre;
-            cur_pre = tar_head;
-            tar_head = cur_next;
+            cur_next = new_head.next;
+            new_head.next = cur_pre;
+            cur_pre = new_head;
+            new_head = cur_next;
         }
         //将反转的起点的next指向next。
         node.next.next = cur_next;

@@ -59,7 +59,7 @@ public class string64把字符串转换成整数 {
     public int StrToInt(String str) {
         //最优解
         if(str == null || "".equals(str.trim()))return 0;
-        str = str.trim();
+        str = str.trim();//作用：去掉字符串首尾的空格。
         char[] arr = str.toCharArray();//先把传入的目标字符串转化为数组，方便处理
         int i = 0;//数组的索引
         int flag = 1;//用于标记正负号（正号：1，负号：-1）

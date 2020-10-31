@@ -61,7 +61,7 @@ public class 二叉树的直径543 {
     }
     // 递归函数的具体实现
     // 作用：用于返回以当前节点为根节点的树的深度
-    int traverse(TreeNode root) {
+    public int traverse(TreeNode root) {
         //1.递归结束的条件，即当为空节点时，深度定义为0
         if (root == null) {
             return 0;

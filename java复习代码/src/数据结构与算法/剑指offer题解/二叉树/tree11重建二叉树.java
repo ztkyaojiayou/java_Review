@@ -47,13 +47,13 @@ public class tree11重建二叉树 {
         for (int i = 0; i < in.length; i++)
             indexForInOrders.put(in[i], i);// 存储中序遍历数组每个值对应的索引（即：key=in[i], value=i）
 
-        //返回值这里重载了reConstructBinaryTree方法
+        //调用递归方法
         //参数说明：preL：前序数组的第一个索引，preR：前序数组的最后一个索引，inL：中序数组的第一个索引
-        return reConstruct(pre, 0, pre.length - 1, 0);
+        return method(pre, 0, pre.length - 1, 0);
     }
 
-    //开始真正重新构建二叉树
-    private TreeNode13 reConstruct(int[] pre, int preL, int preR, int inL) {
+    //使用递归，开始真正重新构建二叉树
+    private TreeNode13 method(int[] pre, int preL, int preR, int inL) {
         if (preL > preR)
             return null;
         TreeNode13 root = new TreeNode13(pre[preL]);//在前序遍历数组中获取根节点的值，易知，其第一个值即为根节点的值
@@ -61,9 +61,9 @@ public class tree11重建二叉树 {
         int leftTreeSize = inIndex - inL;//左子树的长度=中序数组中根节点的索引-第一个数的索引
         //使用递归方法创建二叉树即可（没太懂）
         //创建左子树
-        root.left = reConstruct(pre, preL + 1, preL + leftTreeSize, inL);
+        root.left = method(pre, preL + 1, preL + leftTreeSize, inL);
         //创建右子树
-        root.right = reConstruct(pre, preL + leftTreeSize + 1, preR, inL + leftTreeSize + 1);
+        root.right = method(pre, preL + leftTreeSize + 1, preR, inL + leftTreeSize + 1);
         return root;
     }
 }
