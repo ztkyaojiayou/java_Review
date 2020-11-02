@@ -1,6 +1,6 @@
 package 数据结构与算法.第三遍;
 
-public class demo50_贪心算法之跳跃游戏 {
+public class demo49_2贪心算法之跳跃游戏 {
     //入门版：能否达到
     public boolean canJump01(int[] nums) {
         int max_position = 0;

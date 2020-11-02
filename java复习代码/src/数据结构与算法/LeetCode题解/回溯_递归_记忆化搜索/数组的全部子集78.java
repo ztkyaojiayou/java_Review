@@ -1,6 +1,7 @@
 package 数据结构与算法.LeetCode题解.回溯_递归_记忆化搜索;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,8 +33,8 @@ import java.util.List;
  */
 public class 数组的全部子集78 {
     List<List<Integer>> res = new ArrayList<>();
-    ArrayList<Integer> path = new ArrayList<>();
     public List<List<Integer>> subsets(int[] nums) {
+        ArrayList<Integer> path = new ArrayList<>();
         backtrack(nums, path,0);
         return res;
     }
@@ -41,19 +42,17 @@ public class 数组的全部子集78 {
     /**
      *
      * @param nums 题给的数字字符串
-     * @param index 索引，从零开始，不过他会随着每一个递归而加一，因而在下一次递归时就不是从0开始啦
+     * @param start 索引，从零开始，不过他会随着每一个递归而加一，因而在下一次递归时就不是从0开始啦
      * @param path 每一次递归后的结果/路径（也即一个子集）
      */
-    public void backtrack(int[] nums, ArrayList<Integer> path,int index){
+    public void backtrack(int[] nums, ArrayList<Integer> path,int start){
+        //递归结束的条件？此题非常特殊，所有路径都应该加入结果集，所以不存在结束条件（切记）
         //每次的子集(即每一次递归的结果）都放到结果当中
         //易知，第一次添加的是“空子集”，最后一次添加的是本身
         res.add(new ArrayList<Integer>(path));
-        //递归结束的条件：当子集的长度等于全集的长度时（此时，在上一步已经把“本身”添加进去啦）
-        if(path.size() == nums.length){
-            return;
-        }
-        //选择列表(对其作约束)
-        for(int i = index; i<nums.length; i++){//横向，如，若给定的数组为[1,2,3]，
+
+        //一般情况
+        for(int i = start; i<nums.length; i++){//横向，如，若给定的数组为[1,2,3]，
             // 则先固定的是第一个元素，即nums[0],也就是1，先把1添加到list（因为1本身就是一个子集），
             // 再调用递归函数，此时就又回到line47，于是执行line50，把该结果添加进结果集，
             // （重点）注意，此时元素1还存在于list中，它会继续去拼接后面的元素2或3，这也是为什么能得到[1,2],[1,2,3]的原因
@@ -71,6 +70,33 @@ public class 数组的全部子集78 {
         }
     }
 }
+
+/**
+ * 进阶版：数组中有重复元素时
+ */
+class solution02{
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums); //排序
+        getAns(nums, 0, new ArrayList<>(), ans);
+        return ans;
+    }
+
+    private void getAns(int[] nums, int start, ArrayList<Integer> temp, List<List<Integer>> ans) {
+        ans.add(new ArrayList<>(temp));
+        for (int i = start; i < nums.length; i++) {
+            //和上个数字相等就跳过
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            temp.add(nums[i]);
+            getAns(nums, i + 1, temp, ans);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
+
+
 
 
 

@@ -37,7 +37,7 @@ public class 最短无序连续子数组581 {
             int len = nums.length;
             int max = nums[0];
             int min = nums[len-1];
-            int left = 0, right = -1;
+            int left = 0, right = -1;//这里定义的left和right所对应的元素是属于无序元素的一部分，务必注意，因此最终的结果时right-left+1
             //寻找右边界
             for(int i=0;i<len;i++){
                 if(max > nums[i]){

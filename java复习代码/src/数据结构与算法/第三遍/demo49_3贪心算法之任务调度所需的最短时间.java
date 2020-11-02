@@ -2,7 +2,7 @@ package 数据结构与算法.第三遍;
 
 import java.util.Arrays;
 
-public class demo22_任务调度所需的最短时间 {
+public class demo49_3贪心算法之任务调度所需的最短时间 {
     public int leastInterval(char[] tasks, int n) {
         int[] map = new int[26];
         for (int i = 0;i<tasks.length;i++){

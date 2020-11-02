@@ -5,7 +5,7 @@ import 秋招笔试.其他杂七杂八.dfs;
 import java.util.LinkedList;
 import java.util.List;
 
-public class demo107_回溯之数的全排列 {
+public class demo107_2回溯之数的全排列 {
     List<List<Integer>> res = new LinkedList<>();
     List<List<Integer>> permute(int[] nums) {
         LinkedList<Integer> path = new LinkedList<>();

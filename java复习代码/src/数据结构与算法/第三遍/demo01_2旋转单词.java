@@ -1,6 +1,6 @@
 package 数据结构与算法.第三遍;
 
-public class demo02_旋转单词 {
+public class demo01_2旋转单词 {
     public String ReverseSentence(String str) {
         char[] str_arr = str.toCharArray();
         int len = str_arr.length;

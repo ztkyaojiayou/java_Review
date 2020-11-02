@@ -16,7 +16,7 @@ import java.util.List;
 public class 电话号码盘的数对应的字母组合17 {
         //一个映射表，第二个位置是"abc“,第三个位置是"def"。。。
         //这里也可以用map，用数组可以更节省点内存
-        //下标为数字，其值为对应的字母
+        //下标为数字，其值为对应的字母（0-9）
         String[] letter_map = {" ","*","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
     //最终输出结果的list
     List<String> res = new ArrayList<>();

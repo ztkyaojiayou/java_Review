@@ -2,7 +2,7 @@ package 数据结构与算法.第三遍;
 
 import java.util.ArrayList;
 
-public class demo40_顺时针打印矩阵 {
+public class demo40_1顺时针打印矩阵 {
     public ArrayList<Integer> printMatrix(int[][] nums) {
         ArrayList<Integer> res = new ArrayList<>();
         int row_max = nums.length - 1;//行

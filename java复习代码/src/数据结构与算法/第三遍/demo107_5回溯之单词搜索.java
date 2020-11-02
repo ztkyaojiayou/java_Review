@@ -1,34 +1,10 @@
-package 数据结构与算法.LeetCode题解.回溯_递归_记忆化搜索;
+package 数据结构与算法.第三遍;
 
-/**
- * 79. 单词搜索
- * 给定一个二维网格和一个单词，找出该单词是否存在于网格中。
- * 单词必须按照字母顺序，通过相邻的单元格内的字母构成，
- * 其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。
- * 同一个单元格内的字母不允许被重复使用。
- * <p>
- * 示例:
- * board =
- * [
- * ['A','B','C','E'],
- * ['S','F','C','S'],
- * ['A','D','E','E']
- * ]
- * <p>
- * 给定 word = "ABCCED", 返回 true
- * 给定 word = "SEE", 返回 true
- * 给定 word = "ABCB", 返回 false
- * <p>
- * 提示：
- * board 和 word 中只包含大写和小写英文字母。
- * 1 <= board.length <= 200
- * 1 <= board[i].length <= 200
- * 1 <= word.length <= 10^3
- */
-public class 单词搜索79 {
-    int rows;
-    int cols;
-    boolean[][] isVisited;
+public class demo107_5回溯之单词搜索 {
+    //先定义几个全局变量，目的是简化代码的编写，否则的话，在递归方法中需要带上这些变量，略显麻烦和臃肿！
+    int rows;//行
+    int cols;//列
+    boolean[][] isVisited;//访问数组
     int curWord_index;//深度搜索得到的路径的下标
 
     public boolean exist(char[][] board, String word) {
@@ -76,5 +52,3 @@ public class 单词搜索79 {
         return res;
     }
 }
-
-

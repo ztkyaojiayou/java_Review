@@ -1,6 +1,6 @@
 package 数据结构与算法.第三遍;
 
-public class demo01_旋转字符串_指令左移 {
+public class demo01_1旋转字符串_指令左移 {
     public String LeftRotateString(String str, int n) {
         char[] arr = str.toCharArray();
         int len = arr.length;

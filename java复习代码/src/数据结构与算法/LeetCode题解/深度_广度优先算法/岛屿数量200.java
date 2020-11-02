@@ -27,219 +27,53 @@ package 数据结构与算法.LeetCode题解.深度_广度优先算法;
 import java.util.LinkedList;
 
 /**
- * 这道题是可以使用一个经典的算法来解决的，那就是 Flood fill，以下的定义来自 维基百科：Flood fill 词条。
- * Flood fill 算法是从一个区域中提取若干个连通的点与其他相邻区域区分开（或分别染成不同颜色）的经典 算法。
- * 因为其思路类似洪水从一个区域扩散到所有能到达的区域而得名。在 GNU Go 和 扫雷 中，Flood Fill算法被用来计算需要被清除的区域。
- * “Flood” 我查了一下，作为动词是 “淹没；充满” 的意思，作为名词是 “洪水” 的意思。
- * 下面我们简单解释一下这个算法：
- * 从一个区域中提取若干个连通的点与其他相邻区域区分开
- * 从一个点扩散开，找到与其连通的点，这不是什么高深的算法，其实就是从一个点开始，进行一次 “深度优先遍历” 或者 “广度优先遍历”，
- * 通过 “深度优先遍历” 或者 “广度优先遍历” 发现一片连着的区域，
- * 对于这道题来说，就是从一个是 “陆地” 的格子开始进行一次 “深度优先遍历” 或者 “广度优先遍历”，
- * 把与之相连的所有的格子都标记上，视为发现了一个 “岛屿”。
+ * 思路一：深度优先遍历DFS
+ * 目标是找到矩阵中 “岛屿的数量” ，上下左右相连的 1 都被认为是连续岛屿。
+ * dfs方法： 设目前指针指向一个岛屿中的某一点 (i, j)，寻找包括此点的岛屿边界。
+ * 从 (i, j) 向此点的上下左右 (i+1,j),(i-1,j),(i,j+1),(i,j-1) 做深度搜索。
+ * 终止条件：
+ * (i, j) 越过矩阵边界;
+ * grid[i][j] == 0，代表此分支已越过岛屿边界。
+ * 搜索岛屿的同时，执行 grid[i][j] = '0'，即将岛屿所有节点删除，以免之后重复搜索相同岛屿。
+ * 主循环：
+ * 遍历整个矩阵，当遇到 grid[i][j] == '1' 时，从此点开始做深度优先搜索 dfs，
+ * 岛屿数 count + 1 且在深度优先搜索中删除此岛屿。
+ * 最终返回岛屿数 count 即可。
  *
- * 说明：这里做 “标记” 的意思是，通过 “深度优先遍历” 或者 “广度优先遍历” 操作，
- * 我发现了一个新的格子，与起始点的那个格子是连通的，我们视为 “标记” 过，也可以说 “被访问过”。
- *
- * 那么每一次进行 “深度优先遍历” 或者 “广度优先遍历” 的条件就是：
- * 1、这个格子是陆地 1，如果是水域 0 就无从谈论 “岛屿”；
- * 2、这个格子不能是之前发现 “岛屿” 的过程中执行了 “深度优先遍历” 或者 “广度优先遍历” 操作，
- * 而被标记的格子（这句话说得太拗口了，大家意会即可，意会不了不是您的问题，是我表达的问题，直接看代码会清楚很多）。
+ * 参考链接：https://leetcode-cn.com/problems/number-of-islands/solution/number-of-islands-shen-du-you-xian-bian-li-dfs-or-/
  */
-public class 岛屿数量200 {
-    /**
-     * 方法一：深度优先遍历：遍历所有点（陆地和水），把与一块陆地的所有相邻的陆地全部找到，就构成一片岛屿啦
-     * 原理：每一片相邻的陆地肯定是一个岛屿
-     */
-        //           x-1,y
-        //  x,y-1    x,y      x,y+1
-        //           x+1,y
-        // 方向数组，它表示了相对于当前位置的 4 个方向的横、纵坐标的偏移量，这是一个常见的技巧
-        private static final int[][] directions = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-        // 标记数组，标记了 grid 的坐标对应的格子是否被访问过
-        private boolean[][] marked;
-        // grid 的行数
-        private int rows;
-        // grid 的列数
-        private int cols;
-        private char[][] grid;
 
-        public int numIslands(char[][] grid) {
-            rows = grid.length;//行数
-            if (rows == 0) {
-                return 0;
-            }
-            cols = grid[0].length;//列数
-            this.grid = grid;
-            //“标记是否已经访问过了”的数组，默认全为false，表示没有被访问过
-            marked = new boolean[rows][cols];
-            int count = 0;//用于计数，每一次递归结束就相当于找到了一个岛屿
-            //开始遍历每一个点，从原点开始
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    // 如果是陆地（1），并且没有被访问过，就进行深度优先遍历（此时才有意义嘛）
-                    //同时结果值count加一（因为每一次深度遍历会把所有与之相邻的陆地全找出来，
-                    //肯定就是一片岛屿，则有几次深度遍历就会找到几座岛屿）
-                    if (!marked[i][j] && grid[i][j] == '1') {
-                        count++;//结果值加1
-                        dfs(i, j);//开始深度遍历，找到与之相邻的所有陆地
-                    }
-                }
-            }
-            //当所有的坐标都访问完之后，返回结果即可
-            return count;
-        }
-
-        // 深度遍历的具体方法（也是回溯/递归）
-        // 从坐标为 (i,j) 的点开始进行深度优先遍历
-        private void dfs(int i, int j) {
-            marked[i][j] = true;//遍历过了的点要标记为true，表示已经访问过
-            // 得到 4 个方向的坐标（固定写法）
-            for (int k = 0; k < 4; k++) {
-                int newX = i + directions[k][0];
-                int newY = j + directions[k][1];
-                // 递归的条件（其实也是递归终止的条件），有三个：
-                // （1）如果不越界、（2）没有被访问过、（3）并且还要是陆地
-                //  则继续递归，进行深度优先遍历
-                if (inArea(newX, newY) && grid[newX][newY] == '1' && !marked[newX][newY]) {
-                    //开始递归，深度优先遍历
-                    dfs(newX, newY);
-                }
-            }
-        }
-
-        // 判断当前点是否越界的方法（返回true则表示没有越界，false则表示越界）
-        // （单独封装成了一个方法而已）
-        private boolean inArea(int x, int y) {
-            //等于号不要忘了
-            return x >= 0 && x < rows && y >= 0 && y < cols;
-        }
-
-
-        //测试
-        //案例1
-        public static void main(String[] args) {
-            岛屿数量200 solution = new 岛屿数量200();
-            char[][] grid1 = {
-                    {'1', '1', '1', '1', '0'},
-                    {'1', '1', '0', '1', '0'},
-                    {'1', '1', '0', '0', '0'},
-                    {'0', '0', '0', '0', '0'}};
-            int numIslands1 = solution.numIslands(grid1);
-            System.out.println(numIslands1);
-            //案例2:
-            char[][] grid2 = {
-                    {'1', '1', '0', '0', '0'},
-                    {'1', '1', '0', '0', '0'},
-                    {'0', '0', '1', '0', '0'},
-                    {'0', '0', '0', '1', '1'}};
-            int numIslands2 = solution.numIslands(grid2);
-            System.out.println(numIslands2);
-        }
-    }
-
-/**
- * 方法二：广度优先遍历：思路完全相同，纯粹只是遍历的方式不同而已
- * 具体过程：先把每一个点都转化为一个数（方式随意），比如：下面这个矩阵，其中，令尾部带1的表示陆地，其他的代表水，
- * 11   21  31  41   5
- * 61   71  8   91  10
- * 111 121  13  14  15
- * 16  17   18  19  20
- *
- * 对每一个点（陆地或水）都进行遍历（两层循环即可），在其四周寻找陆地，找到了就把其标记为“已被访问过”，同时继续从找到的陆地中任选一个点继续找，否则，撤回到上一级。
- * 先从第一个点11（0,0）开始，11先入队列，此时该点能遍历到的陆地为21和61，把其加入到队列的末尾，此时11的使命完成，出队，于是队列中现在存的就是21和61；
- * 此时用21再去遍历，此时可以遍历到71和31这两块陆地，于是也把其入队，此时陆地21的使命完成，出队，此时队列中的数为61,71,31；
- * 再从61开始寻找，可以找到11这块新陆地（71由于已经找过了，则此时会跳过，不再入队，会被标记为“之前已经被访问过”），
- * 将其入队，以此类推，直到遍历结束，由于所有找到的陆地构成了一个连通的区域，因此可以构成一个岛屿，于是结果加1。
- * 此时还只是从11这个点的遍历结束，接下来，要按照同样地方法和过程继续遍历其他的所有点，
- * 易知，每一次遍历所得到的连通区域都可以构成岛屿，于是，只需对结果进行累加即可。
- */
-class Solution2 {
-    private int rows;
-    private int cols;
-    private boolean[][] marked;
-    //代表一个点的前后左右四个位置
-    private static final int[][] directions = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-    char[][] grid;
-    public int numIslands(char[][] grid) {
-        //           x-1,y
-        //  x,y-1    x,y      x,y+1
-        //           x+1,y
-        rows = grid.length;//行数
-        if (rows == 0) {
-            return 0;
-        }
-        cols = grid[0].length;//列数
-        this.grid = grid;
-        marked = new boolean[rows][cols];
+//这个版本太清晰了，强烈推荐
+class 岛屿数量 {
+    public int numIslands(char[][] nums) {
         int count = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                // 如果是岛屿中的一个点，并且没有被访问过
-                // 从坐标为 (i,j) 的点开始进行广度优先遍历
-                if (!marked[i][j] && grid[i][j] == '1') {
+        //从原点开始，当为岛屿时，才向其四周搜索，因为才有意义嘛
+        for(int i = 0; i < nums.length; i++) {
+            for(int j = 0; j < nums[0].length; j++) {
+                if(nums[i][j] == '1'){
+                    dfs(nums, i, j);
+                    //搜完一次，count记一次数
                     count++;
-                    bfs(i,j);
-                }
-
                 }
             }
-        //返回最终结果即可
+        }
+        //最后返回结果即可
         return count;
-        }
-
-        //具体的广度遍历算法
-    private void bfs(int i, int j) {
-        //广度优先搜索需要一个额外的队列（这是与深度优先遍历不同的地方），使用LinkedList（勿大惊小怪，它就是队列的一个实现，且常用）
-        LinkedList<Integer> queue = new LinkedList<>();
-        // 把该坐标所对应的值存入队列中
-        // 小技巧：把坐标转换为一个数字
-        // 否则，得用一个数组存
-        queue.addLast(i * cols + j);
-        // 注意：这里要把该位置标记成已经访问过
-        //【特别注意】在放入队列以后，要马上标记成已经访问过，语义也是十分清楚的：反正只要进入了队列，你迟早都会遍历到它
-        // 而不是在出队列的时候再标记
-        //【特别注意】如果是出队列的时候再标记，会造成很多重复的结点进入队列，造成重复的操作，这句话如果你没有写对地方，代码会严重超时的
-        marked[i][j] = true;
-        while (!queue.isEmpty()) {
-            int cur = queue.removeFirst();//第一个元素（也就是当前用于遍历的元素，因为它已经完成了使命）出队
-            // 得到 4 个方向的坐标
-            for (int k = 0; k < 4; k++) {
-                int newX = i + directions[k][0];
-                int newY = j + directions[k][1];
-                // 如果不越界、没有被访问过、并且还要是陆地，我就继续放入队列，放入队列的同时，要记得标记已经访问过
-                if (inArea(newX, newY) && grid[newX][newY] == '1' && !marked[newX][newY]) {
-                    //queue.addLast(newX * cols + newY);
-
-                    //marked[newX][newY] = true;
-                    bfs(newX,newY);
-                }
-            }
-        }
     }
 
-    private boolean inArea(int x, int y) {
-        // 等于号这些细节不要忘了
-        return x >= 0 && x < rows && y >= 0 && y < cols;
-    }
-
-    public static void main(String[] args) {
-        Solution2 solution2 = new Solution2();
-        char[][] grid1 = {
-                {'1', '1', '1', '1', '0'},
-                {'1', '1', '0', '1', '0'},
-                {'1', '1', '0', '0', '0'},
-                {'0', '0', '0', '0', '0'}};
-        int numIslands1 = solution2.numIslands(grid1);
-        System.out.println(numIslands1);
-
-        char[][] grid2 = {
-                {'1', '1', '0', '0', '0'},
-                {'1', '1', '0', '0', '0'},
-                {'0', '0', '1', '0', '0'},
-                {'0', '0', '0', '1', '1'}};
-        int numIslands2 = solution2.numIslands(grid2);
-        System.out.println(numIslands2);
+    //深度优先搜索（递归）
+    private void dfs(char[][] nums, int i, int j){
+        //递归出口，即要么越界要么搜索到了有水区域
+        if(i < 0 || j < 0 || i >= nums.length || j >= nums[0].length || nums[i][j] == '0') {
+            return;
+        }
+        //做选择
+        nums[i][j] = '0';//即将该岛屿置为“水”，也即删除该岛屿，以免之后重复搜索相同岛屿
+        //开始下一层递归，即开始向四周搜索，找到了岛屿就把它删掉/替换
+        dfs(nums, i + 1, j);
+        dfs(nums, i, j + 1);
+        dfs(nums, i - 1, j);
+        dfs(nums, i, j - 1);
     }
 }
 
