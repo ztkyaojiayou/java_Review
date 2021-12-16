@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class demo96_最长连续子序列_非动态规划版 {
     /**
-     * 方法：使用排序即可（推荐），不需要使用动态规划。
+     * 方法：使用排序即可（推荐），不需要使用动态规划，很简单。
      *
      * @param nums
      * @return
@@ -16,11 +16,11 @@ public class demo96_最长连续子序列_非动态规划版 {
         int len = nums.length;
         int maxLen = 1, curMax = 1;
         for (int i = 1; i < len; i++) {
-            //若连续
+            //若连续，就加1
             if (nums[i] != nums[i - 1]) {
                 if (nums[i - 1] + 1 == nums[i]) {
                     curMax++;
-                } else {
+                } else {//否则，置零，重新计数
                     maxLen = Math.max(maxLen, curMax);
                     curMax = 1;
                 }

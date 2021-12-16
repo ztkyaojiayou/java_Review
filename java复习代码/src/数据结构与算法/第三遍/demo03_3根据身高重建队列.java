@@ -18,7 +18,7 @@ public class demo03_3根据身高重建队列 {
         //先按高度降序排序，身高相同时按k升值排序
         Arrays.sort(nums, new Comparator<int[]>() {
             @Override
-            public int compare(int[] o1, int[] o2) {//这个比较器的用法要掌握
+            public int compare(int[] o1, int[] o2) {//这个比较器的用法要掌握，专门用于多行两列的二维数组的比较
                 return o1[0] == o2[0] ? o1[1] - o2[1] : o2[0] - o1[0];
             }
         });

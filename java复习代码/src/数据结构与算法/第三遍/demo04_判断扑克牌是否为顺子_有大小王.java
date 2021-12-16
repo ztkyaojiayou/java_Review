@@ -14,7 +14,7 @@ public class demo04_判断扑克牌是否为顺子_有大小王 {
             }
         }
         //从第一个不是0的位置开始遍历，查看是否有重复元素或者间断的元素是否可以用0补齐（关键）
-        for (int i = count; i < nums.length; i++) {
+        for (int i = count; i < nums.length-1; i++) {
             if (nums[i + 1] == nums[i]) {//要有重复元素，则肯定不是顺子
                 return false;
             }

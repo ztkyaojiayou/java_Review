@@ -72,60 +72,58 @@ class C2 implements Runnable {
 }
 
 public class Demo02 {
-
-    private int signal;////定义一个标记，用于条件的判断（和之前的Demo是一样的），初始值为0
-    // 与signal()方法是两码事，千万不要误会
-
+    private int flag;//定义一个标记，用于条件的判断（和之前的Demo是一样的），初始值为0
     Lock lock = new ReentrantLock();//创建一个显示锁
     //再在此锁上绑定三个Condition对象，就可以分别在不同的线程上调用了,太好用了
-    Condition a = lock.newCondition();
-    Condition b = lock.newCondition();
-    Condition c = lock.newCondition();
+    Condition con1 = lock.newCondition();
+    Condition con2 = lock.newCondition();
+    Condition con3 = lock.newCondition();
 
-
+    //方法1（相当于线程1）
     public void a() {
         lock.lock();//上锁
-        while(signal != 0 ) {
+        while(flag != 0 ) {
             try {
-                a.await();//让a线程等待，这里的await用于代替之前的wait方法，只不过这个方法可以指定哪个线程等待，谁调用谁就等待
+                con1.await();//让a线程等待，这里的await用于代替之前的wait方法，只不过这个方法可以指定哪个线程等待，谁调用谁就等待
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         System.out.println("a");
-        signal ++;//加1，变成1
-        b.signal();//唤醒b线程。该方法就是用来代替之前的notify方法的，其优势就是可以唤醒某一个指定线程
+        flag++;//加1，变成1
+        con2.signal();//唤醒b线程。该方法就是用来代替之前的notify方法的，其优势就是可以唤醒某一个指定线程
         lock.unlock();//释放锁
     }
-
-    public  void b() {
+    //方法2（相当于线程2）
+    public void b() {
         lock.lock();
-        while(signal != 1) {
+        while(flag != 1) {
             try {
-                b.await();//让b线程等待
+                con2.await();//让b线程等待
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
         System.out.println("b");
-        signal ++;//加1，变成2
-        c.signal();//唤醒c线程
+        flag++;//加1，变成2
+        con3.signal();//唤醒c线程
         lock.unlock();
     }
 
+    //方法3（相当于线程3）
     public  void c () {
         lock.lock();
-        while(signal != 2) {
+        while(flag != 2) {
             try {
-                c.await();//让c线程等待
+                con3.await();//让c线程等待
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         System.out.println("c");
-        signal = 0;//又重新设置为0，用于循环顺序打印
-        a.signal();//再次唤醒a线程
+        flag = 0;//又重新设置为0，用于循环顺序打印
+        con1.signal();//再次唤醒a线程
         lock.unlock();
     }
 

@@ -17,17 +17,17 @@ public class demo88_动态规划之是否可以分隔等和子集 {
         //dp[i][j]表示在总和最大为j的情况下，对前i个元素进行选择并装入后是否可以装满的状态，即true或false。
         boolean[][] dp = new boolean[len + 1][target + 1];
         //初始化
-        for (int i = 0;i<target+1;i++){
+        for (int i = 0;i<target+1;i++){//放不了，所以为false
             dp[0][i] = false;
         }
-        for (int j = 0;j<len+1;j++){
+        for (int j = 0;j<len+1;j++){//能放，因为可以不放，所以为true
             dp[j][0] = true;
         }
 
-        //一般情况
+        //一般情况，同理，就是0-1背包问题
         for (int i = 1;i<len + 1;i++){
             for (int j = 1;j<target+1;j++){
-                if (j < nums[i-1]){//装不下，即维持原样
+                if (nums[i-1] > j){//装不下，即维持原样
                     dp[i][j] = dp[i-1][j];
                 }else {//可以装下，但可装可不装，装满即可，即取并集即可
                     dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i-1]];//由于是判断，而不是求所有方法数，因此不是相加，而是取并集即可

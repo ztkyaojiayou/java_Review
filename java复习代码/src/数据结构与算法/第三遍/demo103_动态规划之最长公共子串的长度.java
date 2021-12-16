@@ -1,8 +1,8 @@
 package 数据结构与算法.第三遍;
 
-//典型的动态规划
+//典型的动态规划，很简单（美团一面）
 public class demo103_动态规划之最长公共子串的长度 {
-    public int longestCommonString(String s1,String s2) {
+    public int longestCommonString(String s1, String s2) {
         //结果集
         int res = 0;
         //定义dp数组，dp[i][j]表示s1以i结尾和s2以j结尾的字符串所构成的最长公共子串
@@ -17,15 +17,15 @@ public class demo103_动态规划之最长公共子串的长度 {
         //}
 
         //一般情况
-        for (int i = 1;i<s1.length();i++){
-            for (int j = 1;j<s2.length();j++){
-                if (s1.charAt(i-1) == s2.charAt(j-1)){
-                    dp[i][j] = dp[i-1][j-1] + 1;
-                }else {//否则置零
+        for (int i = 1; i < s1.length(); i++) {
+            for (int j = 1; j < s2.length(); j++) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {//若相等，就在原来的基础上加1
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {//否则置零
                     dp[i][j] = 0;
                 }
                 //更新结果
-                res = Math.max(res,dp[i][j]);
+                res = Math.max(res, dp[i][j]);
             }
         }
         return res;

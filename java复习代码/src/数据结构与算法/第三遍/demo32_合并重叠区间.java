@@ -3,7 +3,7 @@ package 数据结构与算法.第三遍;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class demo32_合并重叠区间 {
+public class demo32_合并重叠区间 {//即重叠/相交才合并
     public int[][] merge(int[][] nums) {
         ArrayList<int[]> list = new ArrayList<>();
         Arrays.sort(nums, (v1, v2) -> v1[0] - v2[0]);//按照第一个元素升序排列（当为二维数组时）

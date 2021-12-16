@@ -1,6 +1,6 @@
 package 数据结构与算法.第三遍;
 
-//（2）可交易多次，见到正利润就计入
+//（2）可交易多次，则只需见到正利润就交易，最后累加即可
 public class demo103_2动态规划之买卖股票的最佳时机II {
     public int maxProfit(int[] nums) {
         int max_profit = 0;

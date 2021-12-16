@@ -14,7 +14,7 @@ public class demo94_1动态规划之最长回文子串 {
         //一般情况，两层循环，j前i后
         for (int j = 1; j < len; j++) {
             for (int i = 0; i < j; i++) {
-                if (str.charAt(i) == str.charAt(j)) {
+                if (str.charAt(i) == str.charAt(j)) {//易知，i相当于头指针，j相当于尾指针
                     if (j - i < 3) {//此时表示(i+1,j-1)无法构成区间,即中间只有一个字符了，易知，当然是回文
                         dp[i][j] = true;
                     } else {//否则，里面子串的回文性质就决定了整个子串的回文性质（核心）

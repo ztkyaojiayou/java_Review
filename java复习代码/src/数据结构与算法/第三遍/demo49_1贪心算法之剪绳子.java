@@ -1,7 +1,5 @@
 package 数据结构与算法.第三遍;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 public class demo49_1贪心算法之剪绳子 {
     public int cutRope(int target) {
         //特判

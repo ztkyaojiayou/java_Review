@@ -5,6 +5,7 @@ package 多线程与并发.叶子猿代码.多线程基础.如何使多个线程
 // （要用到wait等待和notifyAll唤醒，但不能使用notify，因为它只能随机唤醒某一个线程）
 //（之后会用到Condition来指定唤醒某一个线程）
 
+//任务1
 class A1 implements Runnable {
 
     private Demo01 demo01;
@@ -26,6 +27,7 @@ class A1 implements Runnable {
     }
 
 }
+//任务2
 class B1 implements Runnable {
 
     private Demo01 demo02;
@@ -48,6 +50,7 @@ class B1 implements Runnable {
 
 }
 
+//任务3
 class C1 implements Runnable {
 
     private Demo01 demo03;
@@ -71,11 +74,13 @@ class C1 implements Runnable {
 }
 
 public class Demo01 {
+    private int flag;//定义一个标记，用于条件的判断，初始值为0
 
-    private int signal;//定义一个标记，用于条件的判断，初始值为0
-
+    /**
+     * 方法1（相当于线程1）
+     */
     public synchronized void a() {//同步方法,锁为this
-        while(signal != 0 ) {//不为0则等待，等于0时才执行
+        while(flag != 0 ) {//不为0则等待，等于0时才执行
             try {
                 this.wait();//当前线程等待
             } catch (InterruptedException e) {
@@ -83,12 +88,14 @@ public class Demo01 {
             }
         }
         System.out.println("a");
-        signal ++;//加一，则为1
+        flag++;//加一，则为1
         this.notifyAll();//唤醒全部线程，但此时只有b方法的线程执行，因为此时signal为1
     }
-
+    /**
+     *   方法2（相当于线程2）
+     */
     public synchronized void b() {
-        while(signal != 1) {//不为1则等待，等于1时才执行
+        while(flag != 1) {//不为1则等待，等于1时才执行
             try {
                 this.wait();//当前线程等待
             } catch (InterruptedException e) {
@@ -97,12 +104,15 @@ public class Demo01 {
             }
         }
         System.out.println("b");
-        signal ++;//再加一，则为2
+        flag++;//再加一，则为2
         this.notifyAll();//唤醒全部线程，但此时只有c方法的线程执行，因为此时signal为2
     }
 
+    /**
+     * 方法3（相当于线程3）
+     */
     public synchronized void c () {
-        while(signal != 2) {//不为2则等待，等于2时才执行
+        while(flag != 2) {//不为2则等待，等于2时才执行
             try {
                 this.wait();//当前线程等待
             } catch (InterruptedException e) {
@@ -111,14 +121,15 @@ public class Demo01 {
             }
         }
         System.out.println("c");
-        signal = 0;//重新设置为0
+        flag = 0;//重新设置为0
         this.notifyAll();//唤醒全部线程，但此时只有a方法的线程执行，因为此时signal又设置为了1
     }
 
+    //测试
     public static void main(String[] args) {
 
         //创建三个线程并启动
-        Demo01 d = new Demo01();
+        Demo01 d = new Demo01();//共用
         A1 a1 = new A1(d);
         B1 b1 = new B1(d);
         C1 c1 = new C1(d);

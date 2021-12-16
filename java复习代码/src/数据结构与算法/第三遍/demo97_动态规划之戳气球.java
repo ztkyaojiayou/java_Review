@@ -17,7 +17,7 @@ public class demo97_动态规划之戳气球 {
     }
 
     /**
-     *  具体方法,求的是开区间(left,right)的最高分数，用到了递归
+     * 具体方法,求的是开区间(left,right)的最高分数，用到了递归
      */
     private int dpMethod(int[][] dp, int[] nums, int left, int right) {
         //递归出口，即若区间之间没有值了，则易知分数为0

@@ -27,13 +27,14 @@ class demo24_二叉搜索树的最近公共祖先 {
 /**
  * 常考
  */
-public class demo24_二叉树的最近公共祖先 {
+class demo24_二叉树的最近公共祖先 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         //递归结束的条件
         if (root == null || root.val == p.val || root.val == q.val) {
             return root;
         }
-//递归找其左右子树中该两个节点的最近公共祖先
+
+        //递归找其左右子树中该两个节点的最近公共祖先
         TreeNode left_Ancestor = lowestCommonAncestor(root.left, p, q);
         TreeNode right_Ancestor = lowestCommonAncestor(root.right, p, q);
         //四种情况

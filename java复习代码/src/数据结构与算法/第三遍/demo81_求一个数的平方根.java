@@ -7,15 +7,12 @@ public class demo81_求一个数的平方根 {
      * 从 1 开始遍历即可。
      */
     public int sqrt (int n) {
-        if (n <= 0) return 0;
-        int res = 0;
         for (int i = 1; i <= n; i++) {
             if (i * i <= n && (i + 1) * (i + 1) > n) {
-                res = i;
-                break;//找到就退出嘛~
+              return i;
             }
         }
-        return res;
+        return -1;
     }
 
 }

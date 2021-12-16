@@ -87,21 +87,21 @@ public class 买卖股票的最佳时机合集 {
     }
 
 
-/**
- * (4)高阶版：只可买卖两次，但没有冷冻期
- */
-        public int maxProfit04(int[] nums){
-            //把两次交易都看成在一天内完成，这一点非常重要
-            int min_price1 = Integer.MAX_VALUE;//第一次买入时的价格，尽量低（使用min）
-            int max_Profit1 = 0;//第一次卖出时的利润，尽量大（使用max）
-            int maxProfitAfterBuy1 = Integer.MIN_VALUE;//第二次买入时还剩余的利润，尽量大（使用max）
-            int max_Profit2 = 0;//第二次卖出后最终剩余的利润，尽量大（使用max）
-            for (int i = 0; i < nums.length; i++) {
-                min_price1 = Math.min(min_price1, nums[i]);
-                max_Profit1 = Math.max(max_Profit1, nums[i] - min_price1);
-                maxProfitAfterBuy1 = Math.max(maxProfitAfterBuy1, max_Profit1 - nums[i]);
-                max_Profit2 = Math.max(max_Profit2, maxProfitAfterBuy1 + nums[i]);
-            }
-            return max_Profit2;
+    /**
+     * (4)高阶版：只可买卖两次，但没有冷冻期
+     */
+    public int maxProfit04(int[] nums) {
+        //把两次交易都看成在一天内完成，这一点非常重要
+        int min_price1 = Integer.MAX_VALUE;//第一次买入时的价格，尽量低（使用min）
+        int max_Profit1 = 0;//第一次卖出时的利润，尽量大（使用max）
+        int maxProfitAfterBuy1 = Integer.MIN_VALUE;//第二次买入时还剩余的利润，尽量大（使用max）
+        int max_Profit2 = 0;//第二次卖出后最终剩余的利润，尽量大（使用max）
+        for (int i = 0; i < nums.length; i++) {
+            min_price1 = Math.min(min_price1, nums[i]);
+            max_Profit1 = Math.max(max_Profit1, nums[i] - min_price1);
+            maxProfitAfterBuy1 = Math.max(maxProfitAfterBuy1, max_Profit1 - nums[i]);
+            max_Profit2 = Math.max(max_Profit2, maxProfitAfterBuy1 + nums[i]);
         }
+        return max_Profit2;
+    }
 }

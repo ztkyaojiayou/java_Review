@@ -6,13 +6,11 @@ import 数据结构与算法.TreeNode;
 
 public class demo05_6判断二叉树是否平衡 {
     private boolean IsBalanced(TreeNode root){
-        if (root == null){
-            return false;
-        }
+        //先求当前根节点的左右子树的高度，判断其差是否小于等于1
         //调用了求二叉树深度的方法
-        int left = TreeDepth(root.left);
-        int right = TreeDepth(root.right);
-        int diff = left - right;
+        int left_depth = TreeDepth(root.left);
+        int right_depth = TreeDepth(root.right);
+        int diff = left_depth - right_depth;
         if (diff > 1 || diff < -1){
             return false;
         }

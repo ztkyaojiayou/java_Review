@@ -16,9 +16,6 @@ public class demo05_3二叉树的左视图 {
     //左视图
         public List<Integer> LeftView(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        if (root == null) {
-            return res;
-        }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
@@ -37,7 +34,6 @@ public class demo05_3二叉树的左视图 {
                 if (node.right != null) {
                     queue.offer(node.right);
                 }
-
             }
         }
         return res;

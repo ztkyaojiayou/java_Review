@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class demo05_8二叉搜索树的第k小的结点 {
-    List<TreeNode> list = new ArrayList<>();
+    List<TreeNode> list = new ArrayList<>();//全局变量
     public TreeNode method(TreeNode root,int k){
         //先中序遍历，把节点保存到list中，此时为递增序列
         inorder(root);

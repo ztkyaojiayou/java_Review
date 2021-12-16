@@ -13,7 +13,7 @@ public class demo33_替换空格 {
                 chars[index++] = '2';
                 chars[index++] = '0';
             }else {
-                chars[index++] = 'c';
+                chars[index++] = c;
             }
         }
         //由字符串数组转化为字符串的方法，使用构造函数即可

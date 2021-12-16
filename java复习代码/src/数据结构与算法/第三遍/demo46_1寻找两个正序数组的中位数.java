@@ -4,12 +4,12 @@ public class demo46_1寻找两个正序数组的中位数 {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int len1 = nums1.length;
         int len2 = nums2.length;
-        int len = len1 + len2;
-        int[] merged = new int[len];
+        int new_len = len1 + len2;
+        int[] merged = new int[new_len];
         int i = 0;
         int j = 0;
         //1.先合并成有序（升序）数组（属于暴力）
-        for (int index = 0;index<len;index++){
+        for (int index = 0;index<new_len;index++){
             if (i>len1){
                 merged[index] = nums2[j];
                 j++;
@@ -27,8 +27,8 @@ public class demo46_1寻找两个正序数组的中位数 {
             }
         }
         //2.此时已经变成了一个有序的合并数组了,于是只需直接找中位数即可（分奇偶）
-        int mid = len / 2;
-        if (len % 2 == 0){
+        int mid = new_len / 2;
+        if (new_len % 2 == 0){
             return (double)(merged[mid] + merged[mid-1])/2;
         }else {
             return merged[mid];

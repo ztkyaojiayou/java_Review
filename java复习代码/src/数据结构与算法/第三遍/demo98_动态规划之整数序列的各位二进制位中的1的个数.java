@@ -15,7 +15,6 @@ package 数据结构与算法.第三遍;
  */
 public class demo98_动态规划之整数序列的各位二进制位中的1的个数 {
     public int[] countBits(int num) {
-
         //dp[i] 表示数字i的二进制数中的 1 的数目
         int[] dp = new int[num + 1];
         dp[0] = 0;

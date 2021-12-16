@@ -9,18 +9,20 @@ import java.util.Stack;
 public class demo05_14验证二叉搜索树 {
     public boolean isValidBST(TreeNode root) {
         Stack<TreeNode> stack = new Stack();
-        double inorder = -Double.MAX_VALUE;
+        double pre_value = -Double.MAX_VALUE;//表示当前正在遍历的元素的前一个元素
         while (!stack.isEmpty() || root != null) {
+            //先把左节点全部入栈（左）
             while (root != null) {
                 stack.push(root);
                 root = root.left;
             }
+            //再弹出并比较（中）
             TreeNode cur = stack.pop();
-            if (cur.val < inorder) {//核心代码，若当前元素的值还小于前一个元素的值，则肯定不是BST树
+            if (cur.val < pre_value) {//核心代码，若当前元素的值还小于前一个元素的值（因为BST树的中序遍历肯定为递增序列），则肯定不是BST树
                 return false;
             }
-            inorder = cur.val;//记录当前节点的值，用于下一次比较
-            root = cur.right;//遍历右节点，即把当前节点的右节点当成root节点
+            pre_value = cur.val;//记录当前节点的值，用于下一次比较
+            root = cur.right;//遍历右节点，即把当前节点的右节点当成root节点（右）
         }
         return true;
     }

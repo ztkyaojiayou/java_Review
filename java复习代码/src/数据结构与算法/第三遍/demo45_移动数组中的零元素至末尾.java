@@ -10,7 +10,6 @@ public class demo45_移动数组中的零元素至末尾 {
                 index++;
             }
         }
-
              //2.再补零
             while (index < nums.length){
                 nums[index] = 0;
