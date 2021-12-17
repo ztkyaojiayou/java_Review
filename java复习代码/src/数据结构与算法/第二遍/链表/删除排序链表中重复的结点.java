@@ -15,12 +15,12 @@ public class 删除排序链表中重复的结点 {
 
         ListNode cur = head;
         while (cur != null && cur.next != null) {
-            //若有重复元素，则删除
+            //若有重复元素，则删除/跳过该节点指向下一个结点
             if (cur.next.val == cur.val) {
                 cur.next = cur.next.next;
             }
-            //
-                cur = cur.next;
+            //处理下一个结点
+            cur = cur.next;
         }
         //最后，返回新链表的头结点即可
         return head;
@@ -28,6 +28,7 @@ public class 删除排序链表中重复的结点 {
 
     /**
      * 进阶版：重复元素全删除（掌握）
+     *
      * @param head
      * @return
      */
@@ -54,6 +55,34 @@ public class 删除排序链表中重复的结点 {
             }
         }
         return dummy.next;
+    }
+
+    /**
+     * 第三遍-tk.zou
+     * @return
+     */
+    public ListNode test03入门版(ListNode head) {
+        //1.特判
+        if (head == null || head.next == null) {
+            return null;
+        }
+        //定义一个指向/等于头结点的指针用于遍历
+        ListNode cur = head;
+        while (cur != null && cur.next != null) {
+            if (cur.val == cur.next.val) {
+                cur.next = cur.next.next;
+                //这里不能加cur = cur.next，这一点非常重要，因为重复元素可能不止一个，只有重复元素都走完后才处理下一个结点
+            }
+            //再继续往下走，注意：此时的cur已经指在最后（这很关键）那个重复元素上了
+            cur = cur.next;
+        }
+        //最后返回头结点（题目要求）
+        return head;
+    }
+
+    public ListNode test03进阶版(ListNode head) {
+
+        return head;
     }
 }
 
