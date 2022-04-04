@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/*
+/**
+ * @author zoutongkun
+ */
+/**
 collections工具类中的二分查找方法：BinarySearch（）
 返回：
 （1）若找到，则返回第一个出现的值的索引
 （2）若没找到，则返回这个指定对象应该在的索引的负数再减1。
+ * @author zoutongkun
  */
 public class CollectionsBinarySearch {
     public static void main(String[] args) {

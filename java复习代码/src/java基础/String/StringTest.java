@@ -2,6 +2,12 @@ package java基础.String;
 
 public class StringTest {
 
+    private static String str1;
+    private static String str11;
+    private static String str111;
+    private static String str121;
+    private static String str1111;
+
     //关于String的详解
     public static void main(String[] args) {
 
@@ -56,9 +62,11 @@ public class StringTest {
          * 这行代码编译后的效果等同于： String str1 = "abcd";
          */
 
-        String str1 = "ab" + "cd";//只有1个对象，即直接创建了“abcd” ，而不是单独创建再拼接（类比lin72和lin73）
+        //只有1个对象，即直接创建了“abcd” ，而不是单独创建再拼接（类比lin72和lin73）
+        str121 = "ab" + "cd";
 
-        String str11 = "abcd";//和上述语句相同，易知此对象已经存在了
+        //和上述语句相同，易知此对象已经存在了
+        str1111 = "abcd";
 
         System.out.println("str1 = str11 : " + (str1 == str11));//true，因为指向的是字符串常量池中的同一个对象 
 

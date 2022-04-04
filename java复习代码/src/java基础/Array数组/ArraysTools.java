@@ -8,8 +8,8 @@ import java.util.List;
 public class ArraysTools {
     public static void main(String[] args) {
 
-        String[] arr = {"d","c","b","a","f"};
-        int[] arr02 = {1,9,3,7,6,8};
+        String[] arr = {"d", "c", "b", "a", "f"};
+        int[] arr02 = {1, 9, 3, 7, 6, 8};
 
         //1.ToString：打印数组
         System.out.println("原数组arr为" + Arrays.toString(arr));//[d, c, b, a, f]
@@ -33,11 +33,11 @@ public class ArraysTools {
         Arrays.sort(arr02);
         System.out.println("排序之后的数组arr为：" + Arrays.toString(arr));//[a, b, c, d, f]
         System.out.println("排序之后的数组arr02为：" + Arrays.toString(arr02));//[1, 3, 6, 7, 8, 9]
-        int index03 = Arrays.binarySearch(arr,"a");
-        int index031 = Arrays.binarySearch(arr,"z");
+        int index03 = Arrays.binarySearch(arr, "a");
+        int index031 = Arrays.binarySearch(arr, "z");
 
-        int index04 = Arrays.binarySearch(arr02,9);
-        int index041 = Arrays.binarySearch(arr02,19);
+        int index04 = Arrays.binarySearch(arr02, 9);
+        int index041 = Arrays.binarySearch(arr02, 19);
 
         System.out.println("a所在的位置为（正确）：" + index03);//0，正确
         System.out.println("z所在的位置为（正确）：" + index031);//-6，正确（因为不存在）

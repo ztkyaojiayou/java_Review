@@ -1,4 +1,5 @@
 package java基础.Arraylist;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -21,7 +22,7 @@ public class test09ArrayList遍历 {
         list.add("4");
         list.add("5");
         //1.使用for循环+get(i)，按照元素获取：12345
-        for(int i = 0 ; i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             System.out.print(list.get(i));
         }
         System.out.println("\n----------------------");
@@ -35,19 +36,19 @@ public class test09ArrayList遍历 {
         System.out.println("\n----------------------");
         //4.使用迭代器iterator（只能正向遍历，推荐）
         Iterator i = list.iterator();
-        while(i.hasNext()){
+        while (i.hasNext()) {
             System.out.print(i.next());// 12345
         }
         System.out.println("\n----------------------");
         //5.使用List独有的ListIterator迭代器（可正反遍历）
         //5.1：正着输出
         ListIterator li = list.listIterator();
-        while(li.hasNext()){
+        while (li.hasNext()) {
             System.out.print(li.next());//12345
         }
         System.out.println("\n----------------------");
         //5.2：反向输出
-        while(li.hasPrevious()){
+        while (li.hasPrevious()) {
             System.out.print(li.previous());//54321
         }
         System.out.println("\n----------------------");
