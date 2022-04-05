@@ -54,6 +54,7 @@ class Demo01 extends Thread
         super(name);
         //this.name = name;
     }
+    @Override
     public void run()
     {
         for(int x=0; x<10; x++)//d1和但d2这两个线程都会执行10次，且也都只会10次。只是执行顺序是随机的，此时并没有什么安全问题。

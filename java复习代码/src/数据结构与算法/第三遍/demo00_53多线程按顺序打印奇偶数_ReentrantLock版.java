@@ -5,6 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class demo00_53多线程按顺序打印奇偶数_ReentrantLock版 {
     public static int number = 0;//共享资源
+
     public static void main(String[] args) {
         ReentrantLock lock = new ReentrantLock();
         //类似于synchronized，也只需用一个condition既可
@@ -16,20 +17,24 @@ public class demo00_53多线程按顺序打印奇偶数_ReentrantLock版 {
                 while (number < 100) {//目的是打印100以内的数
                     //加锁
                     lock.lock();// 相当于synchronized (object)
-                    if (number % 2 == 1) {//奇数，则打印，同时唤醒另一个线程
-                        System.out.println(number);
-                        number++;
-                        //打印完就唤醒另一个线程
-                        condition.signal();
-                    } else {//偶数，则等待
-                        try {
-                            condition.await();
-                        } catch (Exception e) {
+                    try {
+                        if (number % 2 == 1) {//奇数，则打印，同时唤醒另一个线程
+                            System.out.println(number);
+                            number++;
+                            //打印完就唤醒另一个线程
+                            condition.signal();
+                        } else {//偶数，则等待
+                            try {
+                                condition.await();
+                            } catch (Exception e) {
 
+                            }
                         }
+                    } finally {
+                        //释放锁
+                        lock.unlock();//相当于synchronized中的代码块执行完毕后自动释放锁
                     }
-                    //释放锁
-                    lock.unlock();//相当于synchronized中的代码块执行完毕后自动释放锁
+
                 }
             }
         });
@@ -41,21 +46,24 @@ public class demo00_53多线程按顺序打印奇偶数_ReentrantLock版 {
                 while (number < 100) {
                     //加锁
                     lock.lock();
-                    if (number % 2 == 0) {//偶数
-                        System.out.println(number);
-                        number++;
-                        //打印完就唤醒了一个线程
-                        condition.signal();
-                    } else {//此时为奇数时，就得等
-                        try {
-                            //等待
-                            condition.await();
-                        } catch (Exception e) {
+                    try {
+                        if (number % 2 == 0) {//偶数
+                            System.out.println(number);
+                            number++;
+                            //打印完就唤醒了一个线程
+                            condition.signal();
+                        } else {//此时为奇数时，就得等
+                            try {
+                                //等待
+                                condition.await();
+                            } catch (Exception e) {
 
+                            }
                         }
+                    } finally {
+                        //释放锁
+                        lock.unlock();
                     }
-                    //释放锁
-                    lock.unlock();
                 }
             }
         });

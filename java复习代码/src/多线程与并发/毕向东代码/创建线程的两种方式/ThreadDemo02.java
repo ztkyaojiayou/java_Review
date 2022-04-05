@@ -26,6 +26,7 @@ package 多线程与并发.毕向东代码.创建线程的两种方式;
 class Demo02 implements Runnable//extends Fu //准备扩展Demo类的功能，让其中的内容可以作为线程的任务执行。
         //通过接口的形式完成。
 {
+    @Override
     public void run()
     {
         show();

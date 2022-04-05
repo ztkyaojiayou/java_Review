@@ -7,7 +7,8 @@ class MyLock {
 }
 
 //线程任务，里面通过一个标志位来巧妙地模拟两个线程任务
-//注意：由于是实现了runnable接口，因此这个任务可以被多个线程共用，这也是相比继承thread类的一个优势
+//注意：由于是实现了runnable接口，因此这个任务可以被多个线程共用，
+// 这也是相比继承thread类的一个优势
 class deadLock implements Runnable {
     //加一个标志位
     private boolean flag;

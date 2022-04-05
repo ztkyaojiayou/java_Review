@@ -8,9 +8,11 @@ package 设计模式.代理模式.静态代理;
  * 一单需要修改接口，代理类和委托类都需要修改。
  * 静态代理：静态代理在使用时,需要定义接口或者父类,
  * 被代理对象(即目标对象)与代理对象一起实现相同的接口或者是继承相同父类。
- *
+ * <p>
  * 在使用静态代理时，需要定义接口或者父类,被代理对象(即目标对象)
  * 与代理对象一起实现相同的接口或者是继承相同父类
+ * <p>
+ * 其实有点类似于装饰者模式--对原类增强
  */
 //1.目标类的接口
 interface ITeacherDao {
@@ -28,9 +30,10 @@ class TeacherDao implements ITeacherDao {
 }
 
 //3.创建代理类，生成代理对象，也要实现ITeacherDao接口，这就是静态代理的特点（重点）
-class TeacherDaoProxy implements ITeacherDao{
+class TeacherDaoProxy implements ITeacherDao {
 
     private ITeacherDao target; // 目标对象，通过接口来聚合，目的是使该代理类可以使用原目标类中的方法
+
     //构造器
     public TeacherDaoProxy(ITeacherDao target) {
         this.target = target;

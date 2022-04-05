@@ -62,6 +62,7 @@ public class ClientTest_Enhancer {
             }
         });
         //2.再使用代理对象帮用户代理
+        //商品卖12000，但此时商家只拿到了12000*0.8 = 9600元，差价被代理商拿了
         cglibProducer.saleProduct(12000f);
     }
 }

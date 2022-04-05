@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 方法1：使用join，最简单
+ * @author zoutongkun
  */
 //参考链接：https://www.cnblogs.com/svennee/p/4081155.html（关于如何实现多个线程并发运行）
 public class demo00_51多线程按顺序执行 {
@@ -55,13 +56,13 @@ public class demo00_51多线程按顺序执行 {
  * 方法2：使用synchronized + wait + notify
  */
 class Demo02 {
-    private int flag;//定义一个标记，用于条件的判断，初始值为0
 
+    private int flag;//定义一个标记，用于条件的判断，初始值为0
     /**
      * 方法1（相当于线程1）
      */
     public synchronized void a() {//同步方法,锁为this
-        while(flag != 0 ) {//不为0则等待，等于0时才执行
+        while (flag != 0) {//不为0则等待，等于0时才执行
             try {
                 this.wait();//当前线程等待
             } catch (InterruptedException e) {
@@ -73,11 +74,12 @@ class Demo02 {
         flag++;//加一，则为1
         this.notifyAll();//唤醒全部线程，但此时只有b方法的线程执行，因为此时signal为1
     }
+
     /**
-     *   方法2（相当于线程2）
+     * 方法2（相当于线程2）
      */
     public synchronized void b() {
-        while(flag != 1) {//不为1则等待，等于1时才执行
+        while (flag != 1) {//不为1则等待，等于1时才执行
             try {
                 this.wait();//当前线程等待
             } catch (InterruptedException e) {
@@ -94,8 +96,8 @@ class Demo02 {
     /**
      * 方法3（相当于线程3）
      */
-    public synchronized void c () {
-        while(flag != 2) {//不为2则等待，等于2时才执行
+    public synchronized void c() {
+        while (flag != 2) {//不为2则等待，等于2时才执行
             try {
                 this.wait();//当前线程等待
             } catch (InterruptedException e) {
@@ -106,7 +108,7 @@ class Demo02 {
         //等于2时就执行，同时唤醒所有正在等待的线程
         System.out.println("c");
         flag = 0;//重新设置为0
-        this.notifyAll();//唤醒全部线程，但此时只有a方法的线程执行，因为此时signal又设置为了1
+        this.notifyAll();//唤醒全部线程，但此时只有a方法的线程执行，因为此时flag又设置为了0
     }
 }
 
@@ -124,7 +126,7 @@ class Demo03 {
     //方法1（相当于线程1）
     public void a() {
         lock.lock();//上锁
-        while(flag != 0 ) {
+        while (flag != 0) {
             try {
                 con1.await();//让a线程等待，这里的await用于代替之前的wait方法，只不过这个方法可以指定哪个线程等待，谁调用谁就等待
             } catch (InterruptedException e) {
@@ -136,10 +138,11 @@ class Demo03 {
         con2.signal();//唤醒b线程。该方法就是用来代替之前的notify方法的，其优势就是可以唤醒某一个指定线程
         lock.unlock();//释放锁
     }
+
     //方法2（相当于线程2）
     public void b() {
         lock.lock();
-        while(flag != 1) {
+        while (flag != 1) {
             try {
                 con2.await();//让b线程等待
             } catch (InterruptedException e) {
@@ -154,9 +157,9 @@ class Demo03 {
     }
 
     //方法3（相当于线程3）
-    public  void c () {
+    public void c() {
         lock.lock();
-        while(flag != 2) {
+        while (flag != 2) {
             try {
                 con3.await();//让c线程等待
             } catch (InterruptedException e) {

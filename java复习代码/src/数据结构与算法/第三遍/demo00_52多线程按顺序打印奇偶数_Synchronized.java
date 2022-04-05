@@ -12,7 +12,7 @@ public class demo00_52多线程按顺序打印奇偶数_Synchronized {
             Thread t1 = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (number < 100) {//打印100以内的,相当于开了100个线程
+                    while (number < 100) {//打印100以内的
                         synchronized (object) {
                             if (number % 2 == 0) {//偶数
                                 System.out.println(number);

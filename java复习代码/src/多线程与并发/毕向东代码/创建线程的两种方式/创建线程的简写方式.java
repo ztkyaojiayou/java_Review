@@ -14,13 +14,15 @@ public class 创建线程的简写方式
 
         new Thread(new Runnable()
         {
-            public void run()
+            @Override
+			public void run()
             {
                 System.out.println("runnable run");
             }
         })
         {
-            public void run()
+            @Override
+			public void run()
             {
                 System.out.println("subThread run");
             }
@@ -46,6 +48,7 @@ public class 创建线程的简写方式
 		}
 		Runnable r = new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				for(int x=0; x<50; x++)

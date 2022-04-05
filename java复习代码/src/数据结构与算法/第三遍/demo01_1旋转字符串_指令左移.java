@@ -1,5 +1,8 @@
 package 数据结构与算法.第三遍;
 
+/**
+ * @author zoutongkun
+ */
 public class demo01_1旋转字符串_指令左移 {
     public String LeftRotateString(String str, int n) {
         char[] arr = str.toCharArray();
@@ -28,6 +31,7 @@ public class demo01_1旋转字符串_指令左移 {
 
     /**
      * 第四遍
+     *
      * @param str
      * @param n
      * @return
@@ -35,18 +39,18 @@ public class demo01_1旋转字符串_指令左移 {
     public String LeftRotateString02(String str, int n) {
         char[] chars = str.toCharArray();
         int length = chars.length;
-        reverse02(chars,0,n-1);
-        reverse02(chars,n,length-1);
-        reverse02(chars,0,length-1);
+        reverse02(chars, 0, n - 1);
+        reverse02(chars, n, length - 1);
+        reverse02(chars, 0, length - 1);
         String res = new String(chars);
         return res;
     }
 
     private void reverse02(char[] arr, int i, int j) {
-        while (i<j){
-             char temp = arr[i];
-             arr[i] = arr[j];
-             arr[j] = temp;
+        while (i < j) {
+            char temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
         i++;
         j--;
