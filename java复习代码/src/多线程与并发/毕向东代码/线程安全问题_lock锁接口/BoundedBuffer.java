@@ -16,10 +16,13 @@ public class BoundedBuffer {
     public void put(Object x) throws InterruptedException {
         lock.lock();//加锁
         try {
-            while (count == items.length)
+            while (count == items.length) {
                 notFull.await();//等待
+            }
             items[putptr] = x;
-            if (++putptr == items.length) putptr = 0;
+            if (++putptr == items.length) {
+                putptr = 0;
+            }
             ++count;
             notEmpty.signal();//唤醒对方的锁
         } finally {
@@ -30,10 +33,13 @@ public class BoundedBuffer {
     public Object take() throws InterruptedException {
         lock.lock();//加锁
         try {
-            while (count == 0)
+            while (count == 0) {
                 notEmpty.await();//等待
+            }
             Object x = items[takeptr];
-            if (++takeptr == items.length) takeptr = 0;
+            if (++takeptr == items.length) {
+                takeptr = 0;
+            }
             --count;
             notFull.signal();//唤醒
             return x;

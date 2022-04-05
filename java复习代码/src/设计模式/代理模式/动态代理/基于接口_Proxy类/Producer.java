@@ -9,6 +9,7 @@ public class Producer implements IProducer{
      * 销售
      * @param money
      */
+    @Override
     public void saleProduct(float money){
         System.out.println("销售了产品，并拿到了钱："+money);
     }
@@ -17,6 +18,7 @@ public class Producer implements IProducer{
      * 售后
      * @param money
      */
+    @Override
     public void afterService(float money){
         System.out.println("提供了售后服务，并拿到钱："+money);
     }

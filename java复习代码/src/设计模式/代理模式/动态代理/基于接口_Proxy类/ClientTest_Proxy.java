@@ -6,12 +6,14 @@ import java.lang.reflect.Proxy;
 
 /**
  * 模拟一个消费者，用于测试
+ *
+ * @author zoutongkun
  */
 public class ClientTest_Proxy {
 
     public static void main(String[] args) {
 
-        ////1.当没有代理商（动态代理技术）时，消费者买东西的操作如下：直接找生产厂商购买
+        ////1.当没有代理商（动态代理）时，消费者买东西的操作如下：直接找生产厂商购买
         //Producer producer = new Producer();
         //producer.saleProduct(10000f);
         ////运行结果如下：
@@ -43,14 +45,14 @@ public class ClientTest_Proxy {
          *          我们一般都是写一个该接口的实现类，通常情况下都是匿名内部类，但不是必须的。
          *          此接口的实现类都是谁用谁写。
          */
-        //2.当有了代理商（动态代理技术）时，消费者买东西的操作如下：通过找代理商购买
+        //2.当有了代理商（动态代理）时，消费者买东西的操作如下：通过找代理商购买
 
         final Producer producer = new Producer();//在匿名内部类中访问局部变量时，这个局部变量必须用final修饰符修饰
         // （但从jdk1.8开始，可以不用了）
 
         // 2.1 创建代理对象，同时加上该代理对象要执行的额外逻辑（如赚差价等）
         // （注意）这里返回的proxyProducer就是代理（Producer的）对象，Producer则是被代理的对象，
-       IProducer proxyProducer = (IProducer) Proxy.newProxyInstance(producer.getClass().getClassLoader(),
+        IProducer proxyProducer = (IProducer) Proxy.newProxyInstance(producer.getClass().getClassLoader(),
                 producer.getClass().getInterfaces(),
                 new InvocationHandler() {//匿名内部类，随用随加载
                     /**
@@ -59,7 +61,7 @@ public class ClientTest_Proxy {
                      * @param proxy   代理对象的引用
                      * @param method  当前执行的方法
                      * @param args    当前执行方法所需的参数
-                     * @return        和被代理对象方法有相同的返回值
+                     * @return 和被代理对象方法有相同的返回值
                      * @throws Throwable
                      */
 
@@ -71,10 +73,10 @@ public class ClientTest_Proxy {
                         Object returnValue = null;
 
                         //1.获取方法执行的参数(money)
-                        Float money = (Float)args[0];
+                        Float money = (Float) args[0];
                         //2.判断当前方法是不是销售
-                        if("saleProduct".equals(method.getName())) {
-                            returnValue = method.invoke(producer, money*0.8f);
+                        if ("saleProduct".equals(method.getName())) {
+                            returnValue = method.invoke(producer, money * 0.8f);
                         }
                         return returnValue;
                     }
@@ -85,6 +87,6 @@ public class ClientTest_Proxy {
 
         //此时的运行结果如下：（即消费者花了10000元，但市场厂商只拿到了8000元，差价2000块给了代理商。
         //销售了产品，并拿到了钱：8000.0
-        //易知：通过使用动态代理技术之后，使方法增强了。
+        //易知：通过使用动态代理之后，使方法增强了。
     }
 }

@@ -2,30 +2,39 @@ package 设计模式.工厂模式;
 
 /**
  * （1）简单⼯⼚模式：⼀个抽象的接⼝，多个抽象接⼝的实现类，⼀个⼯⼚类，⽤来实例化抽象的接⼝
- *
+ * <p>
  * 案例示范：这里我们写一个“用户只需要传入车的品牌就可以生产出该车的一个对象”的工厂
  */
 
 // 1.车接口（⼀个抽象的接⼝）
 interface Car {
-     void run();//车启动
-     void stop();//车停车
+    void run();//车启动
+
+    void stop();//车停车
 }
+
 // 2.车的具体实现类，这里写了2个：即一个Benz车，一个Ford车（多个抽象接⼝的实现类）
 //2.1Benz车
 class Benz implements Car {
+    @Override
     public void run() {
         System.out.println("Benz开始启动了。。。。。");
     }
+
+    @Override
     public void stop() {
         System.out.println("Benz停⻋了。。。。。");
     }
 }
+
 //2.2Ford车
 class Ford implements Car {
+    @Override
     public void run() {
         System.out.println("Ford开始启动了。。。");
     }
+
+    @Override
     public void stop() {
         System.out.println("Ford停⻋了。。。。");
     }

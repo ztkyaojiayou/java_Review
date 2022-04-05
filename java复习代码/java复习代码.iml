@@ -2,18 +2,22 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../java复习代码">
-      <sourceFolder url="file://$MODULE_DIR$/../java复习代码/src" isTestSource="false" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.1_3/cglib-2.1_3.jar!/" />
+          <root url="file://$MODULE_DIR$/../../../localJar" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../../../localJar" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/../../../localJar" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../../localJar" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
   </component>

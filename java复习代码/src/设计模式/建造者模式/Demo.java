@@ -6,28 +6,35 @@ package 设计模式.建造者模式;
  * 使得同样的构建过程可以创建不同的表示。
  * 比如一个User类的属性有name、age、 address、email、job...等，
  * 如果想创建一个User对象，传入全部的属性有点太长了，
- * 这时可以使用建造者模式，传入一个参数就只设置对应属性的值。
+ * 这时可以使用建造者模式，传入一个参数就只设置对应属性的值，
+ * 即使用get和set方法代替构造方法来传值。
  */
 //1.要建造的目标产品，这里就为房子
 class House {
     private String base;
     private String wall;
     private String roofed;
+
     public String getBase() {
         return base;
     }
+
     public void setBase(String base) {
         this.base = base;
     }
+
     public String getWall() {
         return wall;
     }
+
     public void setWall(String wall) {
         this.wall = wall;
     }
+
     public String getRoofed() {
         return roofed;
     }
+
     public void setRoofed(String roofed) {
         this.roofed = roofed;
     }
@@ -41,11 +48,13 @@ abstract class HouseBuilder {
 
     //将建造的流程写好, 抽象的方法
     public abstract void buildBasic();
+
     public abstract void buildWalls();
+
     public abstract void roofed();
 
     //建造房子好， 将产品(房子) 返回，
-    //这是一个已经实现了的具体方法（这只是模拟）
+    //这是一个已经实现了的具体方法--jdk1.8后就支持抽象类中有具体方法实现啦！！！
     public House buildHouse() {
         return house;
     }
@@ -103,7 +112,8 @@ class CommonBuilder extends HouseBuilder {
 class HouseDirector {
 
     HouseBuilder houseBuilder = null;
-    //4.1构造器传入建造工人 houseBuilder
+
+    //4.1构造函数--传入建造工人 houseBuilder
     public HouseDirector(HouseBuilder houseBuilder) {
         this.houseBuilder = houseBuilder;
     }

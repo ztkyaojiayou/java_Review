@@ -11,35 +11,35 @@ package 设计模式.装饰者模式;
 */
 
 //普通人
-class Person
-{
-    public void chifan()
-    {
+class Person {
+    public void chifan() {
         System.out.println("吃饭");
     }
 }
 
 //超人（里面包含普通人对象）
-class SuperPerson
-{
-    private Person p ;//普通人对象
-    SuperPerson(Person p)//即在超人类中传入一个原普通人对象，这样就即可以使用原普通人对象中的方法，同时又可以自定义其他逻辑了
-    {
+class SuperPerson {
+    private Person p;//普通人对象
+
+    // 构造方法
+    // 即在超人类中传入一个原普通人对象，这样就即可以使用原普通人对象中的方法，
+    // 同时又可以自定义其他逻辑了
+    SuperPerson(Person p) {
         this.p = p;
     }
-    public void superChifan()//超人吃饭的方法
-    {
+
+    //超人吃饭的方法
+    public void superChifan() {
         System.out.println("开胃酒");
-        p.chifan();//包含了普通人吃饭的方法
+        //包含了普通人吃饭的方法
+        p.chifan();
         System.out.println("甜点");
         System.out.println("来一根");
     }
 }
 
-class  PersonDemo
-{
-    public static void main(String[] args)
-    {
+class PersonDemo {
+    public static void main(String[] args) {
         Person p = new Person();
 
         //p.chifan();

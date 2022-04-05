@@ -4,11 +4,11 @@ package 设计模式.模板模式;
 //抽象类，表示豆浆
 public abstract class Milk {
 
-    //模板方法make，可以做成final，不让子类去覆盖，但子类可以直接调用（精髓）
+    //模板方法make，可以写成final，不让子类去覆盖，但子类可以直接调用（精髓）
     //这里面的三个方法都是具体的方法，且子类不需要重写
     final void make() {
         select();
-        if(customerWantCondiments()) {
+        if (customerWantCondiments()) {
             addCondiments();
         }
         soak();
@@ -19,6 +19,7 @@ public abstract class Milk {
     boolean customerWantCondiments() {
         return true;
     }
+
     //添加不同的配料，抽象方法, 由子类具体实现，该方法就决定了子类的种类
     abstract void addCondiments();
 

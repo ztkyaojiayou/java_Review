@@ -16,6 +16,7 @@ class Benz02 implements Car02 {
         System.out.println("Benz车已经创建，启动啦....");
     }
 }
+
 // 2.2Ford车
 class Ford02 implements Car02 {
     @Override
@@ -40,12 +41,14 @@ abstract class CarFactory02 {
 // 再调用其方法即可，因为分工已经非常明确，每一个工厂只生产一种车
 // 4.1（只）生产Benz车的工厂（但不生产Ford车）
 class BenzFactory extends CarFactory02 {
+    @Override
     public Car02 create() {
         return new Benz02();//在这里真正new该类的对象
     }
 }
 // 4.2（只）生产Ford车的工厂（同样地，也不生产Benz车）
 class FordFactory extends CarFactory02 {
+    @Override
     public Car02 create() {
         return new Ford02();
     }
