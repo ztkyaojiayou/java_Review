@@ -2,18 +2,18 @@ package 数据结构与算法.第三遍;
 
 import java.lang.reflect.Method;
 
-public class demo02_1查找旋转后的数组的最小元素 {
+public class demo02_1二分法之查找旋转后的数组的最小元素 {
     public int minNumberInRotateArray(int[] nums) {//这个数组已经是旋转之后的数组了，如{5,6,1,2,3},{3,4,5,1,2}
         int left = 0;
         int right = nums.length - 1;
         while (left <= right) {
             int mid = (left + right) / 2;
-            //特殊情况，特殊处理，比如{1，1，1，0，1，1}
+            //特殊情况，特殊处理，比如{1，1，1,1，0，1，1}
             if (nums[left] == nums[mid] && nums[mid] == nums[right]) {
                 return minNumber(nums, left, right);
-            } else if (nums[mid] < nums[right]) {//说明右边有序，则最小值在左边
+            } else if (nums[mid] < nums[right]) {//说明右边有序（则肯定是升序），则最小值在左边
                 right = mid;
-            } else {//说明左边有序，则最小值在右边
+            } else {//说明左边有序（也肯定是升序），则最小值在右边
                 left = mid + 1;
             }
         }

@@ -14,7 +14,7 @@ import java.util.Stack;
  * 2.栈minStack用来在push()的时候存加入新的元素后当前stack中对应的最小值。
  * （易知，只需比较要存入stack的新元素与minStack的栈顶元素比较即可）
  *   两个栈中的元素数量始终保持一致，当新的元素小于“minStack”栈顶元素时，
- *   “minStack”向栈顶push新来的元素，否则，“minStack”向栈顶加入原栈顶元素。
+ *   “minStack”向栈顶push新来的元素（易知此时会有重复元素呀），否则，“minStack”向栈顶加入原栈顶元素。
  *   执行“pop”方法时，两个栈同时弹出各自的栈顶元素，
  *   把栈minStack的栈顶元素弹出是为了保证minStack的栈顶元素始终为剩余元素中的最小值。
  */

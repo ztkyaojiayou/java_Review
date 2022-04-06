@@ -9,17 +9,17 @@ class myQueue {
     public myQueue() {
     }
 
-    //定义两个栈
+    //定义两个栈（先进后出）
     Stack<Integer> stack1 = new Stack<>();
     Stack<Integer> stack2 = new Stack<>();
 
     //入队：直接入队即可
-    public void Offer(Integer num) {
+    public void offer(Integer num) {
         stack1.push(num);
     }
 
-    //出队：从栈2出队，若为空，则先把栈1中的元素放入栈2
-    public Integer Poll() {
+    //出队：从栈2出队，若为空，则先把栈1中的元素全部放入栈2
+    public Integer poll() {
         if (stack2.isEmpty()) {
             int size = stack1.size();
             for (int i = 0; i < size; i++) {

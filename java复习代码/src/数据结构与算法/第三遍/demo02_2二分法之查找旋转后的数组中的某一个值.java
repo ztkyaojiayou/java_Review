@@ -2,14 +2,15 @@ package 数据结构与算法.第三遍;
 //注意：返回索引即可
 
 /**
- * 可类比上一题（找最小值）
+ * 可类比上一个题（找最小值）
  * 情况1：当给定数组中无重复元素时
  */
-public class demo02_2查找旋转后的数组中的某一个值 {
+public class demo02_2二分法之查找旋转后的数组中的某一个值 {
     public int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
         while (left <= right) {
+            // 务必注意：这是向下取整的，即11//2 = 5，而不是6
             int mid = (left + right) / 2;
             if (nums[mid] == target) {//说明直接找到了
                 return mid;
@@ -83,6 +84,8 @@ class solution002 {
                 left++;
                 continue;
             }
+
+            //后面的逻辑都相同
             //表示前半部分有序
             if (nums[left] < nums[mid]) {
                 //target在前半部分时
