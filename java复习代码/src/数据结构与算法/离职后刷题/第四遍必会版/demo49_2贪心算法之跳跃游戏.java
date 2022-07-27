@@ -19,7 +19,6 @@ public class demo49_2贪心算法之跳跃游戏 {
         return false;
     }
 
-
     //自写一遍
     //入门版：能否达到
     public boolean canJump001(int[] nums) {
@@ -54,7 +53,8 @@ public class demo49_2贪心算法之跳跃游戏 {
                 max_position = Math.max(max_position, i + nums[i]);
                 //每次都一步跳到最远位置，很明显此时步数最小
                 if (i == end_position) {
-                    //当达到一个最原位置时，更新下一个最远位置，并更新步数，即直接跳到这个位置，一步即可
+                    //当达到一个最远位置时，更新下一个最远位置，
+                    //并更新步数，即直接跳到这个位置，一步即可
                     end_position = max_position;
                     step++;
                 }

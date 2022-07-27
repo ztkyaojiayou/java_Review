@@ -21,12 +21,12 @@ import java.util.LinkedList;
  * 按树的一层一层比较，从根节点开始比较，比较每一层的对称位置的值是否相等即可（画图更直观）
  */
 
-class TreeNode13 {//这是每个tree类都需要的，为了不重复，这里使用其对应的行号进行区分
+class TreeNode {//这是每个tree类都需要的，为了不重复，这里使用其对应的行号进行区分
     int val = 0;
-    TreeNode13 left = null;
-    TreeNode13 right = null;
+    TreeNode left = null;
+    TreeNode right = null;
 
-    public TreeNode13(int val) {
+    public TreeNode(int val) {
         this.val = val;
 
     }
@@ -41,7 +41,7 @@ public class tree13判断二叉树是否对称 {
      * @param root
      * @return
      */
-    public boolean isSymmetrical(TreeNode13 root) {//输入一个结点，把其看成是根节点
+    public boolean isSymmetrical(TreeNode root) {//输入一个结点，把其看成是根节点
         //特判，即若树为空，也是一种特殊的对称
         if (root == null) {
             return true;
@@ -50,7 +50,7 @@ public class tree13判断二叉树是否对称 {
         return isSymmetrical(root, root);
     }
 
-    public boolean isSymmetrical(TreeNode13 root1, TreeNode13 root2) {
+    public boolean isSymmetrical(TreeNode root1, TreeNode root2) {
         //递归结束的条件
         if (root1 == null && root2 == null) {//与运算，若这两个结点都为空，则也是一种对称
             return true;
@@ -82,19 +82,19 @@ public class tree13判断二叉树是否对称 {
  * 时间复杂度是O(n)，空间复杂度是O(n)
  */
 class Solution101 {
-    public boolean isSymmetric(TreeNode13 root) {
+    public boolean isSymmetric(TreeNode root) {
         if(root==null || (root.left==null && root.right==null)) {
             return true;
         }
         //用队列保存节点（list本来就是一个特殊的队列，不要大惊小怪）
-        LinkedList<TreeNode13> queue = new LinkedList<TreeNode13>();
+        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
         //将根节点的左右孩子放到队列中
         queue.add(root.left);
         queue.add(root.right);
         while(queue.size()>0) {
             //从队列中取出两个节点，再比较这两个节点
-            TreeNode13 left = queue.removeFirst();
-            TreeNode13 right = queue.removeFirst();
+            TreeNode left = queue.removeFirst();
+            TreeNode right = queue.removeFirst();
             //如果两个节点都为空就继续循环，两者有一个为空就返回false
             if(left==null && right==null) {
                 continue;

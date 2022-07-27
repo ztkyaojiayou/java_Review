@@ -5,10 +5,10 @@ public class demo14_9找出第一个只出现一次的字符 {
         //用数组代替map即可
         int[] map = new int[256];
         for (int i = 0; i < str.length(); i++) {
-            //减a的目的是把当前字符变成数字（涉及ASC码）
-            map[str.charAt(i) - 'a']++;
+            map[str.charAt(i)]++;
         }
-        for (int i = 0; i < map.length; i++) {
+        //再遍历一遍原字符串，查找频次为1的字符
+        for (int i = 0; i < str.length(); i++) {
             //即有很多字母只出现了一次，但只找第一个，因此只要找到了就返回即可
             if (map[str.charAt(i)] == 1) {
                 return i;

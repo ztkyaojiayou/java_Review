@@ -81,7 +81,8 @@ class 数组中有重复元素时 {
 
         //再看一般情况
         for (int i = start; i < nums.length; i++) {
-            //改变2：剪枝，即跳过重复元素（核心），不需要使用visied数组标记，
+            //改变2：剪枝，即跳过重复元素（核心），
+            // 不需要使用visied数组标记，
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }

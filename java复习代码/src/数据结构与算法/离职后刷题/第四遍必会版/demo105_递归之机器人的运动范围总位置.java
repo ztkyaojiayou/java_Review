@@ -14,7 +14,7 @@ public class demo105_递归之机器人的运动范围总位置 {
     private int dps(int target, int rows, int cols, int cur_row, int cur_col, boolean[][] visited) {
         //递归出口
         if (cur_col < 0 || cur_col > cols || cur_row < 0
-                || cur_row > rows || visited[cur_row][cur_col] == true
+                || cur_row > rows || visited[cur_row][cur_col]
                 || !checkSum(target, cur_col, cur_row)) {
             return 0;
         }
@@ -29,6 +29,7 @@ public class demo105_递归之机器人的运动范围总位置 {
                 + 1;
         return res;
     }
+
 
     //用于检查当前位置是否小于target
     private boolean checkSum(int target, int cur_col, int cur_row) {

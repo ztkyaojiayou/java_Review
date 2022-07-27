@@ -49,4 +49,44 @@ public class demo107_回溯之矩阵中是否存在目标路径 {
         }
         return res;
     }
+
+    //自写一遍
+    public boolean hasPath02(char[][] matrix, char[] str) {
+        rows = matrix.length;
+        cols = matrix[0].length;
+        isVisited = new boolean[rows][cols];
+        int curIndex = 0;
+        for (int i = 0;i<rows;i++){
+            for (int j = 0;j<cols;j++){
+                if (dps02(matrix,str,i,j,curIndex)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean dps02(char[][] matrix, char[] str, int curRow, int curCol, int curIndex) {
+        if (curRow<0 || curRow >rows || curCol < 0 || curCol > cols
+        ||isVisited[curRow][curCol] || matrix[curRow][curCol] != str[curIndex]){
+            return false;
+        }
+        if (curIndex == str.length-1){
+            return true;
+        }
+
+        //对当前位置操作
+        curIndex++;
+        isVisited[curRow][curCol] = true;
+        //递归查找
+        boolean res = dps02(matrix,str,curRow+1,curCol,curIndex)||
+                dps02(matrix,str,curRow-1,curCol,curIndex)||
+                dps02(matrix,str,curRow,curCol+1,curIndex)||
+                dps02(matrix,str,curRow,curCol-1,curIndex);
+                if (!res){
+                    curIndex--;
+                    isVisited[curRow][curCol] = false;
+                }
+        return res;
+    }
 }

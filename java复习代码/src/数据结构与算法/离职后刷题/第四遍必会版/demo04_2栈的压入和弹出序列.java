@@ -11,7 +11,8 @@ public class demo04_2栈的压入和弹出序列 {
         for (int i = 0; i < push1.length; i++) {
             //先入栈
             stack.push(push1[i]);
-            //若栈顶元素和弹出序列相等，就弹出栈顶元素，并继续比较，直到不相等为止
+            //若栈顶元素和弹出序列相等，就弹出栈顶元素，
+            // 并继续比较，直到不相等为止
             while (j < pop1.length) {
                 if (stack.peek() == pop1[j]) {
                     stack.pop();

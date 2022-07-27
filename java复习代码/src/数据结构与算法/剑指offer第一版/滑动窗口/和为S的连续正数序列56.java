@@ -92,8 +92,9 @@ class Solution56_2 {
                 cur_sum+=j;
                 list.add(j);
                 if(cur_sum>sum)//3.2.1若大于目标和，则直接终止循环
+                {
                     break;
-                else if(cur_sum==sum){//3.2.2若等于目标和，则说明该list符合要求，将其加入结果集，
+                } else if(cur_sum==sum){//3.2.2若等于目标和，则说明该list符合要求，将其加入结果集，
                     //同时也要终止循环，开始下一组上的寻找
                     result.add(list);
                     break;

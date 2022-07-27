@@ -13,6 +13,7 @@ import java.util.Stack;
  * <p>
  * 提示：气温 列表长度的范围是 [1, 30000]。
  * 每个气温的值的均为华氏度，都是在 [30, 100] 范围内的整数。
+ *
  * @author zoutongkun
  */
 public class demo04_3单调栈之每日温度 {
@@ -29,7 +30,7 @@ public class demo04_3单调栈之每日温度 {
                 //计算完毕了就删除该栈顶元素
                 stack.pop();
             }
-            //压入的是当前温度对应的下标，只要比当前栈顶温度低的全部压入
+            //压入的是当前温度对应的下标，每个元素都压入
             //每次计算的也是栈顶温度那一天的值（但要注意的是，易知并不一定是按顺序的！！！）
             stack.push(i);
         }
@@ -41,14 +42,15 @@ public class demo04_3单调栈之每日温度 {
         int length = num.length;
         int[] res = new int[length];
         Stack<Integer> stack = new Stack<>();
-        for (int i = 0;i<length;i++){
-            while (!stack.isEmpty() && num[i] > num[stack.peek()]){
+        for (int i = 0; i < length; i++) {
+            while (!stack.isEmpty() && num[i] > num[stack.peek()]) {
                 Integer curIndex = stack.peek();
-                res[curIndex] = i-curIndex;
+                res[curIndex] = i - curIndex;
+                //计算完毕了就删除该栈顶元素
                 stack.pop();
             }
-
-            //若小于，则正常入栈--存下标，便于计算
+            //每个元素都压入
+            //存下标，便于计算
             stack.push(i);
         }
         return res;

@@ -54,12 +54,15 @@ package 数据结构与算法.剑指offer第一版.贪心;
 class solution14_3 {
     public int cutRope(int target) {
         //0.特判，易知当target等于1，2，3的时候，结果是固定的。因为至少要分两段
-        if (target < 2)
+        if (target < 2) {
             return 0;
-        if (target == 2)
+        }
+        if (target == 2) {
             return 1;
-        if (target == 3)
+        }
+        if (target == 3) {
             return 2;
+        }
 
         //1.当 target > 3 时，就尽量把其分解成3的乘积，
         //并且不允许有长度为 1 的绳子出现，如剩下的长度为4，则把4分解成2和2，而不是3和1
@@ -68,8 +71,9 @@ class solution14_3 {
 
         //1.2若目标值只比3的倍数多1，则此时就会有长度为 1 的绳子出现，我们不允许有该绳子出现，而希望它以长度2的绳子出现，
         //于是我们可以从切好的长度为 3 的绳子中拿出一段（即长度为3的绳子的段数要减1）与长度为 1 的绳子重新组合，把它们切成两段长度为 2 的绳子。
-        if (target - timesOf3 * 3 == 1)
+        if (target - timesOf3 * 3 == 1) {
             timesOf3--;
+        }
 
         //1.3再求长度为2的绳子的段数，用剩下的长度对2取商即可
         int timesOf2 = (target - timesOf3 * 3) / 2;//2的段数(取商）
@@ -122,9 +126,11 @@ class solution14_2 {
     public int cutRope(int target) {
         int[] dp = new int[target + 1];
         dp[1] = 1;
-        for (int i = 2; i <= target; i++)
-            for (int j = 1; j < i; j++)
+        for (int i = 2; i <= target; i++) {
+            for (int j = 1; j < i; j++) {
                 dp[i] = Math.max(dp[i], Math.max(j * (i - j), dp[j] * (i - j)));
+            }
+        }
         return dp[target];
     }
 }

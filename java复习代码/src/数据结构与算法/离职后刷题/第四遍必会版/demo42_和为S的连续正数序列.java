@@ -9,9 +9,9 @@ public class demo42_和为S的连续正数序列 {
         ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         ArrayList<Integer> list = new ArrayList<>();
         //显然，只需遍历前S/2即可
+        int cur_sum = 0;
         for (int i = 1; i < S / 2; i++) {
-            int cur_sum = 0;
-            for (int j = 1; j < S; j++) {
+            for (int j = i; j < S; j++) {
                 cur_sum += j;
                 list.add(j);
                 if (cur_sum > S) {

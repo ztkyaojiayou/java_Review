@@ -33,8 +33,8 @@ class 回溯之全排列1_无重复元素 {
             //做选择,即把当前元素添加至path中
             curPath.add(nums[i]);
             //固定第一个元素，递归添加下一个元素
-            //因为元素只可使用一次，因此要从下一个元素递归
-            method(nums, curPath, i + 1);
+            //不需要从下一个元素递归，因为上面反正已经判重啦！
+            method(nums, curPath, i);
             //撤销（深度遍历都需要做撤销操作）
             curPath.remove(curPath.size() - 1);
         }

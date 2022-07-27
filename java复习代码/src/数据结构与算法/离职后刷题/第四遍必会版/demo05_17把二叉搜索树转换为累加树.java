@@ -12,6 +12,7 @@ public class demo05_17把二叉搜索树转换为累加树 {
     }
 
     //递归，反向中序遍历，同时累加即可（非常清晰）
+    //在原树上作改变
     public void method(TreeNode root) {
         //出口
         if (root == null) {
@@ -20,6 +21,7 @@ public class demo05_17把二叉搜索树转换为累加树 {
         method(root.right);//右
         //中
         sum += root.val;
+        //对结点附上累加后的新值
         root.val = sum;
         method(root.left);//左
     }

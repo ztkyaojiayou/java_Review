@@ -19,6 +19,7 @@ public class demo05_12判断二叉树是否对称 {
         if (root1.val != root2.val) {
             return false;
         }
+
         //如果值相等，则需要再比较其左右子节点是否也对称相等
         boolean outside = method(root1.left, root2.right);
         boolean inside = method(root1.right, root2.left);

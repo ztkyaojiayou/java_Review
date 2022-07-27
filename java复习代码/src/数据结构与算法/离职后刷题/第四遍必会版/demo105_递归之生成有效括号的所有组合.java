@@ -42,7 +42,6 @@ public class demo105_递归之生成有效括号的所有组合 {
         }
     }
 
-
     //自写一遍
     List<String> res02 = new ArrayList<>();
 
@@ -67,8 +66,13 @@ public class demo105_递归之生成有效括号的所有组合 {
         }
         //递归
         //若左括号还没有用完，则向左递归
-        dfs02(curStr + "(", usedLeft + 1, usedRight, n);
-        //若右括号还没有用完，则向右递归
-        dfs02(curStr + ")", usedLeft, usedRight + 1, n);
+        if (usedLeft < n) {
+            dfs02(curStr + "(", usedLeft + 1, usedRight, n);
+        }
+        if (usedRight < n) {
+            //若右括号还没有用完，则向右递归
+            dfs02(curStr + ")", usedLeft, usedRight + 1, n);
+        }
+
     }
 }

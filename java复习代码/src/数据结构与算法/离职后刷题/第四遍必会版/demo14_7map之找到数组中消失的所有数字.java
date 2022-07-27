@@ -56,9 +56,11 @@ class demo44_找到数组中消失的所有数字 {
             //因为我们只需要标识它存在即可
             map.put(nums[i], true);
         }
+
         //再使用自然序列去检查即可
         List<Integer> list = new ArrayList<>();
         for (int i = 1; i < nums.length; i++) {
+            //若不存在，则说明为消失的数字
             if (!map.containsKey(i)) {
                 list.add(i);
             }
@@ -89,7 +91,7 @@ class demo44_找到数组中消失的那一个数字 {
         int sum = nums.length;//记录最终的和，先要从最大值开始（可自行验证 ）
         for (int i = 0; i < nums.length; i++) {
             //必须先减再加，否则最终结果不只是消失的那个数（也可自行验证）
-            sum -= nums[i];//减去现在总和（边加边减，妙哉~）
+            sum -= nums[i];//减去现在总和（边减边加，妙哉~）
             sum += i;//实际总和的算法易知就是把各下标加起来
         }
         //最终的sum即为结果

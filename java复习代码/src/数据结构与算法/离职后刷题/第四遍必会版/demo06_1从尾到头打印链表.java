@@ -15,6 +15,7 @@ public class demo06_1从尾到头打印链表 {
             stack.push(root.val);
             root = root.next;
         }
+
         //再从栈中取出即可
         List list = new ArrayList<>();
         while (!stack.isEmpty()) {

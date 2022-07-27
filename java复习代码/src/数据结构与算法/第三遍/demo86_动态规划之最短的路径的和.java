@@ -27,4 +27,25 @@ public class demo86_动态规划之最短的路径的和 {
         //最后返回结果即可
         return dp[m - 1][n - 1];
     }
+
+    //自写一遍
+    public int minPathSum02(int[][] nums) {
+        int row = nums.length;
+        int col = nums[0].length;
+        int[][] dp = new int[row][col];
+        dp[0][0] = 0;
+        for (int i = 1;i<col;i++){
+            dp[0][i] = dp[0][i-1]+nums[0][i];
+        }
+
+        for (int j = 1;j<row;j++){
+            dp[j][0] = dp[j-1][0]+nums[j][0];
+        }
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col; j++) {
+                dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1])+nums[i][j];
+            }
+        }
+        return dp[row-1][col-1];
+    }
 }

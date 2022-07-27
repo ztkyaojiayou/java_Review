@@ -46,6 +46,7 @@ public class demo90_动态规划之单词能否被拆分 {
         //dp[i]就表示字符串s中的前i个字符能否拆分成字典表wordDict中的字符
         boolean[] dp = new boolean[len + 1];
         //初始化
+        //字典表wordDict中默认含有空字符串
         dp[0] = true;
         //一般情况
         for (int i = 1; i < len; i++) {

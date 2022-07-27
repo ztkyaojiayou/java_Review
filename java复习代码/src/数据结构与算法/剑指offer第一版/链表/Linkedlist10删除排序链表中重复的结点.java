@@ -20,16 +20,17 @@ import 数据结构与算法.ListNode;
 /**
  * 思路解析：这是一个简单的问题，仅测试你操作列表的结点指针的能力。
  * 由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。
- * 如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。
+ * 如果它是重复的，我们更改当前结点的 next 指针，
+ * 以便它跳过下一个结点并直接指向下一个结点之后的结点。
  */
 class solution删除链表中重复元素_保留一个{
     public ListNode deleteDuplicates(ListNode head) {
-        ListNode current = head;
-        while (current != null && current.next != null) {
-            if (current.next.val == current.val) {
-                current.next = current.next.next;
+        ListNode cur = head;
+        while (cur != null && cur.next != null) {
+            if (cur.next.val == cur.val) {
+                cur.next = cur.next.next;
             } else {
-                current = current.next;
+                cur = cur.next;
             }
         }
         return head;

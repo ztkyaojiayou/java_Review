@@ -1,65 +1,10 @@
 package 数据结构与算法.离职后刷题;
 
+
+
 import java.util.Arrays;
 
 public class 常考排序算法 {
-    //1）冒泡排序
-    //优化版本：
-    //1）只比较无序部分，有序部分不用再比较
-    //2）使用标志位判断是否已有序，若有序直接跳出该循环，减少了不必要的比较次数
-    //自写一遍
-    public int[] 冒泡排序2(int[] arr) {
-        //特判
-        if (arr == null || arr.length == 0) {
-            return arr;
-        }
-        int lastIndex = 0;
-        int wuXuIndex = arr.length - 1;
-        boolean flag = false;
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < wuXuIndex; j++) {
-                if (arr[j + 1] < arr[j]) {
-                    int temp = arr[j + 1];
-                    arr[j + 1] = arr[j];
-                    arr[j] = temp;
-                    lastIndex = j;
-                    flag = true;
-                }
-                //两件事
-                wuXuIndex = lastIndex;
-                if (!flag) {
-                    break;
-                }
-            }
-        }
-        return arr;
-    }
-
-
-    //2）选择排序
-    //自写一遍
-    public int[] selectSort02(int[] arr) {
-        //特判
-        if (arr == null || arr.length == 0) {
-            return arr;
-        }
-        for (int i = 0; i < arr.length; i++) {
-            //找每一趟的最小值，先假定为第一个元素，但因为后面是要调换而并不是找出该值，因此这里记录下标
-            int min_index = i;
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[j] < arr[min_index]) {
-                    min_index = j;
-                }
-            }
-            //找到了就将其与首位元素调换，如此往复即可
-            int temp = arr[min_index];
-            arr[min_index] = arr[i];
-            arr[i] = temp;
-        }
-        //返回排序后的arr
-        return arr;
-    }
-
     //3）快排
     //自写一遍
     public int[] QuickSort02(int[] arr, int left, int right) {
@@ -70,12 +15,14 @@ public class 常考排序算法 {
 //        }
         //对所有元素进行快排
         if (left < right) {
-            //将当前数组以中轴值为标准分为一大一小的两个小数组（此时其还是无序的，只是整体都比右边小而已），并返回该中轴值所在位置，
+            //将当前数组以中轴值为标准分为一大一小的两个小数组
+            // （此时其还是无序的，只是整体都比右边小而已），并返回该中轴值所在位置，
             // 以便下次只对其两侧的数组进行递归排序
             int mid = partition02(arr, left, right);
             //对左侧的无序数组进行递归快排
             QuickSort02(arr, left, mid - 1);
-            //同理对右侧的无序数组进行递归快排，直到最后的最小数组有序，再返回去递归出整个数组有序
+            //同理对右侧的无序数组进行递归快排，直到最后的最小数组有序，
+            // 再返回去递归出整个数组有序
             QuickSort02(arr, mid + 1, right);
         }
         return arr;
@@ -113,25 +60,38 @@ public class 常考排序算法 {
         return j;
     }
 
-
-    //4）插入排序
-    //自写一遍
-    public int[] 插入排序02(int[] arr) {
-        //特判
-        if (arr == null || arr.length == 0) {
-            return arr;
-        }
-        for (int i = 0; i < arr.length; i++) {
-            int cur = arr[i + 1];
-            int last_index = i;
-            while (last_index >= 0 && cur < arr[last_index]) {
-                arr[last_index + 1] = arr[last_index];
-                last_index--;
-            }
-            //将当前元素插入
-            arr[last_index++] = cur;
+    //自写第二遍
+    public int[] QuickSort002(int[] arr, int left, int right) {
+        if (left < right) {
+            int midIndex = method(arr, left, right);
+            QuickSort002(arr,left,midIndex-1);
+            QuickSort002(arr,midIndex+1,right);
         }
         return arr;
+    }
+
+    private int method(int[] arr, int left, int right) {
+        int mid = arr[left];
+        int i = left;
+        int j = right;
+        while (i < j) {
+            while (i < j && arr[i] <= mid) {
+                i++;
+            }
+            while (i < j && arr[j] >= mid) {
+                j--;
+            }
+            if (i >= j) {
+                break;
+            }
+            //交换
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        arr[left] = arr[j];
+        arr[j] = mid;
+        return j;
     }
 
     //5）归并排序
@@ -186,5 +146,103 @@ public class 常考排序算法 {
 
         }
         return res_arr;
+    }
+
+    //1）冒泡排序
+    //优化版本：
+    //1）只比较无序部分，有序部分不用再比较
+    //2）使用标志位判断是否已有序，若有序直接跳出该循环，减少了不必要的比较次数
+    //自写一遍
+    public int[] 冒泡排序2(int[] arr) {
+        //特判
+        if (arr == null || arr.length == 0) {
+            return arr;
+        }
+        int lastIndex = 0;
+        int wuXuIndex = arr.length - 1;
+        boolean flag = false;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < wuXuIndex; j++) {
+                if (arr[j + 1] < arr[j]) {
+                    int temp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = temp;
+                    lastIndex = j;
+                    flag = true;
+                }
+                //两件事
+                wuXuIndex = lastIndex;
+                if (!flag) {
+                    break;
+                }
+            }
+        }
+        return arr;
+    }
+
+
+    //2）选择排序
+    //自写一遍
+    public int[] selectSort02(int[] arr) {
+        //特判
+        if (arr == null || arr.length == 0) {
+            return arr;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            //找每一趟的最小值，先假定为第一个元素，
+            // 但因为后面是要调换而并不是找出该值，
+            // 因此这里记录下标
+            int min_index = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[min_index]) {
+                    min_index = j;
+                }
+            }
+            //找到了就将其与首位元素调换，如此往复即可
+            int temp = arr[min_index];
+            arr[min_index] = arr[i];
+            arr[i] = temp;
+        }
+        //返回排序后的arr
+        return arr;
+    }
+
+
+
+    //4）插入排序
+    //自写一遍（这次这个版本是最容易理解的，不过没有优化）
+    public int[] 插入排序02(int[] arr) {
+        //特判
+        if (arr == null || arr.length == 0) {
+            return arr;
+        }
+        //两层循环，固定元素，然后去和他之前的所有元素进行比较，遇到倒序就调换
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i; j > 0; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    //调换
+                    int temp = arr[j - 1];
+                    arr[j - 1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        return arr;
+    }
+
+    //优化版本
+    public static int[] sort2(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int temp = arr[i];//保存每次需要插入的那个数
+            int j;
+            //这个较上面有一定的优化
+            for (j = i; j > 0 && arr[j - 1] > temp; j--) {
+                //把大于需要插入的数往后移动，
+                // 最后不大于temp的数就空出来j
+                arr[j] = arr[j - 1];
+            }
+            arr[j] = temp;//将需要插入的数放入这个位置
+        }
+        return arr;
     }
 }

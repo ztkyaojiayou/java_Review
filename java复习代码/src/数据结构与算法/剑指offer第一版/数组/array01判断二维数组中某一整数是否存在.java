@@ -39,11 +39,15 @@ public class array01判断二维数组中某一整数是否存在 {
         // 2.要查找的位置确保在数组之内，比较目标值target 与当前值 array[r][c] 的大小，确定应该像哪边移动
         while(r<= rows - 1&& c >=0){
             if(target == matrix[r][c])// array[r][c]即为array[0][cols-1]，即右上角那个数
+            {
                 return true;//如果找到了就直接退出
-            else if(target>matrix[r][c])// 如果要找的数比找到的数大，说明要找的数在当前数的下边
+            } else if(target>matrix[r][c])// 如果要找的数比找到的数大，说明要找的数在当前数的下边
+            {
                 r ++;// 行数加一，代表向下移动
-            else// 如果要找的数比找到的数小，说明要找的数在当前数的左边
+            } else// 如果要找的数比找到的数小，说明要找的数在当前数的左边
+            {
                 c--;// 列数减一，代表向左移动
+            }
         }
         return false;//若最终都没有找到，则返回false
     }

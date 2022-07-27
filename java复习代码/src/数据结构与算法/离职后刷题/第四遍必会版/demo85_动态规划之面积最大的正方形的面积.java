@@ -1,5 +1,6 @@
 package 数据结构与算法.离职后刷题.第四遍必会版;
 
+//其实关键就是求最大的边长
 public class demo85_动态规划之面积最大的正方形的面积 {
     public int maximalSquare(char[][] nums) {
         int maxSize = 0;

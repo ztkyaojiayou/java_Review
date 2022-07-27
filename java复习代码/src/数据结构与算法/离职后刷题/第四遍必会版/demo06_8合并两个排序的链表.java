@@ -12,13 +12,12 @@ class demo69_合并两个排序的链表 {
         if (list2 == null) {
             return list1;
         }
-
-        //一般情况
+        //一般情况，哪个值小就用它去连接下一个结点
         if (list1.val < list2.val) {
             //则用list1去连接下一个节点
             list1.next = Merge(list1.next, list2);
             return list1;
-        } else {
+        } else {//则用list2去连接下一个节点
             list2.next = Merge(list1, list2.next);
             return list2;
         }

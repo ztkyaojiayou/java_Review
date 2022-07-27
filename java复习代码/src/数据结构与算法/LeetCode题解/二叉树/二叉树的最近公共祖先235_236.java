@@ -60,9 +60,13 @@ class 二叉搜索树的最近公共祖先235 {
         // 3.2要么比他们俩小，此时说明p和q都分布在根节点的右边，则最近公共祖先肯定在右边
         // 3.3再要么比其中一个大，比另外一个小，此时说明p和q分布在根节点的两侧，则最近公共祖先肯定就是根节点自己嘛。
         //3.1 当都分布在左侧时
-        if(root.val>p.val && root.val>q.val) return left;
+        if(root.val>p.val && root.val>q.val) {
+            return left;
+        }
         //3.2 当都分布在右侧时
-        if(root.val<p.val && root.val<q.val) return right;
+        if(root.val<p.val && root.val<q.val) {
+            return right;
+        }
         //3.3 当分布在两侧时
         return root;
     }

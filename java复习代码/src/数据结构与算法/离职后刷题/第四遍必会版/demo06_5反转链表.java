@@ -5,12 +5,12 @@ import 数据结构与算法.LeetCode题解.ListNode;
 class 反转链表 {
     public ListNode ReverseList(ListNode head) {
         ListNode cur_pre = null;
-        ListNode cur_next;
+        ListNode temp_cur_next;
         while (head != null) {
-            cur_next = head.next;
+            temp_cur_next = head.next;
             head.next = cur_pre;
             cur_pre = head;
-            head = cur_next;
+            head = temp_cur_next;
         }
         //因为cur_pre最终移动到了最末尾，成为了新链表的头结点
         return cur_pre;
@@ -41,9 +41,10 @@ class 反转链表 {
  */
 class 反转部分链表 {
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        //设置一个哑结点
+        //设置一个哑结点，指向头结点
         ListNode dummy = new ListNode(0);
         dummy.next = head;
+
         ListNode node = dummy;
         //找到需要反转的那一段的上一个节点。
         for (int i = 1; i < m; i++) {

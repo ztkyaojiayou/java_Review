@@ -4,6 +4,7 @@ import 数据结构与算法.TreeNode;
 
 public class demo05_17把二叉搜索树转换为累加树 {
     public int sum;
+
     public TreeNode convertBST(TreeNode root) {
         sum = 0;
         method(root);
@@ -21,5 +22,22 @@ public class demo05_17把二叉搜索树转换为累加树 {
         sum += root.val;
         root.val = sum;
         method(root.left);//左
+    }
+
+    //自写一遍
+    public int sum01;
+
+    public TreeNode convertBST02(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        //反向中序遍历
+        convertBST02(root.right);
+        //累加
+        sum01 += root.val;
+        //再赋给root结点
+        root.val = sum01;
+        convertBST02(root.left);
+        return root;
     }
 }

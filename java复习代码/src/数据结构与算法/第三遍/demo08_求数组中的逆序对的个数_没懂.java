@@ -1,7 +1,7 @@
 package 数据结构与算法.第三遍;
 
 public class demo08_求数组中的逆序对的个数_没懂 {
-    //1.暴力解法，不推荐
+    //1.暴力解法，简单但不推荐
     public int reversePairs01(int[] nums) {
         int cnt = 0;
         int len = nums.length;
@@ -22,7 +22,9 @@ public class demo08_求数组中的逆序对的个数_没懂 {
     }
 
     public int merge(int[] arr, int start, int end) {
-        if (start == end) return 0;
+        if (start == end) {
+            return 0;
+        }
         int mid = (start + end) / 2;
         int count = merge(arr, start, mid) + merge(arr, mid + 1, end);
 

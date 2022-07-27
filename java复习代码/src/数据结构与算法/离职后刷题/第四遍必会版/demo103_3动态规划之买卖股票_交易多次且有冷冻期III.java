@@ -35,7 +35,7 @@ public class demo103_3动态规划之买卖股票_交易多次且有冷冻期III
         for (int i = 1; i < len; i++) {
             //昨天就没有或昨天持有今天刚卖，利润就为dp[i - 1][1]+nums[i]
             dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + nums[i]);
-            //昨天就有或昨天没有今天刚买（此时利润就是dp[i-2]了，因为有冷冻期）
+            //昨天就有或前天卖了今天刚买（此时利润就是dp[i-2][0]了，即前天卖的（即此时不持有股票），因此今天可以买，因为有冷冻期）
             dp[i][1] = Math.max(dp[i - 1][1], ((i - 2) >= 0 ? dp[i - 2][0] : -nums[i]));
         }
         return Math.max(dp[len - 1][0], dp[len - 1][1]);
@@ -53,6 +53,7 @@ public class demo103_3动态规划之买卖股票_交易多次且有冷冻期III
             //当天持有股票
             dp[i][1] = Math.max(dp[i - 1][1], ((i - 2) >= 0 ? dp[i - 2][0] : -nums[i]));
         }
+        //取这两种情况的最大值即可
         return Math.max(dp[len - 1][0], dp[len - 1][1]);
     }
 }

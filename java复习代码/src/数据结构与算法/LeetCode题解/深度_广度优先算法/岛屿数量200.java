@@ -37,7 +37,7 @@ import java.util.LinkedList;
  * 搜索岛屿的同时，执行 grid[i][j] = '0'，即将岛屿所有节点删除，以免之后重复搜索相同岛屿。
  * 主循环：
  * 遍历整个矩阵，当遇到 grid[i][j] == '1' 时，从此点开始做深度优先搜索 dfs，
- * 岛屿数 count + 1 且在深度优先搜索中删除此岛屿。
+ * 岛屿数 count + 1 且在深度优先搜索中删除此岛屿（即变成水域，也即置为0）。
  * 最终返回岛屿数 count 即可。
  *
  * 参考链接：https://leetcode-cn.com/problems/number-of-islands/solution/number-of-islands-shen-du-you-xian-bian-li-dfs-or-/
@@ -47,7 +47,7 @@ import java.util.LinkedList;
 class 岛屿数量 {
     public int numIslands(char[][] nums) {
         int count = 0;
-        //从原点开始，当为岛屿时，才向其四周搜索，因为才有意义嘛
+        //从原点开始，当为岛屿时，才向其四周搜索，因为只有当为岛屿时才有意义嘛
         for(int i = 0; i < nums.length; i++) {
             for(int j = 0; j < nums[0].length; j++) {
                 if(nums[i][j] == '1'){

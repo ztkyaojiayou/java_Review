@@ -26,6 +26,7 @@ public class demo47_2字母异位词分组 {
         return new ArrayList<>(map.values());
     }
 
+
     //自写一遍
     public List<List<String>> groupAnagram02(String[] strs) {
         List<List<String>> res = new ArrayList<>();

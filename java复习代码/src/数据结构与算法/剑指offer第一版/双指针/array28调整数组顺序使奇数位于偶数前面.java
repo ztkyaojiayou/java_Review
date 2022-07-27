@@ -27,13 +27,13 @@ public class array28调整数组顺序使奇数位于偶数前面 {
         //双指针，一头一尾
         int i = 0, j = nums.length - 1;
         while(i < j) {
-            while (i<j && nums[i] % 2 == 1){//是奇数就跳过
+            while (i<j && nums[i] % 2 == 1){//从左边找第一个偶数，是奇数就跳过
                 i++;
             }
-            while (i<j && nums[j] % 2 == 0){//是偶数就跳过
+            while (i<j && nums[j] % 2 == 0){//同理，从右边找第一个奇数，是偶数就跳过
                 j--;
             }
-            //若奇偶在异侧，则交换
+            //找到了左边的偶数和右边的奇数时就交换即可
             int tmp = nums[i];
             nums[i] = nums[j];
             nums[j] = tmp;

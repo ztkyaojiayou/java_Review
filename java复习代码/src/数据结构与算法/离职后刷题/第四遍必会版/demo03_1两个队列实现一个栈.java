@@ -3,7 +3,7 @@ package 数据结构与算法.离职后刷题.第四遍必会版;
 import java.util.LinkedList;
 import java.util.Queue;
 
-//相比两个栈实现一个队列较难，但也简单
+//只是相比两个栈实现一个队列较难，但也简单
 class myStack {
     //构造函数
     public myStack() {
@@ -35,7 +35,7 @@ class myStack {
             //弹出list1中剩余的那个元素，即为所求
             return list1.poll();
         } else {
-            //同理
+            //此时同理
             //ist1为空（即最后一个元素已经弹出了），此时则从list2出栈，同样先转移
             int size = list2.size();
             for (int i = 0; i < size - 1; i++) {

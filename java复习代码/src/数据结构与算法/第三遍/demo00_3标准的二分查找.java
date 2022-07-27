@@ -26,6 +26,7 @@ public class demo00_3标准的二分查找 {
         int right = arr.length - 1;
         while (left <= right) {
             int mid = (left + right) / 2;
+            //在这里就直接判断
             if (arr[mid] == target) {
                 return mid;
             } else if (arr[mid] < target) {

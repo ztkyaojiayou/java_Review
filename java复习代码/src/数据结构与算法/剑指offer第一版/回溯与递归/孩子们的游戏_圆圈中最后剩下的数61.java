@@ -12,6 +12,7 @@ import 数据结构与算法.ListNode;
  * 并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。
  * 请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
  *
+ * 返回的是小朋友的编号，也即下标（从0开始）
  * 如果没有小朋友，请返回-1
  */
 
@@ -53,10 +54,12 @@ import 数据结构与算法.ListNode;
  */
 class 孩子们的游戏_圆圈中最后剩下的数61_1 {
     public int LastRemaining_Solution(int n, int m) {//n为人数，m为随机指定的一个数
-            if (n == 0)     /* 特殊输入的处理 */
+            if (n == 0)     /* 特殊输入的处理 */ {
                 return -1;
-            if (n == 1)     /* 递归返回的条件 */
+            }
+            if (n == 1)     /* 递归返回的条件 */ {
                 return 0;
+            }
             return (LastRemaining_Solution(n - 1, m) + m) % n;
         }
     }

@@ -16,6 +16,7 @@ class demo105_1递归之判断是否存在 {
         if (root.val == sum && root.left == null && root.right == null) {
             return true;
         }
+
         //向左右子节点递归
         //再递归判断以根节点的左节点的二叉树中是否存在指定和（易知此时要刨去根节点的值啦）
         boolean left = hasPathSum(root.left, sum - root.val);

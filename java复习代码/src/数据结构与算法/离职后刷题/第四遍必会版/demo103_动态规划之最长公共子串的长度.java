@@ -20,29 +20,32 @@ package 数据结构与算法.离职后刷题.第四遍必会版;
  */
 public class demo103_动态规划之最长公共子串的长度 {
     public int longestCommonString(String s1, String s2) {
+        int len1 = s1.length();
+        int len2 = s2.length();
         //结果集
         int res = 0;
         //定义dp数组，dp[i][j]表示s1以i结尾和s2以j结尾的字符串所构成的最长公共子串的长度
-        int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+        int[][] dp = new int[len1 + 1][len2 + 1];
 
         //确定初始值，其实可以不写，因为数组默认就全为0
         //空字符串与有长度的字符串的最长公共子串的长度肯定为0呀。
-        for (int j = 0; j < s2.length(); j++) {
+        for (int j = 0; j < len2; j++) {
             dp[0][j] = 0;
         }
-        for (int i = 0; i < s1.length(); i++) {
+        for (int i = 0; i < len1; i++) {
             dp[i][0] = 0;
         }
 
         //一般情况
-        for (int i = 1; i < s1.length(); i++) {
-            for (int j = 1; j < s2.length(); j++) {
-                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {//若相等，就在原来的基础上加1
+        for (int i = 1; i < len1+1; i++) {
+            for (int j = 1; j < len2+1; j++) {
+                //若相等，就在原来的基础上加1
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
-                } else {//否则置零
+                } else {//否则置零，因为子串需要连续
                     dp[i][j] = 0;
                 }
-                //更新结果
+                //更新结果，只要求出一个dp，就要赶紧更新一下呀（老套路啦）
                 res = Math.max(res, dp[i][j]);
             }
         }
@@ -86,7 +89,7 @@ public class demo103_动态规划之最长公共子串的长度 {
  * 其实我们也可以发现一个问题，就是题目给定的原数组，
  * 比如text数组，如果下标从1开始的话，状态表示会更加的清晰，推导状态转移方程的过程也会更加好理解。
  * <p>
- * 7）时间复杂度分析： O(nm)O(nm)，其中nn 和 mm 分别是字符串 text1 和 text2的长度。
+ * 7）时间复杂度分析： O(nm)O(nm)，其中n 和 m 分别是字符串 text1 和 text2的长度。
  */
 //参考链接：https://leetcode-cn.com/problems/longest-common-subsequence/solution/zui-chang-gong-gong-zi-xu-lie-tu-jie-dpz-6mvz/
 class demo103_动态规划之最长公共子序列的长度 {
@@ -127,7 +130,7 @@ class demo103_动态规划之最长公共子序列的长度 {
                 }
             }
             return res;
-            //但是，不更新dp，而直接返回dp[len1][len2]也是对的
+            //但是，不更新dp而直接返回dp[len1][len2]也是对的
             //return dp[len1][len2];
         }
     }

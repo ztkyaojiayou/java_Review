@@ -5,6 +5,7 @@ public class demo103_2动态规划之买卖股票_交易多次II {
     public int maxProfit(int[] nums) {
         int max_profit = 0;
         int cur_profit = 0;
+        //从i= 1开始
         for (int i = 1; i < nums.length; i++) {
             //当前利润
             cur_profit = nums[i] - nums[i - 1];

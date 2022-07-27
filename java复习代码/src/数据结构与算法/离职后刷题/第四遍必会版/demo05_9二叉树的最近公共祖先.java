@@ -75,7 +75,9 @@ class demo24_二叉搜索树的最近公共祖先 {
 }
 
 /**
- * 常考
+ * 常考：其实这个题的解法已经涵盖了上一题了，
+ * 因为二叉搜索树肯定是二叉树呀！！！
+ * 因此只需记住这个题即可！！！
  */
 class demo24_二叉树的最近公共祖先 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
@@ -106,10 +108,10 @@ class demo24_二叉树的最近公共祖先 {
 
     //自写一遍
     public TreeNode lowestCommonAncestor02(TreeNode root, TreeNode p, TreeNode q) {
+        //递归结束的条件
         if (root == null || root.val == q.val || root.val == p.val) {
             return root;
         }
-
         //递归左右节点看是否有子祖先
         TreeNode leftAncestor = lowestCommonAncestor02(root.left, p, q);
         TreeNode rightAncestor = lowestCommonAncestor02(root.right, p, q);

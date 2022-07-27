@@ -14,6 +14,7 @@ public class demo00_3标准的二分查找 {
                 right = mid - 1;
             }
         }
+        //若没找到，则返回-1
         return -1;
     }
 

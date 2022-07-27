@@ -31,7 +31,7 @@ class 二叉树的深度 {
         if (root.left == null || root.right == null) {
             return left + right + 1;
         }
-        //加1是深度的定义
+        //加1是深度的定义（即左右子树的深度的较大者+1）
         int res = Math.max(left, right) + 1;
         return res;
     }
@@ -127,7 +127,7 @@ class 二叉树的深度 {
 /**
  * 最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
  * 说明：叶子节点是指没有子节点的节点。
- * 思路一模一样
+ * 思路一模一样：相比求深度，只需改为min即可
  */
 class 最小深度 {
     public int Min_Depth(TreeNode root) {
@@ -144,7 +144,7 @@ class 最小深度 {
         if (root.left == null || root.right == null) {
             return left + right + 1;
         }
-        //选较小值加1即为所求
+        //选较小值加1即为所求（即相比求深度，只需将这里改为min即可）
         int res = Math.min(left, right) + 1;
         return res;
     }
@@ -161,7 +161,7 @@ class 最小深度 {
         if (root.left == null || root.right == null) {
             return left_minHeight + right_minHeight + 1;
         }
-        //返回：较小者加1即为所求
+        //返回：较小者（最大深度/深度则是较大者，就这个区别！）加1即为所求
         int res = Math.min(left_minHeight, right_minHeight) + 1;
         return res;
     }

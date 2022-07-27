@@ -20,6 +20,7 @@ public class demo05_00二叉树的三种遍历方式 {
         if (root == null) return;
         //输出结果  1  2  4  8  9  5  10  3  6  7
         System.out.print(root.val + "  ");
+        //其实都不用判断是否为null，因为为null时就结束递归了，在递归出口已经写啦
         if (root.left != null) {
             preOrder01(root.left);
         }
@@ -37,11 +38,10 @@ public class demo05_00二叉树的三种遍历方式 {
         }
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
-
         while (!stack.isEmpty()) {
             TreeNode current = stack.pop();
             res.add(current.val);
-
+//因为栈是先进后出，因此要先加右节点再加左节点呀
             if (current.right != null) {
                 stack.push(current.right);
             }

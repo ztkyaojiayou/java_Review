@@ -20,7 +20,8 @@ public class demo96_连续子序列的最长长度_非动态规划版 {
             if (nums[i] != nums[i - 1]) {
                 if (nums[i - 1] + 1 == nums[i]) {
                     curMax++;
-                } else {//否则，置零，重新计数
+                } else {//否则，说明当前序列不再连续，于是可以计算啦
+                    // 同时将当前长度置零，重新对下一个序列计数
                     maxLen = Math.max(maxLen, curMax);
                     curMax = 1;
                 }
@@ -52,6 +53,6 @@ public class demo96_连续子序列的最长长度_非动态规划版 {
             }
         }
         //最后，再加一道，保证取到最大值，因为好像有一个边界在循环体中未处理
-        return Math.max(maxLen,curLen);
+        return Math.max(maxLen, curLen);
     }
 }

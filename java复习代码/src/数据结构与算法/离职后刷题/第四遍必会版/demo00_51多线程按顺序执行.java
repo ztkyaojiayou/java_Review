@@ -5,12 +5,13 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 方法1：使用join，最简单
+ * 方法1：使用join，最简单，也最容易理解（先掌握这种方式再说）
  * @author zoutongkun
  */
 //参考链接：https://www.cnblogs.com/svennee/p/4081155.html（关于如何实现多个线程并发运行）
 public class demo00_51多线程按顺序执行 {
     public static void main(String[] args) {
+        //直接开干，不用专门写线程任务的类啦
         //线程1
         final Thread t1 = new Thread(new Runnable() {
             @Override
@@ -24,6 +25,7 @@ public class demo00_51多线程按顺序执行 {
             @Override
             public void run() {
                 try {
+                    //先执行t1，即加塞
                     t1.join();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -38,6 +40,7 @@ public class demo00_51多线程按顺序执行 {
             @Override
             public void run() {
                 try {
+                    //同理，先执行t2
                     t2.join();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -11,6 +11,7 @@ public class demo06_7链表中倒数第K个结点 {
             p1 = p1.next;
             k--;
         }
+
         //若p1已为null，但k还大于0，则说明链表元素还没有k个，那倒数第k个元素必为空
         if (k > 0) {
             return null;

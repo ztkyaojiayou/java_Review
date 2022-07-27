@@ -3,18 +3,18 @@ import 数据结构与算法.TreeNode;
 
 
 public class demo05_6判断二叉树是否平衡 {
-    private boolean IsBalanced(TreeNode root) {
+    private boolean isBalanced(TreeNode root) {
         //先求当前根节点的左右子树的高度，判断其差是否小于等于1
         //调用了求二叉树深度的方法
         int left_depth = TreeDepth(root.left);
         int right_depth = TreeDepth(root.right);
         int diff = left_depth - right_depth;
-        //递归出口
+        //递归出口（高度大于1则表示平衡树）
         if (diff > 1 || diff < -1) {
             return false;
         }
         //再判断每一个节点的左右子树的高度是否也符合平衡树，这一点很重要--递归即可
-        boolean res = IsBalanced(root.left) && IsBalanced(root.right);
+        boolean res = isBalanced(root.left) && isBalanced(root.right);
         return res;
     }
 
@@ -34,7 +34,7 @@ public class demo05_6判断二叉树是否平衡 {
 
 
     //自写一遍
-    private boolean IsBalanced02(TreeNode root) {
+    private boolean isBalanced02(TreeNode root) {
         int left_height = TreeDepth(root.left);
         int right_height = TreeDepth(root.right);
         //高度差
@@ -44,7 +44,7 @@ public class demo05_6判断二叉树是否平衡 {
             return false;
         }
         //否则还需要看其左右结点所构成的子树是否也符合平衡树
-        boolean res = IsBalanced02(root.left) && IsBalanced02(root.right);
+        boolean res = isBalanced02(root.left) && isBalanced02(root.right);
         return res;
     }
 }

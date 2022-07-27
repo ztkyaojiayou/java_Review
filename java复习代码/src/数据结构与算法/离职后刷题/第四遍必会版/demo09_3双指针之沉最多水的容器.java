@@ -10,6 +10,7 @@ public class demo09_3双指针之沉最多水的容器 {
         while (left < right) {
             //算面积：高度要取有效高度，即以矮柱子为主！！！
             int curArea = (right - left) * Math.min(height[right], height[left]);
+            //时刻更新面积
             res = Math.max(res, curArea);
             // 移动矮柱子，因为在移动的过程中，宽肯定是减少的，
             // 因此要在移动的过程中尽量增加“有效”高度
@@ -25,7 +26,6 @@ public class demo09_3双指针之沉最多水的容器 {
 
     //自写一遍
     int res02 = 0;
-
     public int maxArea02(int[] height) {
         int left = 0;
         int right = height.length - 1;

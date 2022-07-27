@@ -75,7 +75,9 @@ class solution74 {
                 else if (target < mid_value){
                     right = mid - 1;
                 } else//3）而若目标值大于当前中间值，则调整左边界至mid + 1，继续进行而非查找
+                {
                     left = mid + 1;
+                }
                 }
             //3.若最终都没有找到，则返回false即可
             return false;

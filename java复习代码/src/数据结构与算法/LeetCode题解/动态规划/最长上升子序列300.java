@@ -55,12 +55,13 @@ import java.util.Arrays;
 public class 最长上升子序列300 {
         public int lengthOfLIS(int[] nums) {
             //特判
-            if (nums.length == 0)
+            if (nums.length == 0) {
                 return 0;
+            }
             //定义一个长度为原数组长度的数组，其中，dp[i] 表示 以nums[i] 结尾的序列的最长子序列的长度。
             int[] dp = new int[nums.length];
             int result = 0;
-            //初始化数组的元素全为1
+            //初始化数组的元素全为1，即置为最小长度
             for (int i = 0; i < dp.length; i++) {
                 dp[i] = 1;
             }

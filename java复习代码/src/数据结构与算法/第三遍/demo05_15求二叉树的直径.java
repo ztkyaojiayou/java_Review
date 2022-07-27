@@ -20,7 +20,25 @@ public class demo05_15求二叉树的直径 {
         }
         int left_depth = method(root.left);
         int right_depth = method(root.right);
-        res = Math.max(res, left_depth + right_depth);//核心
+        //更新res--核心
+        res = Math.max(res, left_depth + right_depth);
         return Math.max(left_depth, right_depth) + 1;
+    }
+
+    //自写一遍
+    public int diameterOfBinaryTree02(TreeNode root) {
+        res = 0;
+        method02(root);
+        return res;
+    }
+
+    private int method02(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left_depth = method02(root.left);
+        int right_depth = method02(root.right);
+        res = Math.max(this.res, left_depth + right_depth);
+        return Math.max(left_depth,right_depth)+1;
     }
 }

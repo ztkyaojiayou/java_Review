@@ -24,6 +24,7 @@ public class demo49_1贪心算法之剪绳子 {
         return (int) Math.pow(3, three) * (int) Math.pow(2, two);
     }
 
+
     //自写一遍
     public int cutRope02(int target) {
         if (target < 4) {

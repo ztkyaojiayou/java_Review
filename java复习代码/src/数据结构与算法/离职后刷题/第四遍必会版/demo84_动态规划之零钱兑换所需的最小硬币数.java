@@ -24,9 +24,8 @@ public class demo84_动态规划之零钱兑换所需的最小硬币数 {
                 }
             }
         }
-
         //返回结果
-        //表示凑不出
+        //此时表示凑不出
         if (dp[amount] > amount) {
             return -1;
         }

@@ -95,14 +95,16 @@ class Solution02 {
         }
         for(int num : set){
             // 如果set中存在num之前的一个数，说明当前num不是连续序列的开始
-            if(set.contains(num-1))
+            if(set.contains(num-1)) {
                 continue;
+            }
             int cur = num;
             // 此时num为一个连续序列的开始，现在才统计其所在连续序列长度
             // 在整个for循环中，此while循环总共走了n次，因为数组中的数只属于一个连续序列
             // 而我们每次只从连续序列的开始往后走
-            while(set.contains(cur))
+            while(set.contains(cur)) {
                 cur++;
+            }
             ans = Math.max(cur-num, ans);
         }
         return ans;
@@ -124,8 +126,9 @@ class Solution02 {
         int max = 1;
         for (int v : nums) {
             int r = v;
-            while (map.containsKey(r + 1))
+            while (map.containsKey(r + 1)) {
                 r = map.get(r + 1); // 利用前面已知的右边界，快速找到当前需要的右边界
+            }
             map.put(v, r);
             max = Math.max(max, r - v + 1);
         }

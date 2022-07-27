@@ -27,7 +27,9 @@ public class array52某一数字在排序数组中出现的次数 {
         int cnts=0;
         int len=array.length;
         for(int i=0;i<len;i++){//遍历数组
-            if(array[i]==k) cnts++;//相等就计数
+            if(array[i]==k) {
+                cnts++;//相等就计数
+            }
         }
 
         return cnts;

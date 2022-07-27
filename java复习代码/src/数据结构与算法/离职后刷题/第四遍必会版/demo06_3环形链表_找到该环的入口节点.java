@@ -15,19 +15,18 @@ public class demo06_3环形链表_找到该环的入口节点 {
                 return null;
             }
             if (fast == slow) {//相遇就跳出循环
-                break;
+                //此时他们相遇，于是把快指针指向head节点，且速度和慢指针相同
+                //继续走，相遇处即为入口结点
+                fast = head;
+                while (fast != slow) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return fast;
             }
         }
-        //此时他们相遇，于是把快指针指向head节点，且速度和慢指针相同
-        //继续走，相遇处即为入口结点
-        fast = head;
-        while (fast != slow) {
-            slow = slow.next;
-            fast = fast.next;
-        }
-        return fast;
-    }
 
+    }
 
     public ListNode detectCycle01(ListNode head) {
         //要判断是否有环的话，
@@ -40,16 +39,14 @@ public class demo06_3环形链表_找到该环的入口节点 {
                 return null;
             }
             if (fast == slow) {
-                break;
+                //此时将快指针指向头结点，再和慢指针一起跑
+                fast = head;
+                while (fast != slow) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return fast;
             }
         }
-
-        //此时将快指针指向头结点，再和慢指针一起跑
-        fast = head;
-        while (fast != slow) {
-            slow = slow.next;
-            fast = fast.next;
-        }
-        return fast;
     }
 }

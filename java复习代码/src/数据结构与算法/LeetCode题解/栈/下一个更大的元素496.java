@@ -10,14 +10,14 @@ import java.util.Stack;
  * 找到 nums1 中每个元素在 nums2 中的下一个比其大的值。
  * 注意：nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位置的
  * 右边的第一个比 x 大的元素。如果不存在，对应位置输出 -1 。
- *
- 示例 1:
- 输入: nums1 = [4,1,2], nums2 = [1,3,4,2].
- 输出: [-1,3,-1]
- 解释:
- 对于num1中的数字4，你无法在第二个数组中找到下一个更大的数字，因此输出 -1。
- 对于num1中的数字1，第二个数组中数字1右边的下一个较大数字是 3。
- 对于num1中的数字2，第二个数组中没有下一个更大的数字，因此输出 -1。
+ * <p>
+ * 示例 1:
+ * 输入: nums1 = [4,1,2], nums2 = [1,3,4,2].
+ * 输出: [-1,3,-1]
+ * 解释:
+ * 对于num1中的数字4，你无法在第二个数组中找到下一个更大的数字，因此输出 -1。
+ * 对于num1中的数字1，第二个数组中数字1右边的下一个较大数字是 3。
+ * 对于num1中的数字2，第二个数组中没有下一个更大的数字，因此输出 -1。
  */
 
 /**
@@ -27,33 +27,33 @@ import java.util.Stack;
  * 对于 nums2，我们可以使用单调栈来解决这个问题。
  */
 public class 下一个更大的元素496 {
-        public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-            //定义一个单调栈
-            Stack< Integer > stack = new Stack < > ();
-            //使用一个map来存储num2中每一个元素的下一个元素，即key-value为（当前元素，其下一个元素）
-            HashMap< Integer, Integer > map = new HashMap <> ();
-            //存储结果
-            int[] res = new int[nums1.length];
-            //开始对num2遍历（先不用管num1）
-            for (int i = 0; i < nums2.length; i++) {
-                while (!stack.empty() && nums2[i] > stack.peek()){
-                    map.put(stack.pop(), nums2[i]);
-                }
-                   //若栈为空或者当前元素小于栈顶元素，则把当前元素入栈
-                stack.push(nums2[i]);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        //定义一个单调栈
+        Stack<Integer> stack = new Stack<>();
+        //使用一个map来存储num2中每一个元素的下一个元素，即key-value为（当前元素，其下一个元素）
+        HashMap<Integer, Integer> map = new HashMap<>();
+        //存储结果
+        int[] res = new int[nums1.length];
+        //开始对num2遍历（先不用管num1）
+        for (int i = 0; i < nums2.length; i++) {
+            while (!stack.empty() && nums2[i] > stack.peek()) {
+                map.put(stack.pop(), nums2[i]);
             }
-            //若遍历所有元素之后，栈还不为空，则说明栈中剩下的这些元素是每一下一个比它更大的元素的，因此设为-1。
-            while (!stack.empty()){
-                map.put(stack.pop(), -1);
-            }
-//再去该map中找到num1中对应的元素的下一个元素（value）即可
-            for (int i = 0; i < nums1.length; i++) {
-                res[i] = map.get(nums1[i]);
-            }
-//最后返回结果
-            return res;
+            //若栈为空或者当前元素小于栈顶元素，则把当前元素入栈
+            stack.push(nums2[i]);
         }
+        //若遍历所有元素之后，栈还不为空，则说明栈中剩下的这些元素是每一下一个比它更大的元素的，因此设为-1。
+        while (!stack.empty()) {
+            map.put(stack.pop(), -1);
+        }
+//再去该map中找到num1中对应的元素的下一个元素（value）即可
+        for (int i = 0; i < nums1.length; i++) {
+            res[i] = map.get(nums1[i]);
+        }
+//最后返回结果
+        return res;
     }
+}
 
 /**
  * 进阶版：

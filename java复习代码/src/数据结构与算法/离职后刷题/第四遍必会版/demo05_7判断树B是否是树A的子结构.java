@@ -5,7 +5,8 @@ import 数据结构与算法.TreeNode;
 public class demo05_7判断树B是否是树A的子结构 {
     public boolean HasSubtree(TreeNode rootA, TreeNode rootB) {
         //先以rootA为根节点，去判断是否存在和树B一样的子结构
-        if (rootA.val == rootB.val){//前提，即只要当二者的根节点相等时，才有继续判断的必要
+        //前提，即只要当二者的根节点相等时，才有继续判断的必要
+        if (rootA.val == rootB.val){
             if (isSame(rootA,rootB)){
                 return true;
             }

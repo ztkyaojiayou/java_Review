@@ -3,6 +3,7 @@ package 数据结构与算法.第三遍;
 import java基础.多态.A;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 //注意：其他元素都出现两次
@@ -27,5 +28,19 @@ public class demo14_10找出数组中只出现一次的两个数字 {
 
         return res;
 
+    }
+
+
+    //自写一遍(改了一下返回体，方便）
+    public List<Integer> FindNumsAppearOnce02(int[] arr) {
+        List<Integer> list = new ArrayList<>();
+        for (int num : arr) {
+            if (list.contains(num)) {
+                list.remove(new Integer(num));
+            } else {
+                list.add(num);
+            }
+        }
+        return list;
     }
 }

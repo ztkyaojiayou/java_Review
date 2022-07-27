@@ -29,6 +29,7 @@ public class demo47_1判断两个字符串是否为异位词 {
         return true;
     }
 
+
     //再写一遍
     public boolean isAnagram02(String s, String t) {
         int[] map = new int[26];

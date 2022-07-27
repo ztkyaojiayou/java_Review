@@ -17,6 +17,7 @@ public class demo45_移动数组中的零元素至末尾 {
         }
     }
 
+
     //自写一遍
     public void moveZeroes02(int[] nums) {
         int index =0;

@@ -11,22 +11,43 @@ package 数据结构与算法.第三遍;
 public class demo09_4双指针之调整数组顺序使奇数位于偶数前面 {
     public int[] exchange(int[] nums) {
         //使用双指针即可，很简单
-        int i = 0;
-        int j = nums.length - 1;
+        int left = 0;
+        int right = nums.length - 1;
         //开始循环
-        while (i < j) {
+        while (left < right) {
             //1.若左边已经是奇数，右边已经是偶数了，则不动它，直接跳过
-            while (i < j && nums[i] % 2 == 1) {
-                i++;
+            while (left < right && nums[left] % 2 == 1) {
+                left++;
             }
-            while (i < j && nums[j] % 2 == 0) {
-                j--;
+            while (left < right && nums[right] % 2 == 0) {
+                right--;
             }
             //2.而若左边是偶数，右边是奇数时，则交换二者
-            int temp = nums[j];
-            nums[j] = nums[i];
-            nums[i] = temp;
+            int temp = nums[right];
+            nums[right] = nums[left];
+            nums[left] = temp;
         }
         return nums;
+    }
+
+    //自写一遍
+    public int[] exchange02(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            //左边本来就是奇数时，不动
+            while (left < right && nums[left] % 2 == 1) {
+                left++;
+            }
+            //右边本来就是偶数时，不动
+            while (left < right && nums[right] % 2 == 0) {
+                right--;
+            }
+            //否则，交换
+            int temp = nums[right];
+            nums[right] = nums[left];
+            nums[left] = temp;
+        }
+return nums;
     }
 }

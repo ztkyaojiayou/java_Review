@@ -4,7 +4,8 @@ import 数据结构与算法.TreeNode;
 
 import java.util.LinkedList;
 
-//即反转二叉树，与demo54相同
+//即翻转二叉树，与demo54相同，
+//只是这里不输出翻转后的该二叉树
 public class demo05_4输出二叉树的镜像 {
     /**
      * 方法1：使用递归，注意是在原树上面修改
@@ -15,6 +16,7 @@ public class demo05_4输出二叉树的镜像 {
             return;
         }
         //先交换当前节点左右子节点
+        //把结点看成一个temp
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;

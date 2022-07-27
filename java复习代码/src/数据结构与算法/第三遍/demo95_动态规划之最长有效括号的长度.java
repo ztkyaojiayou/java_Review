@@ -12,12 +12,13 @@ public class demo95_动态规划之最长有效括号的长度 {
     public int longestValidParentheses(String str) {
         int maxLen = 0;
 
-        //dp[i]表示字符串前i个字符（不包括i）的最长有效括号
+        //dp[i]表示由第i个字符结尾的字符串的有效括号的长度（不是最长哦！！！）
         int[] dp = new int[str.length()];
         //初始化
         dp[0] = 0;
         dp[1] = 0;
         for (int i = 2; i < str.length(); i++) {
+            //若当前字符为“（”，则肯定dp值肯定为0呀，因为我们定义的是前i个字符所构成的有效括号
             if (str.charAt(i) == ')') {
                 if (str.charAt(i - 1) == '(') {
                     dp[i] = dp[i - 2] + 2;
@@ -28,6 +29,29 @@ public class demo95_动态规划之最长有效括号的长度 {
             }
         }
         return maxLen;
+    }
+
+    //自写一遍
+    public int longestValidParentheses01(String str) {
+        int len = str.length();
+        int res = 0;
+        //dp[i]定义为：前i个括号构成的有效括号的长度
+        int[] dp = new int[len];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 0; i < len; i++) {
+            if (str.charAt(i) == ')') {
+                if (str.charAt(i - 1) == '(') {
+                    dp[i] = dp[i - 2] + 2;
+                } else if (str.charAt(i - dp[i - 1] - 1) == '(') {
+                    dp[i] = dp[i - 1] + 2 + dp[i - dp[i - 1] - 2];
+                }
+                //每求出一个dp，就立马更新dp中的最大值，因为是要求所有dp中的最大值，
+                //就是个套路呀！！！
+                res = Math.max(res, dp[i]);
+            }
+        }
+        return res;
     }
 
     /**

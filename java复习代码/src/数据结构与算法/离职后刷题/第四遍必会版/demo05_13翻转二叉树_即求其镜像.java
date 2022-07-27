@@ -11,8 +11,7 @@ public class demo05_13翻转二叉树_即求其镜像 {
         if (root == null) {
             return null;
         }
-
-        //反转当前节点的左右节点
+        //翻转当前节点的左右节点
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;

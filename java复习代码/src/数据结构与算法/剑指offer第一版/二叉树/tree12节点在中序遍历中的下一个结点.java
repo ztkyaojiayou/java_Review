@@ -35,7 +35,9 @@ public class tree12节点在中序遍历中的下一个结点 {
         if (pNode.right != null) {//1.即情况1，要找的数为其右子树上的最左结点
             TreeLinkNode pNext = pNode.right;//pNext表示目标结点pNode的下一个结点，即我们要找的结点
             while (pNext.left != null)//1.1即去找其右子树上的最左结点,即为所求
+            {
                 pNext = pNext.left;
+            }
             //1.2 但若没有最左节点，则就为其右子节点
             return pNext;
         } else {//2.而若连右节点都没有，则要去找其父节点了
@@ -43,7 +45,9 @@ public class tree12节点在中序遍历中的下一个结点 {
                 //即情况2.1:当前节点没有右子树,若它是其父节点的左结点（孩子），那么它的父节点即为所求
                 TreeLinkNode parent = pNode.parent;
                 if (parent.left == pNode)//即表示它是其父节点的左结点（孩子）
+                {
                     return parent;//于是，其父节点即为所求
+                }
                 //即情况2.2：若它是其父节点的右结点（孩子），而它自己又还没有右子树，
                 // 这时我们就要沿着指向父节点的指针一直向上找了，
                 // 直到根结点或者此结点是他父节点的右子结点，此时无下一个节点。

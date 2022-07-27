@@ -19,8 +19,10 @@ import 数据结构与算法.LeetCode题解.ListNode;
  */
 public class demo06_9寻找链表的中间节点 {
     public ListNode middleNode(ListNode head) {
+        //先都指向头结点
         ListNode fast = head;
         ListNode slow = head;
+
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;

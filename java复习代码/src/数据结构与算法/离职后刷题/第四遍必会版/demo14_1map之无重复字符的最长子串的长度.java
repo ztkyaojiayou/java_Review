@@ -23,12 +23,16 @@ public class demo14_1map之无重复字符的最长子串的长度 {
         int left = 0;
         //存放当前字符和对应的下标
         HashMap<Character, Integer> map = new HashMap<>();
+        //遍历
         for (int right = 0; right < str.length(); right++) {
-            //若存在，则把左下标移至该值在原map中（也即第一次出现的位置）对应的下标的下一个位置，重新计算
+            //若存在，则更新左边界
+            // 把左下标移至该值在原map中（也即第一次出现的位置）
+            // 对应的下标的下一个位置，重新计算
+            // （即当前字符也算进新的子串当中，只不过不用第一个字符了，而是使用那个重复的字符~）
             if (map.containsKey(str.charAt(right))) {
                 left = map.get(str.charAt(right)) + 1;
             }
-            //存储右边界元素和对应的下表，
+            //存储右边界元素和对应的下标（主要也要是存下标，因为要用于计算长度），
             //而若为重复元素，则更新其下标（并不是else的关系！！！）
             map.put(str.charAt(right), right);
             //随时更新结果

@@ -51,8 +51,9 @@ public class 回文子串的总个数647 {
             boolean[][] dp = new boolean[len][len];
 
             //2.确定初始情况，对角线肯定为true，因为它就是表示由两个相同的字符所构成的字符串，肯定为回文子串。
-            for(int i = 0; i<len; i++)
+            for(int i = 0; i<len; i++) {
                 dp[i][i] = true;
+            }
 
             //3.再看一般情况，使用状态方程
             for (int j = 1; j < len; j++) {//使用遍历，即以j结尾，依次判断前面的字符串是否为回文子串，

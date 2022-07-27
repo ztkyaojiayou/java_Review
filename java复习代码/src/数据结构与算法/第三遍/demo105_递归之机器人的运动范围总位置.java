@@ -21,7 +21,7 @@ public class demo105_递归之机器人的运动范围总位置 {
 
         //做选择，即：走当前位置,将当前位置置为“已经访问过”
         visited[cur_row][cur_col] = true;
-        //下一轮递归
+        //下一轮递归：四个方向都相加即可（式后的“+1”是指当前位置也算一个格子）
         int res = dps(target, rows, cols, cur_row, cur_col - 1, visited)
                 + dps(target, rows, cols, cur_row + 1, cur_col, visited)
                 + dps(target, rows, cols, cur_row - 1, cur_col, visited)
@@ -33,10 +33,12 @@ public class demo105_递归之机器人的运动范围总位置 {
     //用于检查当前位置是否小于target
     private boolean checkSum(int target, int cur_col, int cur_row) {
         int sum = 0;
-        //行和
+        //行和（先加个位后加十位）
         while (cur_row != 0) {
-            sum += cur_row % 10;//个位
-            cur_row = cur_row / 10;//十位
+            //个位（取余即可）
+            sum += cur_row % 10;
+            //十位（取商即可）
+            cur_row = cur_row / 10;
         }
         //再加列和
         while (cur_col != 0) {
@@ -49,6 +51,57 @@ public class demo105_递归之机器人的运动范围总位置 {
             return false;
         } else {
             return true;
+        }
+    }
+
+
+    //自写一遍
+    public int MoveCount02(int[][] matrix, int k) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        Boolean[][] visited = new Boolean[row][col];
+        //不需要向【岛屿数量】那道题一样对每一个位置都遍历，这个题就是
+        return method(matrix, k, 0, 0, visited);
+    }
+
+    //递归方法
+    private int method(int[][] matrix, int target, int curRow, int curCol, Boolean[][] visited) {
+        //递归出口
+        //越界或已访问过或各位上的和大于目标值，此时返回0，即该位置不符合题目要求啦
+        if (curRow < 0 || curRow > matrix.length
+                || curCol < 0 || curCol > matrix[0].length
+                || visited[curRow][curCol] == true
+                || !checkSum02(target, curCol, curRow)) {
+            return 0;
+        }
+        //标记当前结点为已经访问过的结点
+        visited[curRow][curCol] = true;
+        //对当前结点的四个结点相加即可
+        //（式后的“+1”是指当前位置也算一个格子）
+        return method(matrix, target, curRow + 1, curCol, visited)
+                + method(matrix, target, curRow - 1, curCol, visited)
+                + method(matrix, target, curRow, curCol + 1, visited)
+                + method(matrix, target, curRow, curCol - 1, visited)
+                + 1;
+    }
+
+    private boolean checkSum02(int target, int curCol, int curRow) {
+        int sum = 0;
+        //先加个位（取余：%）后加十位（取商：/）：最终都是以个位的形式相加的
+        while (curCol != 0) {
+            sum += curCol % 10;
+            curCol = curCol / 10;
+
+        }
+        while (curRow != 0) {
+            sum += curRow % 10;
+            curRow = curRow / 10;
+        }
+
+        if (sum <= target) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

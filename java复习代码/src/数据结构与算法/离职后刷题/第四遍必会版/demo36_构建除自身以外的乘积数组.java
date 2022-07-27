@@ -14,6 +14,7 @@ public class demo36_构建除自身以外的乘积数组 {
             res[i] = left_sum;
             left_sum = left_sum * nums[i];
         }
+
         //右边乘积，即在左乘积的基础上再乘上右乘积
         //（即此时的res数组越已经变成了个各元素除自己外的左乘积啦，非常巧妙！！！）
         int right_sum = 1;

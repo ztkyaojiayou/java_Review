@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author :zoutongkun
  * @date :2022/4/7 1:35 上午
- * @description :
+ * @description :即先从左至右打印，再从右至左打印，使用一个flag标记即可
  * @modyified By:
  */
 public class demo05_18按之字形顺序打印二叉树 {
@@ -69,8 +69,8 @@ public class demo05_18按之字形顺序打印二叉树 {
         singleLine.add(root);
         boolean flag = false;
         while (!singleLine.isEmpty()) {
-            int size = singleLine.size();
             List<Integer> temp = new ArrayList<>();
+            int size = singleLine.size();
             for (int i = 0; i < size; i++) {
                 TreeNode cur_node = singleLine.poll();
                 if (cur_node == null) {
@@ -84,7 +84,7 @@ public class demo05_18按之字形顺序打印二叉树 {
                     singleLine.add(cur_node.right);
                 }
             }
-            //反转
+            //每一层的元素全部处理完后，考虑反转
             if (flag) {
                 Collections.reverse(temp);
             }

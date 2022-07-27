@@ -1,7 +1,7 @@
 package 数据结构与算法.离职后刷题.第四遍必会版;
 
 /**
- * 和上一题几乎完全相同
+ * 和上一题几乎完全相同，核心都是先判断为回文串，然后再处理即可
  */
 public class demo94_2动态规划之回文子串的总个数 {
     public int countSubstrings(String str) {
@@ -16,6 +16,7 @@ public class demo94_2动态规划之回文子串的总个数 {
         for (int j = 1; j < res_len; j++) {
             for (int i = 0; i < j; i++) {
                 if (str.charAt(i) == str.charAt(j)) {//前提
+                    //如aba或aa等就肯定是回文串呀
                     if (j - i < 3) {
                         dp[i][j] = true;
                     } else {

@@ -5,12 +5,12 @@ public class demo107_回溯之单词搜索 {
     int rows;//行
     int cols;//列
     boolean[][] isVisited;//访问数组
-    int curWord_index;//深度搜索得到的路径的下标
+    int curWord_len = 1;//深度搜索得到的路径的长度（比下标好理解）
 
     public boolean exist(char[][] board, String word) {
-        if (board == null || board.length == 0 || board[0].length == 0) {
-            return false;
-        }
+//        if (board == null || board.length == 0 || board[0].length == 0) {
+//            return false;
+//        }
         rows = board.length;
         cols = board[0].length;
         isVisited = new boolean[rows][cols];
@@ -27,17 +27,19 @@ public class demo107_回溯之单词搜索 {
 
     private boolean dfs(char[][] board, int cur_row, int cur_col, String word) {
         //递归出口
-        //1.目标单词找到（即当前字符串的最大下标=目标目标单词的最大下标），此时结束递归，返回true
-        if (curWord_index == word.length() - 1) {//当下标等于目标单词的最大下标时，就表示已经找到该单词了
+        //1.目标单词找到（即当前字符串的最大长度=目标目标单词的最大长度），此时结束递归，返回true
+        if (curWord_len == word.length()) {//当当前单词的长度等于目标单词的长度时，就表示已经找到该单词了
             return true;
         }
         //2.若当前位置越界，当前位置的字母与目标单词的该位置的字母不相等，或当前位置已经访问过了时，都应该结束递归，此时返回false
-        if (cur_row < 0 || cur_row >= board.length || cur_col < 0 || cur_col >= board[0].length
-                || board[cur_row][cur_col] != word.charAt(curWord_index)|| isVisited[cur_row][cur_col]) {
+        if (cur_row < 0 || cur_row > board.length - 1
+                || cur_col < 0 || cur_col > board[0].length - 1
+                || board[cur_row][cur_col] != word.charAt(curWord_len)
+                || isVisited[cur_row][cur_col]) {
             return false;
         }
         //做选择
-        curWord_index++;
+        curWord_len++;
         isVisited[cur_row][cur_col] = true;
         //下一层递归/即开始深度优先搜索
         boolean res = dfs(board, cur_row + 1, cur_col, word)
@@ -47,9 +49,53 @@ public class demo107_回溯之单词搜索 {
         //再看搜索结果
         if (!res) {
             //撤销
-            curWord_index--;
+            curWord_len--;
             isVisited[cur_row][cur_col] = false;
         }
         return res;
+    }
+
+    //自写一遍
+    public boolean exist02(char[][] board, String word) {
+        rows = board.length;
+        cols = board[0].length;
+        isVisited = new boolean[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (dfs02(board, i, j, word)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean dfs02(char[][] board, int i, int j, String word) {
+        //递归出口
+        if (curWord_len == board.length) {
+            return true;
+        }
+
+        if (i < 0 || i > board.length - 1 || j < 0 || j > board[0].length - 1
+                || isVisited[i][j]
+                || board[i][j] != word.charAt(curWord_len)) {
+            return false;
+        }
+
+        //决策
+        isVisited[i][j] = true;
+        //即搜索到的单词长度加1
+        curWord_len++;
+        //下一轮递归
+        boolean res02 = dfs02(board, i + 1, j, word)
+                || dfs02(board, i - 1, j, word)
+                || dfs02(board, i, j + 1, word)
+                || dfs02(board, i, j - 1, word);
+        //撤销
+        if (!res02) {
+            isVisited[i][j] = false;
+            curWord_len--;
+        }
+        return true;
     }
 }

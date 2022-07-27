@@ -1,13 +1,9 @@
 package 数据结构与算法.离职后刷题;
 
 
-import cn.hutool.core.lang.hash.Hash;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 class Singleton001 {
     //1.饿汉模式--线程安全
@@ -89,6 +85,7 @@ class Singleton004 {
     private Singleton004() {
     }
 
+    //使用volatile关键字：禁止指令重排
     private static volatile Singleton004 instance;
 
     public static Singleton004 getInstance() {
@@ -103,7 +100,7 @@ class Singleton004 {
                 if (instance == null) {
                     //这里也有问题，对于线程1，在创建对象时，由于指令重排现象的存在，
                     // 若不对instance加volatile关键字的话，则有可能创建的不算一个完整的对象，
-                    //要注意的就是：理论上，只要将对象赋值给对象引用就已经是一个完整的对象了，
+                    // 因为：理论上，只要将对象赋值给对象引用就已经是一个完整的对象了，
                     // 但这不是我们所需要的对象，因为我们需要给对象赋自定义的值才算，
                     // 因此我们将这个“完整”对象看成是一个不完整的对象
                     // 此时若另一个线程3也来获取对象，当执行到第一重检查时发现，
@@ -118,16 +115,56 @@ class Singleton004 {
         }
         return instance;
     }
+
 }
 
+//自写一遍
+class Test {
+    private Test() {
+    }
+
+    private static volatile Test test = null;
+
+    public static Test getTest() {
+        if (test == null) {
+            synchronized (Test.class) {
+                if (test == null) {
+                    test = new Test();
+                }
+            }
+        }
+        return test;
+    }
+
+    //懒汉式
+    private static Test test01 = null;
+
+    public static Test getTest02() {
+        synchronized (Test.class) {
+            if (test01 == null) {
+                test01 = new Test();
+            }
+            return test01;
+        }
+    }
+
+    //饿汉式
+    private final static Test test02 = new Test();
+
+    public static Test getTest03() {
+        return test02;
+    }
+
+}
 
 //测试
 public class 单例模式 {
     public static void main(String[] args) {
+        //乱七八糟的测试，与这里的单例无关
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
         HashMap<Object, Object> map = new HashMap<>(18);
-        map.put("tkzou","111");
+        map.put("tkzou", "111");
         System.out.println("单例模式test");
     }
 }

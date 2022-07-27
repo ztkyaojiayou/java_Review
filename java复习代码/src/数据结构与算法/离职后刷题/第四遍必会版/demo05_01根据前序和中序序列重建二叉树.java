@@ -5,11 +5,11 @@ import 数据结构与算法.TreeNode;
 import java.util.Map;
 
 /**
- * （思路懂，代码不太懂）题目：根据前序和中序序列（不含有重复的数字），构建一棵二叉树
+ * 题目：根据前序和中序序列（不含有重复的数字），构建一棵二叉树
  * <p>
  * 分析：
  * 根据中序遍历和前序遍历可以确定二叉树，具体过程为：
- * 1.根据前序序列第一个结点确定根结点
+ * 1.根据前序序列第一个结点确定根结点（核心）
  * 2.再根据根结点在中序序列中的位置分割出左右两个子序列
  * 3.最后对左子树和右子树分别递归使用同样的方法继续分解即可（也是先从前序遍历看）
  * 例如：
@@ -19,8 +19,8 @@ import java.util.Map;
  * 根据当前前序序列的第一个结点确定根结点，为 1
  * 找到 1 在中序遍历序列中的位置，为 in[3]
  * 切割左右子树，则 in[3] 前面的为左子树， in[3] 后面的为右子树
- * 则切割后的左子树前序序列为：{2,4,7}，切割后的左子树中序序列为：{4,7,2}；
- * 切割后的右子树前序序列为：{3,5,6,8}，切割后的右子树中序序列为：{5,3,8,6}
+ * 则切割后的左子树前序序列为：{2,4,7}，中序序列为：{4,7,2}；
+ * 切割后的右子树前序序列为：{3,5,6,8}，中序序列为：{5,3,8,6}
  * 对子树分别使用同样的方法分解
  * <p>
  * （前序遍历的第一个值为根节点的值，使用这个值将中序遍历结果分成两部分，
@@ -43,7 +43,8 @@ public class demo05_01根据前序和中序序列重建二叉树 {
         //调用递归方法
         //（核心）要注意的是：在每次递归时，前序序列和中序序列都是会变的，
         //也因此要找到每一次递归时的前序序列和中序序列（方法如上），这样思路就很很清晰了！！！
-        //参数说明：preL：前序数组的第一个索引，preR：前序数组的最后一个索引，inL：中序数组的第一个索引（后面要分为左右子树）
+        //参数说明：preL：前序数组的第一个索引，preR：前序数组的最后一个索引，
+        // inL：中序数组的第一个索引，用于求左子树的长度（后面要分为左右子树）
         return method(pre, 0, pre.length - 1, 0);
     }
 
@@ -58,6 +59,7 @@ public class demo05_01根据前序和中序序列重建二叉树 {
      * @return
      */
     private TreeNode method(int[] pre, int preL, int preR, int inL) {
+        //递归出口
         if (preL > preR) {
             return null;
         }
@@ -96,24 +98,33 @@ public class demo05_01根据前序和中序序列重建二叉树 {
         return method02(pre, 0, pre.length - 1, 0);
     }
 
+    /**
+     * @param pre      前序遍历序列（固定）
+     * @param preStart 每一次递归的前序遍历序列的起始位置（随时需要改变，也即左子树和右子树两种情况）
+     * @param preEnd   每一次递归的前序遍历序列的起始位置（随时需要改变，也即左子树和右子树两种情况）
+     * @param inStart  每一次递归的中序遍历序列的起始位置（随时需要改变，也即左子树和右子树两种情况）
+     * @return
+     */
     private TreeNode method02(int[] pre, int preStart, int preEnd, int inStart) {
-        if (preStart > preEnd){
+        //递归出口
+        if (preStart > preEnd) {
             return null;
         }
+        //开始构建/重建二叉树
         TreeNode root = new TreeNode(pre[preStart]);
         Integer curInIndex = inOrderMap.get(root.val);
         int leftTreeLenth = curInIndex - inStart;
         //求出左子树在前序序列中的起止下标和在中序遍历中的起点，用于下一次递归
-        int nextPreLeftStart = preStart + 1;
-        int nextPreLeftEnd = preStart + leftTreeLenth + 1;
-        int nextInLeftStart = inStart;
+        int nextLeftPreStart = preStart + 1;
+        int nextLeftPreEnd = preStart + leftTreeLenth + 1;
+        int nextLeftInStart = inStart;
         //同理，求出右子树的
-        int nextPreRightStart = preStart + leftTreeLenth + 1;
-        int nextPreRightEnd = preEnd;
-        int nextInRightStart = inStart + leftTreeLenth + 1;
+        int nextRightPreStart = preStart + leftTreeLenth + 1;
+        int nextRightPreEnd = preEnd;
+        int nextRightInStart = inStart + leftTreeLenth + 1;
         //开始构建左右子树（都是以前序序列为基准）
-        root.left = method02(pre, nextPreLeftStart, nextPreLeftEnd, nextInLeftStart);
-        root.right = method02(pre, nextPreRightStart, nextPreRightEnd, nextInRightStart);
+        root.left = method02(pre, nextLeftPreStart, nextLeftPreEnd, nextLeftInStart);
+        root.right = method02(pre, nextRightPreStart, nextRightPreEnd, nextRightInStart);
         return root;
     }
 }

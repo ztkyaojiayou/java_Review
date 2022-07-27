@@ -44,8 +44,9 @@ public class demo09_7双指针之回文字符串的验证 {
         while (left < right) {
             //不相等时不是直接返回false，而是开始考虑删除一个元素后再判断
             if (chars[left] != chars[right]) {
-                //递归比较
-                //删除一个元素，那具体删除哪个呢？考虑从前后删除即可，然后对剩下的字符串进行判断
+                //此时可以删除一个元素再比较
+                //删除一个元素，那具体删除哪个呢？考虑从前后删除即可，
+                // 然后对剩下的字符串进行判断了，只要有一个是回文串即为true
                 return method(chars, left + 1, right) || method(chars, left, right - 1);
             }
             left++;

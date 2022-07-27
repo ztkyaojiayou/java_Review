@@ -9,11 +9,12 @@ public class demo14_2map之找出数组中的任一重复数字 {
         // 元素本身看成map中的key，
         // 频次看成数组的值/也即相当于map中的value，也很巧妙！！！
         int[] map = new int[len];
-        for (int i = 0;i<len;i++){
+        for (int i = 0; i < len; i++) {
             //若某数重复，就返回
-            if (map[nums[i]] > 1){
+            if (map[nums[i]] > 1) {
                 return nums[i];
             }
+            //统计所有数字出现的频率
             map[nums[i]]++;
         }
         return -1;

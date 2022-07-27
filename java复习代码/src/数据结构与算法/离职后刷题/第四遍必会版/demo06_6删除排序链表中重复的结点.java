@@ -9,26 +9,31 @@ public class demo06_6删除排序链表中重复的结点 {
     public ListNode deleteDuplicates01(ListNode head) {
         //定义一个指针，用于遍历
         ListNode cur = head;
-        while (cur != null || cur.next != null) {//即当还有元素时，就不断处理
+        while (cur != null && cur.next != null) {//即当还有元素时，就不断处理
             if (cur.val == cur.next.val) {
-                //跳过该相同元素即可，此时cur这个元素还在，然后再循环判断是否还相等即可
+                //跳过该相同元素即可，此时cur这个元素还在，
+                // 然后再循环判断是否还相等即可
                 cur.next = cur.next.next;
+            } else {//else不能少啊啊啊啊啊啊啊啊啊啊啊啊啊
+                //若不相等，则进行普通遍历即可，比较下一个
+                cur = cur.next;
             }
-            //此时的cur就是最后一个重复元素，next就是下一个非重复元素了
-            cur = cur.next;
         }
-        //直接返回head即可，因为它肯定不会被删除（即使第二个元素与之相同，也是删除第二个元素）
+        //直接返回head即可，因为它肯定不会被删除
+        //（即使第二个元素与之相同，也是删除第二个元素）
         return head;
     }
 
     //自写一遍
     public ListNode deleteDuplicates001(ListNode head) {
         ListNode cur = head;
-        while (cur != null || cur.next != null) {
+        while (cur != null && cur.next != null) {
             if (cur.val == cur.next.val) {
                 cur.next = cur.next.next;
+            } else {//else不能少啊啊啊啊啊啊啊啊
+                //若不相等，则进行普通遍历即可，比较下一个
+                cur = cur.next;
             }
-            cur = cur.next;
         }
         return head;
     }
@@ -41,7 +46,7 @@ public class demo06_6删除排序链表中重复的结点 {
      * @return
      */
     public ListNode deleteDuplicates02(ListNode head) {
-        //哑结点
+        //哑结点，指向头结点head
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         //定义两个指针

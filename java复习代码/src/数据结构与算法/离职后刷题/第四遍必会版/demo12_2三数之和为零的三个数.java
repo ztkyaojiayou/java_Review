@@ -8,13 +8,15 @@ public class demo12_2三数之和为零的三个数 {
     public List<List<Integer>> threeSum(int[] nums){
         List<List<Integer>> res = new ArrayList<>();
         int len = nums.length;
-        //先排序
+        //同“两数之和”那个题，先排序
         Arrays.sort(nums);
-        for (int i = 0;i<len;i++){//固定第一个元素
+        //固定第一个元素
+        for (int i = 0;i<len;i++){
+            //若第一个值就大于0，那说明无解呀，直接退出
             if (nums[i] > 0){
                 break;
             }
-            //双指针
+            //再使用双指针
             int left = i+1;//从第二个元素开始
             int right = len-1;
             while (left < right){//一直循环
@@ -28,7 +30,9 @@ public class demo12_2三数之和为零的三个数 {
                     while (left < right && nums[right] == nums[right-1]){
                         right--;
                     }
-                    //找到了第一组，还要继续探索是否有下一组，此时易知要一起移动，因为此时已经去重了！
+                    // 找到了第一组，还要继续探索是否有下一组，
+                    // 此时易知要一起移动，因为此时已经去重了，
+                    // 且已经排好序，因此只能都移动呀！
                     left++;
                     right--;
                 }else if (cur_sum < 0){//若没有只找到，就只需看情况移动一边即可

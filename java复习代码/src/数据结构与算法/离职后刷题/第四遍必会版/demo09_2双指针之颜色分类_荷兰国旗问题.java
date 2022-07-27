@@ -25,7 +25,7 @@ public class demo09_2双指针之颜色分类_荷兰国旗问题 {
                 //也是因为当前元素已经被换成了2了呀，即已经摆放正确啦
                 swap(nums, cur, right);//和右边的‘2’区间交换
                 right--;//左移
-                //那为什么cur不用左移呢？因为此时从右边调换过来的元素还不确定是什么元素，
+                //那为什么cur不用右移呢？因为此时从右边调换过来的元素还不确定是什么元素，
                 // 比如可能是0，可能是1，因此此时还要再次处理一次该位置的元素，因此此时不能移动cur！！！
             }
         }
@@ -45,14 +45,14 @@ public class demo09_2双指针之颜色分类_荷兰国旗问题 {
         int cur = 0;
         //不能使用for循环，因为不是每一种情况都要移动i
         while (cur <= right) {
-            if (nums[cur] == 0){
-                swap(nums,cur,left);
+            if (nums[cur] == 0) {
+                swap(nums, cur, left);
                 left++;
                 cur++;
-            }else if (nums[cur] == 1){
+            } else if (nums[cur] == 1) {
                 cur++;
-            }else if (nums[cur] == 2){
-                swap(nums,cur,right);
+            } else if (nums[cur] == 2) {
+                swap(nums, cur, right);
                 right--;
             }
         }

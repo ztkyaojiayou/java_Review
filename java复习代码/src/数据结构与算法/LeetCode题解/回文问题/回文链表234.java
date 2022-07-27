@@ -115,8 +115,9 @@ class 回文链表234 {
 class solution234{
         public boolean isPalindrome3(ListNode head) {
             //0.特判
-            if (head == null || head.next == null)
+            if (head == null || head.next == null) {
                 return true;
+            }
             //1.0定义一快一慢两个指针，且先均指向头结点，其中，快指针一次走两步，慢指针一次走一步
             //为了找到需要翻转的半条链表的起点，需要遍历半个链表
             ListNode slow = head;
@@ -134,7 +135,8 @@ class solution234{
                 // 此时就应该退出循环了，因此退出循环的条件就应为fast == null
                 ListNode cur = slow;
                 slow = slow.next;
-                fast = fast.next.next;//快指针并不参与链表的反转，只是起到控制循环啥时候终止的目的
+                //快指针并不参与链表的反转，只是起到控制循环啥时候终止的目的
+                fast = fast.next.next;
                 cur.next = pre;
                 pre = cur;
             }
@@ -153,8 +155,9 @@ class solution234{
             //5.两个半长链表开始比较
             while (pre != null) {
                 //5.1若二者对应的值有一个不相等，就直接返回false
-                if (pre.val != slow.val)
+                if (pre.val != slow.val) {
                     return false;
+                }
                 //5.2否则，开始遍历每一个节点并比对他们的值是否相等
                 slow = slow.next;
                 pre = pre.next;

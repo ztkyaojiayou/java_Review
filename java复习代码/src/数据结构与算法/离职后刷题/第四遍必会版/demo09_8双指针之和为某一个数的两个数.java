@@ -12,17 +12,25 @@ public class demo09_8双指针之和为某一个数的两个数 {
         //双指针
         int left = 0;
         int right = arr.length - 1;
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list;
         while (left < right) {
             int cur_sum = arr[left] + arr[right];
             if (cur_sum == sum) {
-                list.add(arr[left]);
-                list.add(arr[right]);
+                list = Arrays.asList(arr[left], arr[right]);
+//                //1.或者直接返回list（推荐）
+//                return Arrays.asList(arr[left],arr[right]);
+                  //2.构建list的常规方法
+//                list.add(arr[left]);
+//                list.add(arr[right]);
+//                //3.若要有多组值，则需要返回一个list<list>型，此时可以这么写
+//                //即用一个list存储每一组值，并将所有结果再存入一个list（参照“三数之和为0”那个题）
+//                list.add(Arrays.asList(arr[left],arr[right]));
+//                List<Integer> test = Arrays.asList(1, 2, 3);
                 return list;
             } else if (cur_sum < sum) {
                 left++;
             } else {
-                right++;
+                right--;
             }
         }
         //否则，返回空list即可
@@ -37,7 +45,7 @@ public class demo09_8双指针之和为某一个数的两个数 {
             if (map.containsKey(target - nums[i])) {
                 return new int[]{map.get(target - nums[i]), i};
             }
-            //若没有找到，就把该值放入map中
+            //把该值放入map中（不管有没有找到）
             //key:元素，value：对应的下标
             map.put(nums[i], i);
         }
@@ -47,6 +55,7 @@ public class demo09_8双指针之和为某一个数的两个数 {
     //自写一遍
     public List<Integer> twoSum001(int[] arr, int target) {
         List<Integer> list = new ArrayList<>();
+        //先排序，很重要
         Arrays.sort(arr);
         //双指针
         int left = 0;

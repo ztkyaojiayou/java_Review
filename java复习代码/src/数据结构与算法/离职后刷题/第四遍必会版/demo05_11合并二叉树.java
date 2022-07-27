@@ -14,6 +14,7 @@ public class demo05_11合并二叉树 {
             return t1;
         }
 
+        //合并
         //若均不为空，则二者对应的值相加，即为合并
         t1.val += t2.val;
 

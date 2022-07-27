@@ -16,9 +16,11 @@ public class demo71_二分查找之某一数字在排序数组中出现的次数
     //2.使用二分查找
     public int GetNumberOfK02(int[] arr, int k) {
         int index = binarySearch(arr, k);
-        //此时已经找到了k第一次出现的位置，因此只需往右寻找最后出现的位置即可
+        //此时已经找到了k第一次出现的位置，
+        //因此只需往右寻找最后出现的位置即可
         int count = 0;
-        for (int i = index; i < arr.length; i++) {//此时，就不用考虑元素还有很多了
+        //此时，就不用考虑元素还有很多了
+        for (int i = index; i < arr.length; i++) {
             if (arr[i] == k) {
                 count++;
             }

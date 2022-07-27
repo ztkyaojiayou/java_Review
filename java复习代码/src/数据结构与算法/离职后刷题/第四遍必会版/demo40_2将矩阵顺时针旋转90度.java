@@ -32,7 +32,8 @@ public class demo40_2将矩阵顺时针旋转90度 {
         int len = matrix.length;
         //1.先转置，两层循环
         for (int i = 0; i < len; i++) {
-            //j = i，即每次都是以对角线元素为标准/交换线，交换其水平和垂直方向上的元素
+            // j = i，即每次都是以对角线元素为标准/交换线，
+            // 交换其水平和垂直方向上的元素
             for (int j = i; j < len; j++) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[j][i];

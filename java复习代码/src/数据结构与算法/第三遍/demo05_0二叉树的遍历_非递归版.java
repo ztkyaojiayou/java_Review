@@ -16,20 +16,23 @@ public class demo05_0二叉树的遍历_非递归版 {
         stack.push(root);
         //再处理栈中的节点
         while (!stack.isEmpty()) {
-            //出栈
-            TreeNode cur = stack.pop();
-            res.add(cur.val);
-            //再把其左右节点入栈
+                //出栈
+                TreeNode cur = stack.pop();
+                if (cur == null) {
+                    continue;//continue时，跳出本次循环，继续执行下次循环;Break时，跳出循环（结束循环），执行循环体下面的语句。
+                }
+                res.add(cur.val);
+                //再把其左右节点入栈
 //因为是栈，所以是先进后出，而前序遍历的顺是根节点-左节点-右节点，
 //因此要先把右节点入栈，再把左节点入栈
-            if (cur.right != null) {
-                stack.push(cur.right);
-            }
+                if (cur.right != null) {
+                    stack.push(cur.right);
+                }
 
-            if (cur.left != null) {
-                stack.push(cur.left);
+                if (cur.left != null) {
+                    stack.push(cur.left);
+                }
             }
-        }
         return res;
     }
 

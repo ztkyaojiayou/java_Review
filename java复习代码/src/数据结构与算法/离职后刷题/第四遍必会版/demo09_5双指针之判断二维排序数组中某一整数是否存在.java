@@ -1,12 +1,13 @@
 package 数据结构与算法.离职后刷题.第四遍必会版;
 
 public class demo09_5双指针之判断二维排序数组中某一整数是否存在 {
-    public boolean Find(int target, int[][] matrix) {//matrix 待查找的数组,target 要查找的数
+    //matrix 待查找的数组,target 要查找的数
+    public boolean Find(int target, int[][] matrix) {
 
         int cow = matrix.length;//行数
         int cols = matrix[0].length;//列数
 
-        //从右上角开始找
+        //从右上角开始找（非常关键，也很巧妙呀）
         int i = 0;
         int j = cols - 1;
         while (i < cow && j >= 0) {

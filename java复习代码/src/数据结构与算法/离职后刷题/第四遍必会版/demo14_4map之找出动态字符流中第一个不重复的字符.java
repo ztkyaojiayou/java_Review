@@ -21,7 +21,7 @@ public class demo14_4map之找出动态字符流中第一个不重复的字符 {
     public char findMethod() {
         //这是遍历map的一种常用方式，记住即可
         for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            //找到value为1的字符即为所求
+            //找到value为1的字符即为所求呀
             if (entry.getValue() == 1) {
                 return entry.getKey();
             }

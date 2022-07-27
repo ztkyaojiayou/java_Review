@@ -98,8 +98,8 @@ class 全排列46 {
             }
             //（2）2.2做选择，即在nums 中选择一个list中不存在的元素（即不能有重复数字）并记录到list中
             path.add(nums[i]);
-            //（3）进入下一层决策树/递归
-            backtrack(nums, path,i+1);
+            //（3）进入下一层决策树/递归（不需要从下一位开始，因为上面已经判重啦）
+            backtrack(nums, path,i);
             //（4）取消选择（即删除最后一个元素，往上回溯/递归）
             path.removeLast();
         }
@@ -188,10 +188,13 @@ class 全排列47 {
             // 1）开始排除不合法的选择（重点）
             // 我们已经选择过的不需要再放进去了
             if(visited[i])//若该值为真，则表示已经选过了，则不再选它，跳过即可
+            {
                 continue;
+            }
             //如果当前节点等于他的前一个节点，并且他的前一个节点已经被遍历过了，那我们也就不需要了。
-            if(i>0 && nums[i] == nums[i-1] && visited[i-1])
+            if(i>0 && nums[i] == nums[i-1] && visited[i-1]) {
                 break;//也可以使用continue，但是不如break来的直接，break是直接跳出这一块，而continue则是一次一次地跳出。
+            }
             //2）做出选择，即把当前数字存入list中
             path.add(nums[i]);
             //同时把该值设为已经被使用过（重点）

@@ -45,8 +45,10 @@ import java.util.*;
  */
 class 字符串的全排列42 {
     public ArrayList<String> Permutation(String str) {
-        ArrayList<String> res=new ArrayList<String>();
-        if(str.length()==0||str==null)return res;
+        ArrayList<String> res=new ArrayList<>();
+        if(str.length()==0||str==null) {
+            return res;
+        }
         //int n= str.length();
         helper(res,0,str.toCharArray());
         Collections.sort(res);

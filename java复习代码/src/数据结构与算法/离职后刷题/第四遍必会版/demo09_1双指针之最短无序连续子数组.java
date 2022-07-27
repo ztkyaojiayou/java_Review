@@ -17,6 +17,7 @@ public class demo09_1双指针之最短无序连续子数组 {
             } else {
                 left_max = nums[i];
             }
+
             //再寻找左边界（注意，是在同一循环里，节省了开销，巧妙~）
             if (nums[len - i - 1] > right_min) {
                 left_index = len - i - 1;

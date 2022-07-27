@@ -10,7 +10,7 @@ public class demo15_堆排序之最小的k个数 {
         PriorityQueue<Integer> priQueue = new PriorityQueue<>(((o1, o2) -> o2 - o1));//降序
         for (int i = 0;i<nums.length;i++){
             priQueue.add(nums[i]);
-            if (priQueue.size() > k){//只存k个数，多的就弹出
+            if (priQueue.size() > k){//只存k个数，多的就弹出（弹出的是堆顶元素，是最大值，因此剩余的就是最小的k个数啦）
                 priQueue.poll();
             }
         }

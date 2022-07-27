@@ -24,18 +24,21 @@ public class demo05_3二叉树的左视图 {
                 TreeNode node = queue.poll();
                 //新增逻辑
                 if (node == null) {
-                    continue;//continue时，跳出本次循环，继续执行下次循环;Break时，跳出循环（结束循环），执行循环体下面的语句。
+                    //continue时，跳出本次循环，继续执行下次循环;
+                    //Break时，跳出循环（结束循环），执行循环体下面的语句。
+                    continue;
                 }
                 //关键代码
-                if (i == 0) {  //将当前层的第一个节点放入结果列表
+                //只将当前层的第一个节点放入结果列表
+                if (i == 0) {
                     res.add(node.val);
                 }
 
                 if (node.left != null) {
-                    queue.offer(node.left);
+                    queue.add(node.left);
                 }
                 if (node.right != null) {
-                    queue.offer(node.right);
+                    queue.add(node.right);
                 }
             }
         }

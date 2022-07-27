@@ -14,15 +14,19 @@ import java.util.Queue;
  */
 public class demo05_3二叉树的左视图 {
     //左视图
-        public List<Integer> LeftView(TreeNode root) {
+    public List<Integer> LeftView(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
+                //删除当前要处理的结点，同时获取到该节点的值，供后续使用
                 TreeNode node = queue.poll();
-
+                //新增逻辑
+                if (node == null) {
+                    continue;//continue时，跳出本次循环，继续执行下次循环;Break时，跳出循环（结束循环），执行循环体下面的语句。
+                }
                 //关键代码
                 if (i == 0) {  //将当前层的第一个节点放入结果列表
                     res.add(node.val);
@@ -37,5 +41,33 @@ public class demo05_3二叉树的左视图 {
             }
         }
         return res;
-        }
     }
+
+    //自写一遍
+    public List<Integer> LeftView02(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        LinkedList<TreeNode> singleLine = new LinkedList<>();
+        singleLine.add(root);
+        while (!singleLine.isEmpty()) {
+            int size = singleLine.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur_node = singleLine.poll();
+                //新增逻辑
+                if (cur_node == null) {
+                    continue;//continue时，跳出本次循环，继续执行下次循环;Break时，跳出循环（结束循环），执行循环体下面的语句。
+                }
+                if (i == 0) {
+                    res.add(cur_node.val);
+                }
+                if (cur_node.left != null) {
+                    singleLine.add(cur_node.left);
+                }
+                if (cur_node.right != null) {
+                    singleLine.add(cur_node.right);
+                }
+            }
+        }
+        return res;
+    }
+
+}

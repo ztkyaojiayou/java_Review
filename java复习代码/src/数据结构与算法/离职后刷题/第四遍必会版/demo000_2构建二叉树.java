@@ -11,7 +11,12 @@ package 数据结构与算法.离职后刷题.第四遍必会版;
 // （这是重点和核心）
 class TreeNode {
     //1.1定义基本成员变量
+    //若使用了private,则只有该类可以使用，其他类不可以使用，
+    // 此时就只能使用get和set方法了
+    // （当然，其也必须设置为public才行）
     private int val;//序号
+    //若要使用get和set方法来操作该节点的话，那么确实应该使用private，
+    //但要图省事儿，则可以直接使用public，这样就可以直接使用这两个变量啦！
     private TreeNode left; //左结点，默认null
     private TreeNode right; //右节点，默认null
 
@@ -24,6 +29,7 @@ class TreeNode {
     public void setLeft(TreeNode left) {
         this.left = left;
     }
+
     public void setRight(TreeNode right) {
         this.right = right;
     }
@@ -48,7 +54,7 @@ public class demo000_2构建二叉树 {
     public static void main(String[] args) {
         //创建/添加需要的结点（此时还没有安置到二叉树上）
         //根节点
-        TreeNode root =  new TreeNode(1);
+        TreeNode root = new TreeNode(1);
         //自定义子节点（先只设val。当然也可以直接是构造器设置左右子节点啦）
         TreeNode node2 = new TreeNode(2);
         TreeNode node3 = new TreeNode(3);

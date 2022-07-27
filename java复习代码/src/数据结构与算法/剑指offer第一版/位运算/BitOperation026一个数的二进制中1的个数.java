@@ -26,8 +26,15 @@ public class BitOperation026一个数的二进制中1的个数 {
     private static int numberOfOne02(int n) {
         int cnt = 0;
         for (int i = 0; i < 32; i++) {  //Java语言规范中，int整形占四个字节，总计32位
-            cnt += (n & 1);
+            if ((n & 1) == 1){
+                cnt++;
+            }
+            //右移一位
+            //注意java的>>是有符号右移，也就是说，负数用>>右移的话，
+            // 会在左侧补1而不是0，这就会影响最终对1的计数。
+            // 所以若题目没说一定是正整数是时，我们最好使用无符号右移>>>。
             n = n >> 1;
+
         }
         return cnt;
     }

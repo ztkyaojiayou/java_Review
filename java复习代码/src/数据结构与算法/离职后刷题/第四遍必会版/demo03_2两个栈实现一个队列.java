@@ -2,7 +2,7 @@ package 数据结构与算法.离职后刷题.第四遍必会版;
 
 import java.util.Stack;
 
-//比用两个队列实现一个栈,简单
+//比用两个队列实现一个栈,非常简单
 class myQueue {
     //构造函数
     public myQueue() {

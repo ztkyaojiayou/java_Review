@@ -73,10 +73,12 @@ public class 对称二叉树101 {
             if (r1 == null || r2 == null) {
                 return false;
             }
-            if (r1.val != r2.val ) {//若这两个结点（的值）都不相等，则也肯定不对称
+            //若这两个结点（的值）都不相等，则也肯定不对称
+            if (r1.val != r2.val ) {
                 return false;
             }
-            return (r1.val == r2.val) && isMirror(r1.left, r2.right) && isMirror(r1.right, r2.left);//只有这三个条件都满足时才返回true
+            //只有这三个条件都满足时才返回true
+            return (r1.val == r2.val) && isMirror(r1.left, r2.right) && isMirror(r1.right, r2.left);
         }
     }
 
@@ -124,7 +126,6 @@ class Solution101 {
             queue.add(left.right);
             queue.add(right.left);
         }
-
         return true;
     }
 }

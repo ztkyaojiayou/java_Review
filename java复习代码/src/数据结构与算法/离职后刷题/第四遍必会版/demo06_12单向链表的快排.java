@@ -1,5 +1,5 @@
 package 数据结构与算法.离职后刷题.第四遍必会版;
-
+import 数据结构与算法.LeetCode题解.ListNode;
 /**
  * 单向链表的快排
  * （洛特一面）
@@ -26,13 +26,13 @@ public class demo06_12单向链表的快排 {
         if (begin == null || end == null || begin == end) {
             return;
         }
-        //从第一个节点和第一个节点的后面一个几点
+        //从第一个节点和第一个节点的后面一个结点
         ListNode first = begin;
         ListNode second = begin.next;
 
         int nMidValue = begin.val;
         //结束条件，second到最后了
-        while (second != end.next && second != null) {
+        while (second != null && second != end.next) {
             if (second.val < nMidValue) {
                 first = first.next;
                 //判断一下，避免后面的数比第一个数小，不用换的局面

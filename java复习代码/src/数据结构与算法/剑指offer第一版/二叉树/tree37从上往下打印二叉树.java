@@ -53,8 +53,9 @@ public class tree37从上往下打印二叉树 {
             int cnt = queue.size();
             while (cnt > 0) {
                 TreeNode37 t = queue.poll();//取出节点（先入先出）
-                if (t == null)
+                if (t == null) {
                     continue;//意义：退出本次循环，进行下次循环
+                }
                 ret.add(t.val);
                 //如此循环，逐个添加其左右结点到queue中，再逐个poll到ret中，最后返回
                 queue.add(t.left);

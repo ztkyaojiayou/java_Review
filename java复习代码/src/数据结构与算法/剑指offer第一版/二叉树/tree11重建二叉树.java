@@ -31,8 +31,8 @@ import java.util.Map;
 //创建二叉树所需要的结点（牛客网上则不需要自己写，系统默认已输入）
   class TreeNode11 {
       int val;
-     TreeNode13 left;
-     TreeNode13 right;
+     TreeNode left;
+     TreeNode right;
 
      TreeNode11(int x){
          this.val = x;
@@ -43,20 +43,24 @@ public class tree11重建二叉树 {
     // 缓存中序遍历数组每个值对应的索引
     private Map<Integer, Integer> indexForInOrders = new HashMap<>();
 
-    public TreeNode13 reConstructBinaryTree(int[] pre, int[] in) {//pre：前序遍历后的数组，in:中序遍历后的数组
-        for (int i = 0; i < in.length; i++)
+    public TreeNode reConstructBinaryTree(int[] pre, int[] in) {//pre：前序遍历后的数组，in:中序遍历后的数组
+        for (int i = 0; i < in.length; i++) {
             indexForInOrders.put(in[i], i);// 存储中序遍历数组每个值对应的索引（即：key=in[i], value=i）
+        }
 
         //调用递归方法
+        //（核心）要注意的是：在每次递归时，前序序列和中序序列都是会变的，
+        //也因此要找到每一次递归时的前序序列和中序序列（方法如上），这样思路就很很清晰了！！！
         //参数说明：preL：前序数组的第一个索引，preR：前序数组的最后一个索引，inL：中序数组的第一个索引
         return method(pre, 0, pre.length - 1, 0);
     }
 
     //使用递归，开始真正重新构建二叉树
-    private TreeNode13 method(int[] pre, int preL, int preR, int inL) {
-        if (preL > preR)
+    private TreeNode method(int[] pre, int preL, int preR, int inL) {
+        if (preL > preR) {
             return null;
-        TreeNode13 root = new TreeNode13(pre[preL]);//在前序遍历数组中获取根节点的值，易知，其第一个值即为根节点的值
+        }
+        TreeNode root = new TreeNode(pre[preL]);//在前序遍历数组中获取根节点的值，易知，其第一个值即为根节点的值
         int inIndex = indexForInOrders.get(root.val);//获取根节点在中序数组中所在的索引，目的是为了求出左右子树的长度
         int leftTreeSize = inIndex - inL;//左子树的长度=中序数组中根节点的索引-第一个数的索引
         //使用递归方法创建二叉树即可（没太懂）

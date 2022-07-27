@@ -22,9 +22,12 @@ class 元素可以重复使用时 {
     //回溯方法
     private void method(int[] nums, int sum, int start, List<Integer> path) {
         //递归结束的出口(有2个）
+        //sum-nums[i]完全有可能小于0呀，怎么可能都是刚好等于0呢！！！
+        //只是说当等于0时就是我们想要的！！！
         if (sum < 0){
             return;
         }
+        //此时就表示找到了这个组合
         if (sum == 0){
             res.add(new ArrayList<>(path));
             return;
@@ -63,7 +66,7 @@ class 元素只可使用一次时{
     private void method(int[] nums, int target, int start, List<Integer> path) {
         //递归出口（同理，有两个）
         //因为target-nums[i]完全有可能小于0呀，
-        // 怎么可能刚刚好为0呀，因此需要特判！！！
+        // 怎么可能刚刚好为0呀，只是说为0时表示刚好找到了，因此需要特判！！！
         if (target < 0){
             return;
         }

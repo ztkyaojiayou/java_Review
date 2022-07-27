@@ -27,9 +27,15 @@ public class 丑数48 {
                 //从小到大，找这个数的2倍，3倍，5倍的数的最小值，
                 // 若该最小值为其中某个数对应的倍数，则令其加1。
                 result[i] = Math.min(result[p2]*2, Math.min(result[p3]*3, result[p5]*5));
-                if(result[i] == result[p2]*2)p2++;//为了防止重复
-                if(result[i] == result[p3]*3)p3++;
-                if(result[i] == result[p5]*5)p5++;
+                if(result[i] == result[p2]*2) {
+                    p2++;//为了防止重复
+                }
+                if(result[i] == result[p3]*3) {
+                    p3++;
+                }
+                if(result[i] == result[p5]*5) {
+                    p5++;
+                }
             }
 
             return result[index-1];

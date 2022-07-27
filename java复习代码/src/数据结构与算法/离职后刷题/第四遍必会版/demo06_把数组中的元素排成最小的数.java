@@ -6,7 +6,7 @@ public class demo06_把数组中的元素排成最小的数 {
         for (int i = 0; i < nums.length - 1; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 //再把这两个元素拼接成一个Integer型进行比较（属于自定义比较规则）
-                //必须加上“”，因为不然的话，就直接相加了
+                //必须加上“”，因为不然的话，就是直接相加了
                 Integer append1 = Integer.parseInt(nums[i] + "" + nums[j]);
                 //同理
                 Integer append2 = Integer.parseInt(nums[j] + "" + nums[i]);
@@ -36,8 +36,8 @@ public class demo06_把数组中的元素排成最小的数 {
                 //拼接
                 int num1 = Integer.parseInt(nums[i] + "" + nums[j]);
                 int num2 = Integer.parseInt(nums[j] + "" + nums[i]);
+                //此时即应该交换一下这两个元素
                 if (num1 > num2) {
-                    //交换对应的元素
                     int temp = nums[j];
                     nums[j] = nums[i];
                     nums[i] = temp;

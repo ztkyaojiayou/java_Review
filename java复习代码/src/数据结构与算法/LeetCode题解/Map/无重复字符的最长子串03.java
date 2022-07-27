@@ -53,7 +53,8 @@ class 无重复字符的最长子串的长度03_1 {
                         //则重新设置子串，即新子串的起点改为该字符在map中的位置的下一个位置，即当前字符所处的索引值+1
                         start = Math.max(start,map.get(endChar)+1);
                     }
-                    //若没有重复,把end所对应的字符当做key存入map中，把end作为value存入
+                    //当没有重复时,把end所对应的字符当做key存入map中，把end作为value存入
+                    //而若为重复元素，则更新其下标（并不是else的关系！！！）
                     map.put(s.charAt(end), end);
                     //更新结果
                     res = Math.max(res, end - start + 1);//起点不变，终点end一直后移

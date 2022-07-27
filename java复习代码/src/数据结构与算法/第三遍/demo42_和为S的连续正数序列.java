@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class demo42_和为S的连续正数序列 {
-    //暴力
+    //暴力（最佳解法为滑动窗口，但不太懂）
     public List<ArrayList<Integer>> FindContinuousSequence(int S) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 1;i<S/2;i++){//显然，只需遍历前S/2即可
+        //显然，只需遍历前S/2即可
+        for (int i = 1; i < S / 2; i++) {
             int cur_sum = 0;
-            for (int j = 1;j<S;j++){
+            for (int j = 1; j < S; j++) {
                 cur_sum += j;
                 list.add(j);
-                if (cur_sum > S){
+                if (cur_sum > S) {
                     break;
-                }else if (cur_sum == S){
+                } else if (cur_sum == S) {
                     res.add(list);
+                    //同时也要终止循环，开始下一组的寻找
+                    break;
                 }
             }
         }

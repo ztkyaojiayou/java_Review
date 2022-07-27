@@ -10,7 +10,7 @@ public class demo02_2二分法之查找旋转后的数组中的某一个值 {
         int left = 0;
         int right = nums.length - 1;
         while (left <= right) {
-            // 务必注意：这是向下取整的，即11//2 = 5，而不是6
+            // 务必注意：这是向下取整的，即11/2 = 5，而不是6
             int mid = (left + right) / 2;
             if (nums[mid] == target) {//说明直接找到了
                 return mid;
