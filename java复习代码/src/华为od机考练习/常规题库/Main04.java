@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * 3）字符串分割
+ * 4）字符串分割
  *
  * @author :zoutongkun
  * @date :2022/7/23 4:39 下午
@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @modyified By:
  */
 
-public class Main03 {
+public class Main04 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String str;
@@ -35,7 +35,7 @@ public class Main03 {
 /**
  * 第二遍
  */
-class Main003 {
+class Main004 {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();

@@ -59,7 +59,7 @@ public class Main10 {
 /**
  * 自写一遍
  */
-class Main100 {
+class Main1000 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();

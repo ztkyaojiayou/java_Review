@@ -1,7 +1,7 @@
 package 华为od机考练习.常规题库;
 
 /**
- * 80）整型数组合并
+ * 80）整型数组合并--使用treeSet
  *
  * @author :zoutongkun
  * @date :2022/7/27 10:34 下午
