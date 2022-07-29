@@ -1,5 +1,7 @@
 package 数据结构与算法.离职后刷题.第四遍必会版;
 
+import java.util.Arrays;
+
 //类比：构成目标和的最少完全平方数的个数
 public class demo93_动态规划之最长上升子序列的长度 {
     public int lengthOfLIS(int[] nums) {
@@ -9,19 +11,27 @@ public class demo93_动态规划之最长上升子序列的长度 {
         //也即： nums前i个数字的最长子序列长度。
         int[] dp = new int[len];
         //初始化
-        for (int i = 0; i < len; i++) {
-            dp[i] = 1;
-        }
+        //使用现成的api更方便
+        Arrays.fill(dp, 1);
+        //原始写法
+//      for (int i = 0; i < len; i++) {
+//            dp[i] = 1;
+//        }
         for (int i = 1; i < len; i++) {
             // 为什么j<j即可？因为子序列是不要求连续的，
             // 因此在i之前的所有情况都要考虑呀
             for (int j = 0; j < i; j++) {
                 //若小于，则可以状态转移
                 if (nums[j] < nums[i]) {
+                    //即此时可以转移到求dp[j]+1的值，
+                    //也即先求以nums[j] 结尾的序列的最长上升子序列的长度，再加上num[i]本身，即长度加1
+                    //但是有可能还没有dp[i]大（即此时不转移到求dp[j]）)，
+                    //易知，这是以i为固定值，求它前面的元素所能构成的最长上升子序列的长度，
+                    //而位于它之后的元素则没有考虑
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
                 //随时更新，因为dp[i]表示的只是以num[i]结尾时的最长上升子序列的长度，
-                //但不一定是整个数组中的最长上升子序列
+                //但不一定是整个数组中的最长上升子序列，因此需要继续以i的维度再更新一次
                 res = Math.max(res, dp[i]);
             }
         }

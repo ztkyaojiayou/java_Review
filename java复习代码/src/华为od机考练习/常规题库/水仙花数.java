@@ -10,7 +10,7 @@ package 华为od机考练习.常规题库;
  * @description :
  * @modyified By:
  */
-public class 水仙花数 {
+class 水仙花数 {
     public static void main(String[] args) {
         for (int i = 1; i < 999999; i++) {
             int j = i, ret = 0, n = i, sum = 0;
